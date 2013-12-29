@@ -1,6 +1,6 @@
 {
     "name": "i18n-easy",
-    "description": "Simple way to handle i18n, including admin ui",
+    "description": "Simple way to handle i18n, including ability to add plurals within translations and admin ui",
     "homepage": "https://github.com/janouma/i18n-easy",
     "version": "0.1.0",
     "git": "https://github.com/janouma/i18n-easy.git",

@@ -1,5 +1,5 @@
 Package.describe({
-    summary: "Simple way to handle i18n, including admin ui"
+    summary: "Simple way to handle i18n, including ability to add plurals within translations and admin ui"
 });
 
 Package.on_use(function(api, where){
