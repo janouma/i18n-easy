@@ -10,3 +10,8 @@ Package.on_use(function(api, where){
         api.export('I18nEasy', 'client');
     }
 });
+
+Package.on_test(function(api){
+    api.use(['coffeescript', 'i18n-easy', 'tinytest', 'test-helpers'], 'client');
+    api.add_files('i18n_easy_tests.coffee', 'client');
+});
