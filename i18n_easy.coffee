@@ -3,6 +3,15 @@ _language = _defaultLanguage
 _languages = {}
 _messages = {}
 _dep = new Deps.Dependency()
+_messagesId = undefined
+
+#==================================
+updateDb = ->
+    if _messagesId
+        I18nEasyMessages.update {_id: _messagesId}, _messages
+    else
+        _messagesId = I18nEasyMessages.insert _messages
+        
 
 #==================================
 addTranslation = (language, messages)->
@@ -18,6 +27,8 @@ addTranslation = (language, messages)->
                 _messages[key][language] = message
                 
             else _messages[key] = message
+                
+    do updateDb
 
 #==================================
 translationFor = (key)-> _messages[key]?[_language] or _messages[key]?[_defaultLanguage] or _messages[key]
@@ -82,4 +93,4 @@ I18nEasy =
 
 
 #==================================
-Handlebars.registerHelper 'i18n', I18nEasy.i18n
+Handlebars.registerHelper('i18n', I18nEasy.i18n) if Meteor.isClient

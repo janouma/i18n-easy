@@ -1,0 +1,1 @@
+@I18nEasyMessages = new Meteor.Collection 'i18n_easy_messages'
