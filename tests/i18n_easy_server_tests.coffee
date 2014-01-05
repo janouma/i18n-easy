@@ -1,19 +1,21 @@
 Tinytest.add(
     'map adds keys to i18n_easy_messages collection'
     (test)->
-        I18nEasyMessages.remove()
+        Meteor.call 'clearI18nEasyMessages'
         
-        testKey = 'test_key'
-        en = {}
-        en[testKey] = "test key"
-        I18nEasy.map 'en', en
-        messagesCursor = do I18nEasyMessages.find
-        messages = (do messagesCursor.fetch)?[0]
+        language = 'en'
+        newTestKey = 'new_test_key'
+        translation = {}
+        translation[newTestKey] = "new test key"
+        I18nEasy.map language, translation
+        
+        message = I18nEasyMessages.findOne {
+            language: language
+            key: newTestKey
+        }
         
         test.equal(
-            messages?[testKey]?.en
-            en[testKey]
+            message?.message
+            translation[newTestKey]
         )
-        
-        I18nEasyMessages.remove()
 )

@@ -1,49 +1,112 @@
-_defaultLanguage = 'fr'
-_language = _defaultLanguage
-_languages = {}
-_messages = {}
-_dep = new Deps.Dependency()
-_messagesId = undefined
+_defaultVarName = 'i18n-defaultLanguage'
+_varName = 'i18n-language'
+
+_serverDefaultLanguage = undefined
+_serverLanguage = undefined
 
 #==================================
-updateDb = ->
-    if _messagesId
-        I18nEasyMessages.update {_id: _messagesId}, _messages
+_defaultLanguage = (language)->
+    if language
+        if Meteor.isServer
+            _serverDefaultLanguage = language
+        else
+            Session.set _defaultVarName, language
     else
-        _messagesId = I18nEasyMessages.insert _messages
+        if Meteor.isServer
+            _serverDefaultLanguage
+        else
+            Session.get _defaultVarName
+
+#==================================
+_language = (language)->
+    if language
+        if Meteor.isServer
+            _serverLanguage = language
+        else
+            Session.set _varName, language
+    else
+        if Meteor.isServer
+            _serverLanguage
+        else
+            Session.get _varName
+
+#==================================
+_publish = ->
+    if Meteor.isServer
+        #DEBUG
+        Meteor._debug "Creating meteor publication"
         
+        Meteor.publish(
+            'translations'
+            (languages)->
+                check languages, [String]
+                
+                #DEBUG
+                Meteor._debug "Publishing '#{languages}'"
+                
+                selector = $or: []
+                selector.$or.push {language: language} for language in languages
+                I18nEasyMessages.find selector
+                
+        )
 
 #==================================
-addTranslation = (language, messages)->
+_subscribe = (options)->
+    if Meteor.isClient
+        defaultLanguage = options?.default
+        check defaultLanguage, String
+
+        _defaultLanguage defaultLanguage
+        _language defaultLanguage unless _language()
+        
+        #DEBUG
+        Meteor._debug "Subscribing to '#{_language()}'"
+        
+        Meteor.subscribe(
+            'translations'
+            [_defaultLanguage(), _language()]
+            ->
+                #DEBUG
+                Meteor._debug "Subscription to '#{[_defaultLanguage(), _language()]}' is ready"
+        )
+
+#==================================
+_addTranslation = (language, messages)->
     for key, message of messages
-        translation = _messages[key]
-        switch translation?.constructor.name
-            when 'Object'
-                translation[language] = message
-            
-            when 'String', 'Array'
-                _messages[key] = {}
-                _messages[key][_defaultLanguage] = translation
-                _messages[key][language] = message
-                
-            else _messages[key] = message
-                
-    do updateDb
+        I18nEasyMessages.upsert(
+            {
+                language: language
+                key: key
+            }
+            $set: message: message
+        )
 
 #==================================
-translationFor = (key)-> _messages[key]?[_language] or _messages[key]?[_defaultLanguage] or _messages[key]
+_translationFor = (key)->
+    translation = I18nEasyMessages.findOne {
+        language: _language()
+        key: key
+    }
+
+    unless translation
+        translation = I18nEasyMessages.findOne {
+            language: _defaultLanguage()
+            key: key
+        }
+    
+    translation?.message
 
 #==================================
-singularFor = (key)->
-    message = translationFor key
+_singularFor = (key)->
+    message = _translationFor key
     if message?.constructor.name is 'Array'
         message[0]
     else
         message
 
 #==================================
-pluralFor = (key)->
-    message = translationFor(key)
+_pluralFor = (key)->
+    message = _translationFor(key)
     if message?.constructor.name is 'Array'
         message[1]
     else
@@ -51,41 +114,52 @@ pluralFor = (key)->
 
 #==================================
 I18nEasy =
-    setDefault: (language)->
-        throw new Error "language argument must be of type 'String'" if language?.constructor.name isnt 'String'
-        _defaultLanguage = language
-        _dep.changed()
+
+    publish: (defaultLanguage)-> do _publish
         
-    getDefault: ->
-        _dep.depend()
-        _defaultLanguage
+    subscribe: (options)-> _subscribe options
+    
+    setDefault: (language)->
+        check language, String
+        
+        return if language is _defaultLanguage()
+        _defaultLanguage language
+        _language _defaultLanguage unless _language()
+        
+    getDefault: -> _defaultLanguage()
     
     setLanguage: (language)->
-        throw new Error "language argument must be of type 'String'" if language?.constructor.name isnt 'String'
-        _language = language
-        _dep.changed()
+        check language, String
         
-    getLanguage: ->
-        _dep.depend()
-        _language
+        return if language is _language()
+        _language language
+        _defaultLanguage _language unless _defaultLanguage()
+        
+    getLanguage: -> _language()
 
-    map: (language, messages)->
-        _languages[language] = yes
-        addTranslation language, messages
-        _dep.changed()
+    map: (language, messages)-> _addTranslation language, messages
         
     getLanguages: ->
-        _dep.depend()
-        Object.keys _languages
+        results = I18nEasyMessages.find(
+            {}
+            {fields: language: yes}
+        ).fetch()
+        
+        distinctLanguages = []
+        distinctLanguages.push result.language for result in results when result.language not in distinctLanguages
+        distinctLanguages
         
     i18n: (key)->
-        _dep.depend()
-        throw new Error "key must be of type 'String'" if key?.constructor.name isnt 'String'
-        message = singularFor key
+        check key, String
+        
+        message = _singularFor key
+        
+        #DEBUG
+        Meteor._debug "Getting translation for '#{key}' '#{_language()}' (#{message})"
 
         unless message
             fallBack = "{{#{key}}}"
-            if /s$/i.test key then pluralFor(key[0...key.length-1])  or fallBack else fallBack
+            if /s$/i.test key then _pluralFor(key[0...key.length-1])  or fallBack else fallBack
         else
             message
             

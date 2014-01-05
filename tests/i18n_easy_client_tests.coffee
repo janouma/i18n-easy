@@ -3,7 +3,6 @@ Tinytest.add(
     (test)->
         defaultLanguage = 'it'
         I18nEasy.setDefault defaultLanguage
-        
         test.equal I18nEasy.getDefault(), defaultLanguage
 )
 
@@ -12,33 +11,28 @@ Tinytest.add(
     (test)->
         language = 'es'
         I18nEasy.setLanguage language
-        
         test.equal I18nEasy.getLanguage(), language
 )
 
 Tinytest.add(
-    'map/translate works'
+    'translate works'
     (test)->
-        testKey = 'test_key'
         test.equal(
-            I18nEasy.translate testKey
-            "{{#{testKey}}}"
+            I18nEasy.translate 'unkown_key'
+            "{{unkown_key}}"
         )
         
         I18nEasy.setLanguage 'fr'
-        fr = {}
-        fr[testKey] = "test de clé"
-        I18nEasy.map 'fr', fr
+        do Deps.flush
 
+        testKey = 'test_key'
+        
         test.equal(
             I18nEasy.translate testKey
             fr[testKey]
         )
         
         I18nEasy.setLanguage 'en'
-        en = {}
-        en[testKey] = "key test"
-        I18nEasy.map 'en', en
 
         test.equal(
             I18nEasy.translate testKey 
@@ -52,10 +46,7 @@ Tinytest.add(
         testKeyOne = 'test_key_one'
         testKeyTwo = 'test_key_two'
         I18nEasy.setLanguage 'en'
-        en = {}
-        en[testKeyOne] = "test"
-        en[testKeyTwo] = ["test2", "all tests"]
-        I18nEasy.map 'en', en
+        do Deps.flush
         
         test.equal(
             I18nEasy.translate "#{testKeyOne}s"
