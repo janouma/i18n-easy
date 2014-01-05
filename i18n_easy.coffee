@@ -31,24 +31,23 @@ _language = (language)->
             Session.get _varName
 
 #==================================
-_publish = ->
+_publish = (initialTranslations)->
     if Meteor.isServer
-        #DEBUG
-        Meteor._debug "Creating meteor publication"
-        
+        if initialTranslations and not I18nEasyMessages.find().count()
+            _mapAll initialTranslations
+
         Meteor.publish(
             'translations'
             (languages)->
                 check languages, [String]
-                
-                #DEBUG
-                Meteor._debug "Publishing '#{languages}'"
-                
                 selector = $or: []
                 selector.$or.push {language: language} for language in languages
                 I18nEasyMessages.find selector
                 
         )
+        
+#==================================
+_mapAll = (translations)-> _addTranslation(language, messages) for language, messages of translations
 
 #==================================
 _subscribe = (options)->
@@ -58,16 +57,9 @@ _subscribe = (options)->
 
         _defaultLanguage defaultLanguage
         _language defaultLanguage unless _language()
-        
-        #DEBUG
-        Meteor._debug "Subscribing to '#{_language()}'"
-        
         Meteor.subscribe(
             'translations'
             [_defaultLanguage(), _language()]
-            ->
-                #DEBUG
-                Meteor._debug "Subscription to '#{[_defaultLanguage(), _language()]}' is ready"
         )
 
 #==================================
@@ -115,7 +107,7 @@ _pluralFor = (key)->
 #==================================
 I18nEasy =
 
-    publish: (defaultLanguage)-> do _publish
+    publish: (initialTranslations)-> _publish initialTranslations
         
     subscribe: (options)-> _subscribe options
     
@@ -153,10 +145,6 @@ I18nEasy =
         check key, String
         
         message = _singularFor key
-        
-        #DEBUG
-        Meteor._debug "Getting translation for '#{key}' '#{_language()}' (#{message})"
-
         unless message
             fallBack = "{{#{key}}}"
             if /s$/i.test key then _pluralFor(key[0...key.length-1])  or fallBack else fallBack
