@@ -19,7 +19,7 @@ Tinytest.add(
     (test)->
         test.equal(
             I18nEasy.translate 'unkown_key'
-            "{{unkown_key}}"
+            "unkown_key..."
         )
         
         I18nEasy.setLanguage 'fr'

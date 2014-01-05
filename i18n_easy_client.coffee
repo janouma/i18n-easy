@@ -15,3 +15,19 @@ class I18nClient extends I18nBase
 #==================================
 I18nEasy = new I18nClient()
 Handlebars.registerHelper('i18n', I18nEasy.i18n)
+
+Handlebars.registerHelper(
+    'pathToLanguage'
+    (language)->
+        try
+            Router.current().route.path(language: language)
+        catch error
+            Meteor._debug """
+            Warning: #{error.message}
+             |_route: #{Router.current().route.name}
+             |_path: #{Router.current().path}
+             |_template: #{Router.current().template}
+             |_language: #{language}
+            """
+            "/#{language}"
+)
