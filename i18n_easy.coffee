@@ -1,115 +1,80 @@
-_defaultVarName = 'i18n-defaultLanguage'
-_varName = 'i18n-language'
-
-_serverDefaultLanguage = undefined
-_serverLanguage = undefined
-
-#==================================
-_defaultLanguage = (language)->
-    if language
-        if Meteor.isServer
-            _serverDefaultLanguage = language
-        else
-            Session.set _defaultVarName, language
-    else
-        if Meteor.isServer
-            _serverDefaultLanguage
-        else
-            Session.get _defaultVarName
-
-#==================================
-_language = (language)->
-    if language
-        if Meteor.isServer
-            _serverLanguage = language
-        else
-            Session.set _varName, language
-    else
-        if Meteor.isServer
-            _serverLanguage
-        else
-            Session.get _varName
-
-#==================================
-_publish = (initialTranslations)->
-    if Meteor.isServer
-        if initialTranslations and not I18nEasyMessages.find().count()
-            _mapAll initialTranslations
-
-        Meteor.publish(
-            'translations'
-            (languages)->
-                check languages, [String]
-                selector = $or: []
-                selector.$or.push {language: language} for language in languages
-                I18nEasyMessages.find selector
-                
-        )
-        
-#==================================
-_mapAll = (translations)-> _addTranslation(language, messages) for language, messages of translations
-
-#==================================
-_subscribe = (options)->
+class @I18nBase
+    #Private
+    
+    _defaultVarName = 'i18n-defaultLanguage'
+    _varName = 'i18n-language'
+    
     if Meteor.isClient
-        defaultLanguage = options?.default
-        check defaultLanguage, String
+        _context =
+            set: (varName, value)-> Session.set varName, value
+            get: (varName)-> Session.get varName
+    
+    if Meteor.isServer
+        _context =
+            set: (varName, value)-> @[varName] = value
+            get: (varName)-> @[varName]
 
-        _defaultLanguage defaultLanguage
-        _language defaultLanguage unless _language()
-        Meteor.subscribe(
-            'translations'
-            [_defaultLanguage(), _language()]
-        )
+    #==================================
+    _defaultLanguage = (language)->
+        if language
+            _context.set _defaultVarName, language
+        else
+            _context.get _defaultVarName
 
-#==================================
-_addTranslation = (language, messages)->
-    for key, message of messages
-        I18nEasyMessages.upsert(
-            {
-                language: language
-                key: key
-            }
-            $set: message: message
-        )
-
-#==================================
-_translationFor = (key)->
-    translation = I18nEasyMessages.findOne {
-        language: _language()
-        key: key
-    }
-
-    unless translation
+    #==================================
+    _language = (language)->
+        if language
+            _context.set _varName, language
+        else
+            _context.get _varName
+    
+    #==================================
+    _mapAll = (translations)->
+        _addTranslation(language, messages) for language, messages of translations
+    
+    #==================================
+    _addTranslation = (language, messages)->
+        for key, message of messages
+            I18nEasyMessages.upsert(
+                {
+                    language: language
+                    key: key
+                }
+                $set: message: message
+            )
+    
+    #==================================
+    _translationFor = (key)->
         translation = I18nEasyMessages.findOne {
-            language: _defaultLanguage()
+            language: _language()
             key: key
         }
     
-    translation?.message
-
-#==================================
-_singularFor = (key)->
-    message = _translationFor key
-    if message?.constructor.name is 'Array'
-        message[0]
-    else
-        message
-
-#==================================
-_pluralFor = (key)->
-    message = _translationFor(key)
-    if message?.constructor.name is 'Array'
-        message[1]
-    else
-        "#{message}s" unless not message
-
-#==================================
-I18nEasy =
-
-    publish: (initialTranslations)-> _publish initialTranslations
+        unless translation
+            translation = I18nEasyMessages.findOne {
+                language: _defaultLanguage()
+                key: key
+            }
         
-    subscribe: (options)-> _subscribe options
+        translation?.message
+        
+    #==================================
+    _singularFor = (key)->
+        message = _translationFor key
+        if message?.constructor.name is 'Array'
+            message[0]
+        else
+            message
+            
+    #==================================
+    _pluralFor = (key)->
+        message = _translationFor(key)
+        if message?.constructor.name is 'Array'
+            message[1]
+        else
+            "#{message}s" unless not message
+    
+    #Public
     
     setDefault: (language)->
         check language, String
@@ -118,8 +83,10 @@ I18nEasy =
         _defaultLanguage language
         _language _defaultLanguage unless _language()
         
+    #==================================
     getDefault: -> _defaultLanguage()
     
+    #==================================
     setLanguage: (language)->
         check language, String
         
@@ -127,10 +94,16 @@ I18nEasy =
         _language language
         _defaultLanguage _language unless _defaultLanguage()
         
+    #==================================
     getLanguage: -> _language()
-
+    
+    #==================================
     map: (language, messages)-> _addTranslation language, messages
         
+    #==================================
+    mapAll: (translations)-> _mapAll translations
+    
+    #==================================
     getLanguages: ->
         results = I18nEasyMessages.find(
             {}
@@ -140,7 +113,8 @@ I18nEasy =
         distinctLanguages = []
         distinctLanguages.push result.language for result in results when result.language not in distinctLanguages
         distinctLanguages
-        
+    
+    #==================================
     i18n: (key)->
         check key, String
         
@@ -150,9 +124,6 @@ I18nEasy =
             if /s$/i.test key then _pluralFor(key[0...key.length-1])  or fallBack else fallBack
         else
             message
-            
+    
+    #==================================
     translate: (key)-> @i18n key
-
-
-#==================================
-Handlebars.registerHelper('i18n', I18nEasy.i18n) if Meteor.isClient

@@ -5,7 +5,10 @@ Package.describe({
 Package.on_use(function(api, where){
     api.use(['coffeescript', 'minimongo', 'mongo-livedata', 'templating', 'handlebars', 'deps'], 'client');
     api.use(['coffeescript', 'minimongo', 'mongo-livedata', 'deps'], 'server');
-    api.add_files(['i18n_easy.coffee', 'collections/i18n_easy_messages.coffee']);
+    
+    api.add_files(['i18n_easy.coffee','collections/i18n_easy_messages.coffee']);
+    api.add_files('i18n_easy_client.coffee', 'client');
+    api.add_files('i18n_easy_server.coffee', 'server');
     
     if (api.export) {
         api.export('I18nEasy');
