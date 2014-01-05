@@ -120,7 +120,7 @@ class @I18nBase
         
         message = _singularFor key
         unless message
-            fallBack = "{{#{key}}}"
+            fallBack = "#{key}..."
             if /s$/i.test key then _pluralFor(key[0...key.length-1])  or fallBack else fallBack
         else
             message
