@@ -5,7 +5,3 @@ permissions =
     update: -> yes
 
 @I18nEasyMessages.allow permissions
-
-Meteor.methods(
-    clearI18nEasyMessages: -> I18nEasyMessages.remove {}
-)

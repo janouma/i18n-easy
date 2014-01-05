@@ -1,4 +1,3 @@
-Meteor._debug "Clearing 'i18n_easy_messages' collection"
 Meteor.call 'clearI18nEasyMessages'
 
 @fr = test_key: "test de clé"
