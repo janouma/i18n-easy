@@ -76,6 +76,9 @@ class @I18nBase
     
     #Public
     
+    @TRANSLATION_PUBLICATION: 'i18n-easy-translations'
+    @LANGUAGES_PUBLICATION: 'i18n-easy-languages'
+    
     setDefault: (language)->
         check language, String
         

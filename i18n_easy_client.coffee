@@ -8,7 +8,7 @@ class I18nClient extends I18nBase
     
         @setDefault defaultLanguage
         Meteor.subscribe(
-            'translations'
+            I18nBase.TRANSLATION_PUBLICATION
             [@getDefault(), @getLanguage()]
         )
 

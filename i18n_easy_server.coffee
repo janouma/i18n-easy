@@ -5,7 +5,7 @@ class I18nServer extends I18nBase
             @mapAll initialTranslations
     
         Meteor.publish(
-            'translations'
+            I18nBase.TRANSLATION_PUBLICATION
             (languages)->
                 check languages, [String]
                 selector = $or: []

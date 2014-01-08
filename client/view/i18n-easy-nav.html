@@ -1,0 +1,21 @@
+<template name="i18n-easy-nav">
+    <div class="col width-fit mobile-width-fit">
+        <div class="cell">
+            <h2><a href="{{pathFor 'i18n-easy-admin'}}" class="no-text-decoration"><i class="fa fa-flag"></i> {{i18n 'translationAdmin'}}</a></h2>
+        </div>
+    </div>
+    <div class="col width-fill mobile-width-fill">
+        <div class="cell capitalize">
+            <ul class="col width-fit mobile-width-fit nav color-blue">
+                {{#each languages}}
+                <li class="{{activeRouteClass this}}"><a href="{{pathToLanguage this}}"><i class="fa fa-file-text"></i> {{i18n this}}</a></li>
+                {{/each}}
+            </ul>
+            <div class="col width-fill mobile-width-fill">
+                <ul class="nav color-emerald pull-right">
+                    <li><a href="#"><i class="fa fa-lock"></i> {{i18n 'signin'}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>

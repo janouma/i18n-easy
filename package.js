@@ -3,12 +3,12 @@ Package.describe({
 });
 
 Package.on_use(function(api, where){
-    api.use(['coffeescript', 'minimongo', 'mongo-livedata', 'templating', 'handlebars', 'deps'], 'client');
-    api.use(['coffeescript', 'minimongo', 'mongo-livedata', 'deps'], 'server');
+    api.use(['coffeescript', 'minimongo', 'mongo-livedata', 'templating', 'handlebars', 'deps', 'iron-router'], 'client');
+    api.use(['coffeescript', 'minimongo', 'mongo-livedata'], 'server');
     
     api.add_files(['i18n_easy.coffee','collections/i18n_easy_messages.coffee']);
-    api.add_files(['i18n_easy_client.coffee', 'router.coffee'], 'client');
-    api.add_files('i18n_easy_server.coffee', 'server');
+    api.add_files(['i18n_easy_client.coffee', 'router.coffee', 'client/view/i18n-easy-nav.html', 'client/view/i18n-easy-nav.coffee', 'client/view/i18n-easy-header.html', 'client/view/i18n-easy-footer.html', 'client/view/i18n-easy-layout.html','client/view/i18n-easy-admin.html'], 'client');
+    api.add_files(['i18n_easy_server.coffee', 'server/publications.coffee'], 'server');
     
     if (api.export) {
         api.export('I18nEasy');
