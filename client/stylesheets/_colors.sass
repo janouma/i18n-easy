@@ -1,0 +1,28 @@
+$header-color: #000055
+$emerald: #228055
+$jade: #88bb00
+
+=color($name, $main, $hover: $main, $active: $main)
+    .color-#{$name}
+        &,a
+            color: $main !important
+        a:hover
+            color: $hover !important
+        .active, &.active
+            &,a
+                color: $active !important
+
+
+.background-transparent
+    background-color: transparent
+
+.gradient-nightfall
+    +background-image(linear-gradient(rgba(darken($header-color, 10%), 0.95) 10%, rgba($header-color, 0.85) 65%, rgba($header-color, 0.75)))
+
++color('blue', darken(steelblue, 10%), steelblue, lighten(dodgerblue, 5%))
++color('jade', $jade)
++color('emerald', $emerald, lighten($emerald, 7%), $jade)
++color('black', #555, #ccc, black)
++color('red', #ff6000)
+
+

@@ -1,0 +1,56 @@
+.background-transparent {
+  background-color: transparent; }
+
+.gradient-nightfall {
+  background-image: -webkit-linear-gradient( rgba(0, 0, 34, 0.95) 10%, rgba(0, 0, 85, 0.85) 65%, rgba(0, 0, 85, 0.75));
+  background-image: linear-gradient( rgba(0, 0, 34, 0.95) 10%, rgba(0, 0, 85, 0.85) 65%, rgba(0, 0, 85, 0.75)); }
+
+.color-blue, .color-blue a {
+  color: #38678f !important; }
+.color-blue a:hover {
+  color: steelblue !important; }
+.color-blue .active, .color-blue .active a, .color-blue.active, .color-blue.active a {
+  color: #389dff !important; }
+
+.color-jade, .color-jade a {
+  color: #88bb00 !important; }
+.color-jade a:hover {
+  color: #88bb00 !important; }
+.color-jade .active, .color-jade .active a, .color-jade.active, .color-jade.active a {
+  color: #88bb00 !important; }
+
+.color-emerald, .color-emerald a {
+  color: #228055 !important; }
+.color-emerald a:hover {
+  color: #299c68 !important; }
+.color-emerald .active, .color-emerald .active a, .color-emerald.active, .color-emerald.active a {
+  color: #88bb00 !important; }
+
+.color-black, .color-black a {
+  color: #555555 !important; }
+.color-black a:hover {
+  color: #cccccc !important; }
+.color-black .active, .color-black .active a, .color-black.active, .color-black.active a {
+  color: black !important; }
+
+.color-red, .color-red a {
+  color: #ff6000 !important; }
+.color-red a:hover {
+  color: #ff6000 !important; }
+.color-red .active, .color-red .active a, .color-red.active, .color-red.active a {
+  color: #ff6000 !important; }
+
+.no-box-shadow {
+  box-shadow: none; }
+
+.no-text-decoration, .no-text-decoration:hover {
+  text-decoration: none; }
+
+.pull-right {
+  float: right; }
+
+.capitalize {
+  text-transform: capitalize; }
+
+.text-center {
+  text-align: center; }
