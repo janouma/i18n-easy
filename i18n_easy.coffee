@@ -44,13 +44,13 @@ class @I18nBase
             )
     
     #==================================
-    _translationFor = (key)->
+    _translationFor = (key, options)->
         translation = I18nEasyMessages.findOne {
             language: _language()
             key: key
         }
     
-        unless translation
+        if not translation and options?.useDefault isnt no
             translation = I18nEasyMessages.findOne {
                 language: _defaultLanguage()
                 key: key
@@ -59,20 +59,20 @@ class @I18nBase
         translation?.message
         
     #==================================
-    _singularFor = (key)->
-        message = _translationFor key
+    _singularFor = (key, options)->
+        message = _translationFor(key, options)
         if message?.constructor.name is 'Array'
             message[0]
         else
             message
             
     #==================================
-    _pluralFor = (key, auto=yes)->
-        message = _translationFor(key)
+    _pluralFor = (key, options)->
+        message = _translationFor(key, options)
         if message?.constructor.name is 'Array'
             message[1]
         else
-            "#{message}s" unless not message or auto is no
+            "#{message}s" unless not message or options?.autoPlural is no
     
     #Public
     
@@ -121,11 +121,11 @@ class @I18nBase
     i18n: (key, options)=>
         check key, String
         
-        message = _singularFor key
+        message = _singularFor(key, options)
         unless message
             fallBack = "#{key}..." unless options?.fallBack is no
             if /s$/i.test key
-                _pluralFor(key[0...key.length-1], options?.autoPlural) or fallBack
+                _pluralFor(key[0...key.length-1], options) or fallBack
             else
                 fallBack
         else
@@ -140,6 +140,7 @@ class @I18nBase
             key
             fallBack: no
             autoPlural: no
+            useDefault: no
         )
         
     #==================================
