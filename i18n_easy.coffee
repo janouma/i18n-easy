@@ -67,12 +67,12 @@ class @I18nBase
             message
             
     #==================================
-    _pluralFor = (key)->
+    _pluralFor = (key, auto=yes)->
         message = _translationFor(key)
         if message?.constructor.name is 'Array'
             message[1]
         else
-            "#{message}s" unless not message
+            "#{message}s" unless not message or auto is no
     
     #Public
     
@@ -118,15 +118,29 @@ class @I18nBase
         distinctLanguages
     
     #==================================
-    i18n: (key)->
+    i18n: (key, options)=>
         check key, String
         
         message = _singularFor key
         unless message
-            fallBack = "#{key}..."
-            if /s$/i.test key then _pluralFor(key[0...key.length-1])  or fallBack else fallBack
+            fallBack = "#{key}..." unless options?.fallBack is no
+            if /s$/i.test key
+                _pluralFor(key[0...key.length-1], options?.autoPlural) or fallBack
+            else
+                fallBack
         else
             message
+            
+    #==================================
+    i18ns: (key, options)=> @i18n("#{key}s", options)
     
     #==================================
-    translate: (key)-> @i18n key
+    translate: (key)=>
+        @i18n(
+            key
+            fallBack: no
+            autoPlural: no
+        )
+        
+    #==================================
+    translatePlural: (key)=> @translate "#{key}s"

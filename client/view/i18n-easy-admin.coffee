@@ -2,7 +2,10 @@ Template['i18n-easy-admin'].helpers(
     keys: ->
         results = I18nEasyMessages.find(
             {}
-            {fields: key: yes}
+            {
+                fields: key: yes
+                sort: key: 1
+            }
         ).fetch()
         
         distinctKeys = []

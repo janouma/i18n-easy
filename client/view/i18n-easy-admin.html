@@ -15,19 +15,19 @@
                 <div class="col">
                     <div class="col width-1of4">
                         <div class="cell">
-                            <label class="capitalize" for="{{this}}"><strong>{{i18n this}}</strong></label>
+                            <label class="capitalize-first" for="{{this}}"><strong>{{i18n this}}</strong> <span class="tiny">{{this}}</span></label>
                         </div>
                     </div>
                     <div class="col width-fill">
                         <div class="col">
                             <div class="col width-1of2">
                                 <div class="cell">
-                                    <textarea id="{{this}}" class="stretch" placeholder="{{i18n 'singular'}}">{{i18n this}}</textarea>
+                                    <textarea id="{{this}}" class="stretch" placeholder="{{i18n 'singular'}}">{{translate this}}</textarea>
                                 </div>
                             </div>
                             <div class="col width-1of2">
                                 <div class="cell">
-                                    <textarea id="{{this}}s" class="stretch" placeholder="{{i18n 'plural'}}">{{i18n this}}</textarea>
+                                    <textarea id="{{this}}s" class="stretch" placeholder="{{i18ns this}}">{{translatePlural this}}</textarea>
                                 </div>
                             </div>
                         </div>

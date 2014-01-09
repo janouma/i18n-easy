@@ -22,7 +22,7 @@
   text-decoration: none; }
 .i18n-easy .pull-right {
   float: right; }
-.i18n-easy .capitalize {
+.i18n-easy .capitalize, .i18n-easy .capitalize-first:first-letter {
   text-transform: capitalize; }
 .i18n-easy .text-center {
   text-align: center; }

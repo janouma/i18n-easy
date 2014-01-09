@@ -15,10 +15,10 @@ Tinytest.add(
 )
 
 Tinytest.add(
-    'translate works'
+    'i18n works'
     (test)->
         test.equal(
-            I18nEasy.translate 'unkown_key'
+            I18nEasy.i18n 'unkown_key'
             "unkown_key..."
         )
         
@@ -28,14 +28,14 @@ Tinytest.add(
         testKey = 'test_key'
         
         test.equal(
-            I18nEasy.translate testKey
+            I18nEasy.i18n testKey
             fr[testKey]
         )
         
         I18nEasy.setLanguage 'en'
 
         test.equal(
-            I18nEasy.translate testKey 
+            I18nEasy.i18n testKey 
             en[testKey]
         )
 )
@@ -49,15 +49,15 @@ Tinytest.add(
         do Deps.flush
         
         test.equal(
-            I18nEasy.translate "#{testKeyOne}s"
+            I18nEasy.i18n "#{testKeyOne}s"
             "#{en[testKeyOne]}s"
         )
         test.equal(
-            I18nEasy.translate testKeyTwo
+            I18nEasy.i18n testKeyTwo
             en[testKeyTwo][0]
         )
         test.equal(
-            I18nEasy.translate "#{testKeyTwo}s"
+            I18nEasy.i18n "#{testKeyTwo}s"
             en[testKeyTwo][1]
         )
 )
