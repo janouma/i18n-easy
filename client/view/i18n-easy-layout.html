@@ -1,11 +1,13 @@
 <template name="i18n-easy-layout">
-    {{>i18n-easy-header}}
-    <div class="site-body centered-content">
-        <div class="site-center">
-            <div class="cell">
-                {{yield}}
+    <span class="i18n-easy">
+        {{>i18n-easy-header}}
+        <div class="site-body centered-content">
+            <div class="site-center">
+                <div class="cell">
+                    {{yield}}
+                </div>
             </div>
         </div>
-    </div>
-    {{>i18n-easy-footer}}
+        {{>i18n-easy-footer}}
+    </span>
 </template>

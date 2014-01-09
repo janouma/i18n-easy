@@ -1,56 +1,28 @@
-.background-transparent {
+.i18n-easy .background-transparent {
   background-color: transparent; }
+.i18n-easy .gradient-silver {
+  background-image: -webkit-linear-gradient( #d4d4df 10%, rgba(241, 241, 245, 0.95) 65%, rgba(241, 241, 245, 0.85));
+  background-image: linear-gradient( #d4d4df 10%, rgba(241, 241, 245, 0.95) 65%, rgba(241, 241, 245, 0.85)); }
+.i18n-easy .color-magenta, .i18n-easy .color-magenta a {
+  color: #cc94be !important; }
+.i18n-easy .color-magenta a:hover {
+  color: #c482b3 !important; }
+.i18n-easy .color-magenta .active, .i18n-easy .color-magenta .active a, .i18n-easy .color-magenta.active, .i18n-easy .color-magenta.active a {
+  color: #aa5093 !important; }
+.i18n-easy .color-pink, .i18n-easy .color-pink a {
+  color: #e93889 !important; }
+.i18n-easy .color-pink a:hover {
+  color: #be0158 !important; }
+.i18n-easy .color-pink .active, .i18n-easy .color-pink .active a, .i18n-easy .color-pink.active, .i18n-easy .color-pink.active a {
+  color: #e93889 !important; }
 
-.gradient-nightfall {
-  background-image: -webkit-linear-gradient( rgba(0, 0, 34, 0.95) 10%, rgba(0, 0, 85, 0.85) 65%, rgba(0, 0, 85, 0.75));
-  background-image: linear-gradient( rgba(0, 0, 34, 0.95) 10%, rgba(0, 0, 85, 0.85) 65%, rgba(0, 0, 85, 0.75)); }
-
-.color-blue, .color-blue a {
-  color: #38678f !important; }
-.color-blue a:hover {
-  color: steelblue !important; }
-.color-blue .active, .color-blue .active a, .color-blue.active, .color-blue.active a {
-  color: #389dff !important; }
-
-.color-jade, .color-jade a {
-  color: #88bb00 !important; }
-.color-jade a:hover {
-  color: #88bb00 !important; }
-.color-jade .active, .color-jade .active a, .color-jade.active, .color-jade.active a {
-  color: #88bb00 !important; }
-
-.color-emerald, .color-emerald a {
-  color: #228055 !important; }
-.color-emerald a:hover {
-  color: #299c68 !important; }
-.color-emerald .active, .color-emerald .active a, .color-emerald.active, .color-emerald.active a {
-  color: #88bb00 !important; }
-
-.color-black, .color-black a {
-  color: #555555 !important; }
-.color-black a:hover {
-  color: #cccccc !important; }
-.color-black .active, .color-black .active a, .color-black.active, .color-black.active a {
-  color: black !important; }
-
-.color-red, .color-red a {
-  color: #ff6000 !important; }
-.color-red a:hover {
-  color: #ff6000 !important; }
-.color-red .active, .color-red .active a, .color-red.active, .color-red.active a {
-  color: #ff6000 !important; }
-
-.no-box-shadow {
+.i18n-easy .no-box-shadow {
   box-shadow: none; }
-
-.no-text-decoration, .no-text-decoration:hover {
+.i18n-easy .no-text-decoration, .i18n-easy .no-text-decoration:hover {
   text-decoration: none; }
-
-.pull-right {
+.i18n-easy .pull-right {
   float: right; }
-
-.capitalize {
+.i18n-easy .capitalize {
   text-transform: capitalize; }
-
-.text-center {
+.i18n-easy .text-center {
   text-align: center; }

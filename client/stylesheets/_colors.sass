@@ -1,6 +1,8 @@
-$header-color: #000055
-$emerald: #228055
-$jade: #88bb00
+$header-color: darken(#F7F7F9, 2%)
+$magenta: #aa5093
+//$strawberry: #ef006e
+$darkpink: #be0158
+$pink: #e93889
 
 =color($name, $main, $hover: $main, $active: $main)
     .color-#{$name}
@@ -12,17 +14,14 @@ $jade: #88bb00
             &,a
                 color: $active !important
 
+.i18n-easy
 
-.background-transparent
-    background-color: transparent
-
-.gradient-nightfall
-    +background-image(linear-gradient(rgba(darken($header-color, 10%), 0.95) 10%, rgba($header-color, 0.85) 65%, rgba($header-color, 0.75)))
-
-+color('blue', darken(steelblue, 10%), steelblue, lighten(dodgerblue, 5%))
-+color('jade', $jade)
-+color('emerald', $emerald, lighten($emerald, 7%), $jade)
-+color('black', #555, #ccc, black)
-+color('red', #ff6000)
-
+    .background-transparent
+        background-color: transparent
+    
+    .gradient-silver
+        +background-image(linear-gradient(darken($header-color, 10%) 10%, rgba($header-color, 0.95) 65%, rgba($header-color, 0.85)))
+    
+    +color('magenta', lighten($magenta, 20%), lighten($magenta, 15%), $magenta)
+    +color('pink', $pink, $darkpink)
 
