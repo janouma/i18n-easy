@@ -26,3 +26,5 @@
   text-transform: capitalize; }
 .i18n-easy .text-center {
   text-align: center; }
+.i18n-easy .stretch {
+  width: 100%; }
