@@ -8,7 +8,7 @@
         <div class="cell capitalize color-magenta">
             <ul class="col width-fit mobile-width-fit nav">
                 {{#each languages}}
-                <li class="{{activeRouteClass this}}"><a href="{{pathToLanguage this}}"><i class="fa fa-flag-o"></i> {{i18n this}}</a></li>
+                <li class="{{activeLanguageClass this}}"><a href="{{pathToLanguage this}}"><i class="fa {{activeFlagClass this}}"></i> {{i18n this}}</a></li>
                 {{/each}}
             </ul>
             <div class="col width-fill mobile-width-fill">
