@@ -11,23 +11,23 @@
     <div class="col content">
         <div class="col">
             <div class="cell">
-                {{#each keys}}
+                {{#each i18nTranslations}}
                 <div class="col">
                     <div class="col width-1of4">
                         <div class="cell">
-                            <label class="capitalize-first" for="{{this}}"><strong>{{i18n this}}</strong> <span class="tiny">{{this}}</span></label>
+                            <label class="capitalize-first" for="{{key}}"><strong>{{label}}</strong> <span class="tiny">{{key}}</span></label>
                         </div>
                     </div>
                     <div class="col width-fill">
                         <div class="col">
                             <div class="col width-1of2">
                                 <div class="cell">
-                                    <textarea id="{{this}}" class="stretch" placeholder="{{i18n this}}">{{translate this}}</textarea>
+                                    <textarea id="{{key}}" class="stretch" placeholder="{{singular.default}}">{{singular.actual}}</textarea>
                                 </div>
                             </div>
                             <div class="col width-1of2">
                                 <div class="cell">
-                                    <textarea id="{{this}}s" class="stretch" placeholder="{{i18ns this}}">{{translatePlural this}}</textarea>
+                                    <textarea id="{{key}}s" class="stretch" placeholder="{{plural.default}}">{{plural.actual}}</textarea>
                                 </div>
                             </div>
                         </div>

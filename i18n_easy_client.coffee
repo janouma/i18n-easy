@@ -19,6 +19,7 @@ Handlebars.registerHelper('i18n', I18nEasy.i18n)
 Handlebars.registerHelper('i18ns', I18nEasy.i18ns)
 Handlebars.registerHelper('translate', I18nEasy.translate)
 Handlebars.registerHelper('translatePlural', I18nEasy.translatePlural)
+Handlebars.registerHelper('i18nTranslations', I18nEasy.translations)
 
 Handlebars.registerHelper(
     'pathToLanguage'

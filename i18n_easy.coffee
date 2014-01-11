@@ -44,6 +44,42 @@ class @I18nBase
             )
     
     #==================================
+    _translations = ->
+        translations = {}
+        defaultLanguage = _defaultLanguage()
+        language = _language()
+
+        results = I18nEasyMessages.find(
+            {}
+            sort: key: 1
+        ).fetch()
+        
+        for result in results when result.key
+            translation =
+                translations[result.key] ?=
+                    key: result.key
+                    label: "{{#{result.key}}}"
+                    singular: {}
+                    plural:{}
+            
+            if result.language is defaultLanguage
+                [translation.singular.default, translation.plural.default] = if result.message.constructor.name is 'Array'
+                        result.message
+                    else
+                        [result.message, "#{result.message}s"]
+                
+                translation.label = translation.singular.default
+
+            if result.language is language
+                [translation.singular.actual, translation.plural.actual] = if result.message.constructor.name is 'Array'
+                        result.message
+                    else
+                        [result.message, "#{result.message}s"]
+                
+        
+        translation for key, translation of translations
+    
+    #==================================
     _translationFor = (key, options)->
         translation = I18nEasyMessages.findOne {
             language: _language()
@@ -145,3 +181,6 @@ class @I18nBase
         
     #==================================
     translatePlural: (key)=> @translate "#{key}s"
+        
+    #==================================
+    translations: => _translations()

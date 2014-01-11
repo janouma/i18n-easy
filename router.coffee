@@ -6,11 +6,11 @@ Router.map ->
         layoutTemplate: 'i18n-easy-layout'
 
         before: ->
-            language = @params[0] or @params.language
-        
+            language = @params.language
+
             if language and I18nEasy.getLanguage() isnt language
                 I18nEasy.setLanguage language
 
         waitOn: -> Meteor.subscribe I18nBase.LANGUAGES_PUBLICATION
+        fastRender: true
     )
-    
