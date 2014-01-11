@@ -74,7 +74,7 @@ class @I18nBase
                 [translation.singular.actual, translation.plural.actual] = if result.message.constructor.name is 'Array'
                         result.message
                     else
-                        [result.message, "#{result.message}s"]
+                        [result.message, undefined]
                 
         
         translation for key, translation of translations
