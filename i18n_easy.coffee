@@ -81,12 +81,13 @@ class @I18nBase
     
     #==================================
     _translationFor = (key, options)->
-        translation = I18nEasyMessages.findOne {
-            language: _language()
-            key: key
-        }
-    
-        if not translation and options?.useDefault isnt no
+        if options?.defaultLanguage isnt yes
+            translation = I18nEasyMessages.findOne {
+                language: _language()
+                key: key
+            }
+
+        if options?.defaultLanguage or not translation and options?.useDefault isnt no
             translation = I18nEasyMessages.findOne {
                 language: _defaultLanguage()
                 key: key
@@ -167,6 +168,13 @@ class @I18nBase
         else
             message
             
+    #==================================
+    i18nDefault: (key)=>
+        @i18n(
+            key
+            defaultLanguage: yes
+        )
+
     #==================================
     i18ns: (key, options)=> @i18n("#{key}s", options)
     
