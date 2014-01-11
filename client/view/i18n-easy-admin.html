@@ -11,40 +11,43 @@
     <div class="col content">
         <div class="col">
             <div class="cell">
-                {{#each i18nTranslations}}
-                <div class="col">
-                    <div class="col width-1of4">
-                        <div class="cell">
-                            <label class="capitalize-first" for="{{key}}"><strong>{{label}}</strong> <span class="tiny">{{key}}</span></label>
-                        </div>
-                    </div>
-                    <div class="col width-fill">
-                        <div class="col">
-                            <div class="col width-1of2">
-                                <div class="cell">
-                                    <textarea id="{{key}}" class="stretch" placeholder="{{singular.default}}">{{singular.actual}}</textarea>
-                                </div>
-                            </div>
-                            <div class="col width-1of2">
-                                <div class="cell">
-                                    <textarea id="{{key}}s" class="stretch" placeholder="{{plural.default}}">{{plural.actual}}</textarea>
-                                </div>
+                <form>
+                    {{#each i18nTranslations}}
+                    <div class="col">
+                        <div class="col width-1of4">
+                            <div class="cell">
+                                <label class="capitalize-first" for="{{key}}"><strong>{{label}}</strong> <span class="tiny">{{key}}</span></label>
                             </div>
                         </div>
-                    </div>
-                </div>
-                {{/each}}
-                <div class="col">
-                    <div class="col width-1of4">
-                        <div class="cell"></div>
-                    </div>
-                    <div class="col width-fill">
-                        <div class="cell">
-                            <button id="save" class="button icon-button active-button capitalize" href="#"><i class="fa fa-check"></i> <strong>{{i18nDefault 'save'}}</strong></button>
-                            <button id="add" class="button icon-button active-button capitalize" href="#"><i class="fa fa-plus"></i> <strong>{{i18nDefault 'add'}}</strong></button>
+                        <div class="col width-fill">
+                            <div class="col">
+                                <div class="col width-1of2">
+                                    <div class="cell">
+                                        <textarea id="_{{key}}" class="stretch" placeholder="{{singular.default}}">{{singular.actual}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col width-1of2">
+                                    <div class="cell">
+                                        <textarea id="_{{key}}s" class="stretch" placeholder="{{plural.default}}">{{plural.actual}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    {{/each}}
+                    <div class="col">
+                        <div class="col width-1of4">
+                            <div class="cell"></div>
+                        </div>
+                        <div class="col width-fill">
+                            <div class="cell">
+                                <button id="save" class="button icon-button active-button capitalize theme-black color-grey" href="javascript:void();"><i class="fa fa-check"></i> <strong>{{i18nDefault 'save'}}</strong></button>
+                                <button id="add" class="button icon-button capitalize theme-grey color-white" disabled href="javascript:void();"><i class="fa fa-plus"></i> <strong>{{i18nDefault 'add'}}</strong></button>
+                                <input type="text" id="newKey" placeholder="{{i18nDefault 'newKey'}}" class="text">
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

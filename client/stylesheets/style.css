@@ -5,16 +5,46 @@
   background-image: linear-gradient( #d4d4df 10%, rgba(241, 241, 245, 0.95) 65%, rgba(241, 241, 245, 0.85)); }
 .i18n-easy .color-magenta, .i18n-easy .color-magenta a {
   color: #cc94be !important; }
-.i18n-easy .color-magenta a:hover {
+.i18n-easy .color-magenta:hover, .i18n-easy .color-magenta a:hover {
   color: #c482b3 !important; }
 .i18n-easy .color-magenta .active, .i18n-easy .color-magenta .active a, .i18n-easy .color-magenta.active, .i18n-easy .color-magenta.active a {
   color: #aa5093 !important; }
 .i18n-easy .color-pink, .i18n-easy .color-pink a {
   color: #e93889 !important; }
-.i18n-easy .color-pink a:hover {
+.i18n-easy .color-pink:hover, .i18n-easy .color-pink a:hover {
   color: #be0158 !important; }
 .i18n-easy .color-pink .active, .i18n-easy .color-pink .active a, .i18n-easy .color-pink.active, .i18n-easy .color-pink.active a {
   color: #e93889 !important; }
+.i18n-easy .color-white, .i18n-easy .color-white a {
+  color: white !important; }
+.i18n-easy .color-white:hover, .i18n-easy .color-white a:hover {
+  color: white !important; }
+.i18n-easy .color-white .active, .i18n-easy .color-white .active a, .i18n-easy .color-white.active, .i18n-easy .color-white.active a {
+  color: white !important; }
+.i18n-easy .color-grey, .i18n-easy .color-grey a {
+  color: #dddde5 !important; }
+.i18n-easy .color-grey:hover, .i18n-easy .color-grey a:hover {
+  color: #dddde5 !important; }
+.i18n-easy .color-grey .active, .i18n-easy .color-grey .active a, .i18n-easy .color-grey.active, .i18n-easy .color-grey.active a {
+  color: #dddde5 !important; }
+.i18n-easy .theme-black {
+  background-color: #333333;
+  border-color: #262626; }
+  .i18n-easy .theme-black:hover {
+    background-color: #505050;
+    border-color: #434343; }
+  .i18n-easy .theme-black:active {
+    background-color: black;
+    border-color: black; }
+.i18n-easy .theme-grey {
+  background-color: #dddde5;
+  border-color: #ceceda; }
+  .i18n-easy .theme-grey:hover {
+    background-color: #dddde5;
+    border-color: #ceceda; }
+  .i18n-easy .theme-grey:active {
+    background-color: #dddde5;
+    border-color: #ceceda; }
 
 .i18n-easy .no-box-shadow {
   box-shadow: none; }
