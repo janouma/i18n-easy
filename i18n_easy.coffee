@@ -58,32 +58,31 @@ class @I18nBase
 				{}
 			sort:
 				key: 1
-		).fetch()
+		).forEach (result)->
+			if result.key
+				translation =
+					translations[result.key] ?=
+						key: result.key
+						label: "{{#{result.key}}}"
+						singular: {}
+						plural: {}
 
-		for result in results when result.key
-			translation =
-				translations[result.key] ?=
-					key: result.key
-					label: "{{#{result.key}}}"
-					singular: {}
-					plural: {}
+				if result.language is defaultLanguage
+					if result.message.constructor.name is 'Array'
+						translation.singular.default = result.message[0]
+						translation.plural.default = result.message[1] unless translation.plural.default
+					else
+						translation.singular.default = result.message
+						translation.plural.default = "#{result.message}s" unless translation.plural.default
 
-			if result.language is defaultLanguage
-				if result.message.constructor.name is 'Array'
-					translation.singular.default = result.message[0]
-					translation.plural.default = result.message[1] unless translation.plural.default
-				else
-					translation.singular.default = result.message
-					translation.plural.default = "#{result.message}s" unless translation.plural.default
+					translation.label = translation.singular.default
 
-				translation.label = translation.singular.default
-
-			if result.language is language
-				[translation.singular.actual, translation.plural.actual] = if result.message.constructor.name is 'Array'
-					result.message
-				else
-					translation.plural.default = "#{result.message}s"
-					[result.message, undefined]
+				if result.language is language
+					[translation.singular.actual, translation.plural.actual] = if result.message.constructor.name is 'Array'
+						result.message
+					else
+						translation.plural.default = "#{result.message}s"
+						[result.message, undefined]
 
 
 		translation for key, translation of translations
