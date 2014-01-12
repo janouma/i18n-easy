@@ -54,10 +54,9 @@ class @I18nBase
 		defaultLanguage = _defaultLanguage()
 		language = _language()
 
-		results = I18nEasyMessages.find(
-				{}
-			sort:
-				key: 1
+		I18nEasyMessages.find(
+			{}
+			sort: key: 1
 		).forEach (result)->
 			if result.key
 				translation =
@@ -157,14 +156,13 @@ class @I18nBase
 
 	#==================================
 	getLanguages: ->
-		results = I18nEasyMessages.find(
-				{}
-				{fields:
-					language: yes}
-		).fetch()
-
 		distinctLanguages = []
-		distinctLanguages.push result.language for result in results when result.language not in distinctLanguages
+
+		I18nEasyMessages.find(
+			{}
+			fields: language: yes
+		).forEach (result)-> distinctLanguages.push result.language unless result.language in distinctLanguages
+
 		distinctLanguages
 
 	#==================================
