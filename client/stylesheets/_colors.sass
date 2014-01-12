@@ -19,16 +19,16 @@ $redlight: #ff6000
 
 =theme($name, $main, $hover: $main, $active: $main)
 	.theme-#{$name}
-		background-color: $main
-		border-color: darken($main, 5%)
+		background-color: $main !important
+		border-color: darken($main, 5%) !important
 
 		&:hover
-			background-color: $hover
-			border-color: darken($hover, 5%)
+			background-color: $hover !important
+			border-color: darken($hover, 5%) !important
 
 		&:active
-			background-color: $active
-			border-color: darken($active, 5%)
+			background-color: $active !important
+			border-color: darken($active, 5%) !important
 
 
 .i18n-easy
@@ -43,7 +43,9 @@ $redlight: #ff6000
 	+color('pink', $pink, $darkpink)
 	+color('white', white)
 	+color('grey', $darkgrey)
+	+color('redlight', $redlight)
 
 	+theme('black', #333, #505050, black)
 	+theme('grey', $darkgrey)
+	+theme('redlight', rgba($redlight, 0.1))
 

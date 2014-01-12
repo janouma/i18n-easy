@@ -16,7 +16,7 @@
                     <div class="col">
                         <div class="col width-1of4">
                             <div class="cell">
-                                <label class="capitalize-first" for="{{key}}"><strong>{{label}}</strong> <span class="tiny">{{key}}</span></label>
+                                <label class="capitalize-first" for="_{{key}}"><strong>{{label}}</strong> <span class="tiny">{{key}}</span></label>
                             </div>
                         </div>
                         <div class="col width-fill">
@@ -42,8 +42,9 @@
                         <div class="col width-fill">
                             <div class="cell">
                                 <button id="save" class="button icon-button active-button capitalize theme-black color-grey" href="javascript:void();"><i class="fa fa-check"></i> <strong>{{i18nDefault 'save'}}</strong></button>
-                                <button id="add" class="button icon-button capitalize theme-grey color-white" disabled href="javascript:void();"><i class="fa fa-plus"></i> <strong>{{i18nDefault 'add'}}</strong></button>
-                                <input type="text" id="newKey" placeholder="{{i18nDefault 'newKey'}}" class="text">
+                                <button id="add" class="button icon-button capitalize {{disabledClass}}" {{disabledAttr}} href="javascript:void();"><i class="fa fa-plus"></i> <strong>{{i18nDefault 'add'}}</strong></button>
+                                <input type="text" id="newKey" placeholder="{{i18nDefault 'newKey'}}" class="text {{statusClass}}">
+								<span id="submit-result" class="note capitalize-first {{statusClass}} {{displayClass}}">{{submitMessage}}</span>
                             </div>
                         </div>
                     </div>

@@ -1,21 +1,78 @@
-Template['i18n-easy-admin'].events {
-    'submit form': (e)->
-        do e.preventDefault
+context =
+	sessionPrefix: 'i18n-easy-submit-result'
+
+	update: ->
+		sessionPropertyPattern = /^_\w+$/
+		Session.set("#{@sessionPrefix}#{property}", value) for property, value of @ when sessionPropertyPattern.test property
+
+	clear: ->
+		@_submitMessage = undefined
+		@_statusClass = undefined
+		@_displayClass = 'hidden'
+		@_disabledClass = 'theme-grey color-white'
+		@_disabledAttr = 'disabled'
+
+	reset: ->
+		do @clear
+		do @update
+
+	init: -> do @reset
 
 
-    'click #add': (e)->
-        do e.preventDefault
+templateName = 'i18n-easy-admin'
 
-        $newKeyInput = $('#newKey')
-        newKey = $newKeyInput.val()
-        #$newKeyInput.addClass('theme-redlight') unless $.trim(newKey)
+Template[templateName].created =-> do context.init
 
 
-    'input #newKey': (e)->
-        $addButton = $('#add')
+Template[templateName].helpers {
+	displayClass: -> Session.get "#{context.sessionPrefix}_displayClass"
+	submitMessage: -> Session.get "#{context.sessionPrefix}_submitMessage"
+	statusClass: -> Session.get "#{context.sessionPrefix}_statusClass"
+	disabledClass: -> Session.get "#{context.sessionPrefix}_disabledClass"
+	disabledAttr: -> Session.get "#{context.sessionPrefix}_disabledAttr"
+}
 
-        if $(e.target).val().trim()
-            $addButton.removeAttr('disabled').addClass('active-button theme-black color-grey').removeClass('theme-grey color-white')
-        else
-            $addButton.attr(disabled: yes).addClass('theme-grey color-white').removeClass('active-button theme-black color-grey')
+
+Template[templateName].events {
+
+	'submit form': (e)->
+		do e.preventDefault
+
+
+	'click #add': (e)->
+		do e.preventDefault
+
+		Meteor.call(
+			'i18nEasyAddKey'
+			$.trim $('#newKey').val()
+
+			(error, result)->
+				do context.reset
+
+				if error
+					Meteor._debug error
+					context._displayClass = undefined
+					context._submitMessage = I18nEasy.i18nDefault(if error.error is 409 then 'duplicatedKey' else 'internalServerError')
+					context._statusClass = 'theme-redlight color-redlight'
+					context._disabledClass = 'theme-grey color-white'
+					context._disabledAttr = 'disabled'
+				else
+					$newKeyInput.val ''
+					do context.clear
+
+				do context.update
+		)
+
+
+	'input #newKey': (e)->
+		$addButton = $('#add')
+
+		if /^\w+$/.test $(e.target).val().trim()
+			$addButton.removeAttr('disabled')
+				.addClass('active-button theme-black color-grey')
+				.removeClass('theme-grey color-white')
+		else
+			$addButton.attr(disabled: yes)
+				.addClass('theme-grey color-white')
+				.removeClass('active-button theme-black color-grey')
 }

@@ -74,7 +74,7 @@ class @I18nBase
 						translation.singular.default = result.message
 						translation.plural.default = "#{result.message}s" unless translation.plural.default
 
-					translation.label = translation.singular.default
+					translation.label = translation.singular.default if translation.singular.default
 
 				if result.language is language
 					[translation.singular.actual, translation.plural.actual] = if result.message.constructor.name is 'Array'

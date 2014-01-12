@@ -27,24 +27,39 @@
   color: #dddde5 !important; }
 .i18n-easy .color-grey .active, .i18n-easy .color-grey .active a, .i18n-easy .color-grey.active, .i18n-easy .color-grey.active a {
   color: #dddde5 !important; }
+.i18n-easy .color-redlight, .i18n-easy .color-redlight a {
+  color: #ff6000 !important; }
+.i18n-easy .color-redlight:hover, .i18n-easy .color-redlight a:hover {
+  color: #ff6000 !important; }
+.i18n-easy .color-redlight .active, .i18n-easy .color-redlight .active a, .i18n-easy .color-redlight.active, .i18n-easy .color-redlight.active a {
+  color: #ff6000 !important; }
 .i18n-easy .theme-black {
-  background-color: #333333;
-  border-color: #262626; }
+  background-color: #333333 !important;
+  border-color: #262626 !important; }
   .i18n-easy .theme-black:hover {
-    background-color: #505050;
-    border-color: #434343; }
+    background-color: #505050 !important;
+    border-color: #434343 !important; }
   .i18n-easy .theme-black:active {
-    background-color: black;
-    border-color: black; }
+    background-color: black !important;
+    border-color: black !important; }
 .i18n-easy .theme-grey {
-  background-color: #dddde5;
-  border-color: #ceceda; }
+  background-color: #dddde5 !important;
+  border-color: #ceceda !important; }
   .i18n-easy .theme-grey:hover {
-    background-color: #dddde5;
-    border-color: #ceceda; }
+    background-color: #dddde5 !important;
+    border-color: #ceceda !important; }
   .i18n-easy .theme-grey:active {
-    background-color: #dddde5;
-    border-color: #ceceda; }
+    background-color: #dddde5 !important;
+    border-color: #ceceda !important; }
+.i18n-easy .theme-redlight {
+  background-color: rgba(255, 96, 0, 0.1) !important;
+  border-color: rgba(230, 86, 0, 0.1) !important; }
+  .i18n-easy .theme-redlight:hover {
+    background-color: rgba(255, 96, 0, 0.1) !important;
+    border-color: rgba(230, 86, 0, 0.1) !important; }
+  .i18n-easy .theme-redlight:active {
+    background-color: rgba(255, 96, 0, 0.1) !important;
+    border-color: rgba(230, 86, 0, 0.1) !important; }
 
 .i18n-easy .no-box-shadow {
   box-shadow: none; }
@@ -58,3 +73,13 @@
   text-align: center; }
 .i18n-easy .stretch {
   width: 100%; }
+.i18n-easy .hidden {
+  visibility: hidden; }
+.i18n-easy .note {
+  display: inline-block;
+  line-height: 19px;
+  padding: 4px;
+  border-radius: 3px;
+  border: #dddde5 1px solid;
+  background-color: #f1f1f5;
+  color: #aaaaaa; }
