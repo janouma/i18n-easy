@@ -42,11 +42,13 @@ Template[templateName].events {
 	'click #add': (e)->
 		do e.preventDefault
 
+		$newKeyInput = $('#newKey')
+
 		Meteor.call(
 			'i18nEasyAddKey'
-			$.trim $('#newKey').val()
+			$.trim $newKeyInput.val()
 
-			(error, result)->
+			(error)->
 				do context.reset
 
 				if error

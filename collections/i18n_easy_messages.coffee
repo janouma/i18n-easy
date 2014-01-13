@@ -16,6 +16,6 @@ Meteor.methods {
 			I18nEasyMessages.insert(
 				key: newKey
 				language: I18nEasy.getDefault()
-				message: null
+				message: ''
 			)
 }

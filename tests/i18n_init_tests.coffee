@@ -21,5 +21,5 @@ for key, message of @en
         message: message
     }
 
-I18nEasy.publish()
+I18nEasy.publish default: 'en'
 I18nEasy.subscribe default: 'en'
