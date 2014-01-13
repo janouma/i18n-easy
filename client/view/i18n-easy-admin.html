@@ -10,13 +10,14 @@
     -->
     <div class="col content">
         <div class="col">
+			<div class="cell note capitalize-first stretch text-center animated {{statusClass}} {{displayClass}}">{{submitMessage}}</div>
             <div class="cell">
                 <form>
                     {{#each i18nTranslations}}
-                    <div class="col {{emptyWarningClass singular.default}}">
+                    <div class="col">
                         <div class="col width-1of4">
                             <div class="cell">
-                                <label class="capitalize-first" for="_{{key}}"><strong>{{label}}</strong> <span class="tiny">{{key}}</span></label>
+                                <label class="capitalize-first" for="_{{key}}"><strong class="{{emptyWarningClass singular.default}}">{{label}}</strong> <span class="tiny">{{key}}</span></label>
                             </div>
                         </div>
                         <div class="col width-fill">

@@ -90,7 +90,10 @@
   width: 100%; }
 .i18n-easy .hidden {
   opacity: 0;
-  visibility: hidden; }
+  visibility: hidden;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important; }
 .i18n-easy .animated {
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -99,7 +102,7 @@
   display: inline-block;
   line-height: 19px;
   padding: 4px;
-  border-radius: 3px;
-  border: #dddde5 1px solid;
+  border-radius: 2px;
   background-color: #f1f1f5;
+  box-shadow: 0 1px 3px #aaaaaa;
   color: #aaaaaa; }
