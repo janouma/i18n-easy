@@ -33,6 +33,12 @@
   color: #ff6000 !important; }
 .i18n-easy .color-redlight .active, .i18n-easy .color-redlight .active a, .i18n-easy .color-redlight.active, .i18n-easy .color-redlight.active a {
   color: #ff6000 !important; }
+.i18n-easy .color-emerald, .i18n-easy .color-emerald a {
+  color: #228055 !important; }
+.i18n-easy .color-emerald:hover, .i18n-easy .color-emerald a:hover {
+  color: #228055 !important; }
+.i18n-easy .color-emerald .active, .i18n-easy .color-emerald .active a, .i18n-easy .color-emerald.active, .i18n-easy .color-emerald.active a {
+  color: #228055 !important; }
 .i18n-easy .theme-black {
   background-color: #333333 !important;
   border-color: #262626 !important; }
@@ -60,6 +66,15 @@
   .i18n-easy .theme-redlight:active {
     background-color: rgba(255, 96, 0, 0.1) !important;
     border-color: rgba(230, 86, 0, 0.1) !important; }
+.i18n-easy .theme-jade {
+  background-color: rgba(136, 187, 0, 0.3) !important;
+  border-color: rgba(117, 162, 0, 0.3) !important; }
+  .i18n-easy .theme-jade:hover {
+    background-color: rgba(136, 187, 0, 0.3) !important;
+    border-color: rgba(117, 162, 0, 0.3) !important; }
+  .i18n-easy .theme-jade:active {
+    background-color: rgba(136, 187, 0, 0.3) !important;
+    border-color: rgba(117, 162, 0, 0.3) !important; }
 
 .i18n-easy .no-box-shadow {
   box-shadow: none; }

@@ -1,9 +1,8 @@
 context =
 	sessionPrefix: 'i18n-easy-submit-result'
+	sessionPropertyPattern: /^_\w+$/
 
-	update: ->
-		sessionPropertyPattern = /^_\w+$/
-		Session.set("#{@sessionPrefix}#{property}", value) for property, value of @ when sessionPropertyPattern.test property
+	update: -> Session.set("#{@sessionPrefix}#{property}", value) for property, value of @ when @sessionPropertyPattern.test property
 
 	clear: ->
 		@_submitMessage = undefined
@@ -51,17 +50,23 @@ Template[templateName].events {
 
 			(error)->
 				do context.reset
+				context._displayClass = undefined
+				context._disabledClass = 'theme-grey color-white'
+				context._disabledAttr = 'disabled'
 
 				if error
 					Meteor._debug error
-					context._displayClass = undefined
 					context._submitMessage = I18nEasy.i18nDefault(if error.error is 409 then 'duplicatedKey' else 'internalServerError')
 					context._statusClass = 'theme-redlight color-redlight'
-					context._disabledClass = 'theme-grey color-white'
-					context._disabledAttr = 'disabled'
 				else
 					$newKeyInput.val ''
-					do context.clear
+					context._submitMessage = I18nEasy.i18nDefault 'successful'
+					context._statusClass = 'theme-jade color-emerald'
+
+					Meteor.setTimeout(
+						-> do context.reset
+						3000
+					)
 
 				do context.update
 		)
