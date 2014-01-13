@@ -25,6 +25,7 @@ Template[templateName].created =-> do context.init
 
 
 Template[templateName].helpers {
+	emptyWarningClass: (translation)-> 'theme-redlight color-redlight' unless translation?.length
 	displayClass: -> Session.get "#{context.sessionPrefix}_displayClass"
 	submitMessage: -> Session.get "#{context.sessionPrefix}_submitMessage"
 	statusClass: -> Session.get "#{context.sessionPrefix}_statusClass"
