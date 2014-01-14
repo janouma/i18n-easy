@@ -1,16 +1,26 @@
 class I18nClient extends I18nBase
 
-    publish: -> Meteor._debug "Calling publish client side has no effect"
-    
-    subscribe: (options)->
-        defaultLanguage = options?.default
-        check defaultLanguage, String
-    
-        @setDefault defaultLanguage
-        Meteor.subscribe(
-            I18nBase.TRANSLATION_PUBLICATION
-            [@getDefault(), @getLanguage()]
-        )
+	publish: ->
+		Meteor._debug "Calling publish client side has no effect"
+
+	subscribe: (options)->
+		defaultLanguage = options?.default
+		check defaultLanguage, String
+
+		OptionalFunction = Match.Optional(
+			Match.Where (val)-> typeof val is 'function'
+		)
+
+		ready = options?.ready
+		check ready, OptionalFunction
+
+		@setDefault defaultLanguage
+
+		Meteor.subscribe(
+			I18nBase.TRANSLATION_PUBLICATION
+			[@getDefault(), @getLanguage()]
+			ready
+		)
 
 #==================================
 I18nEasy = new I18nClient()
