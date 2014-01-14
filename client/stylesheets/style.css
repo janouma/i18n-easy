@@ -76,6 +76,9 @@
     background-color: rgba(136, 187, 0, 0.3) !important;
     border-color: rgba(117, 162, 0, 0.3) !important; }
 
+.i18n-easy input[type=text],
+.i18n-easy textarea {
+  background-color: rgba(241, 241, 245, 0.1); }
 .i18n-easy .no-box-shadow {
   box-shadow: none; }
 .i18n-easy .no-text-decoration, .i18n-easy .no-text-decoration:hover {
@@ -92,12 +95,21 @@
   opacity: 0;
   visibility: hidden;
   height: 0 !important;
+  width: 0 !important;
   padding: 0 !important;
   margin: 0 !important; }
 .i18n-easy .animated {
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out; }
+.i18n-easy .collapse-left {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 0; }
+.i18n-easy .collapse-right {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right-width: 0; }
 .i18n-easy .note {
   display: inline-block;
   line-height: 19px;

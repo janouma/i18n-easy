@@ -2,6 +2,9 @@
 @import colors
 
 .i18n-easy
+	input[type=text],
+	textarea
+		background-color: rgba($grey, 0.1)
 
 	.no-box-shadow
 		box-shadow: none
@@ -29,11 +32,22 @@
 		opacity: 0
 		visibility: hidden
 		height: 0 !important
+		width: 0 !important
 		padding: 0 !important
 		margin: 0 !important
 
 	.animated
 		+transition(all 0.5s ease-in-out)
+
+	.collapse-left
+		border-top-left-radius: 0
+		border-bottom-left-radius: 0
+		border-left-width: 0
+
+	.collapse-right
+		border-top-right-radius: 0
+		border-bottom-right-radius: 0
+		border-right-width: 0
 
 	.note
 		display: inline-block

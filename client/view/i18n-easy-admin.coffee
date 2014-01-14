@@ -55,7 +55,6 @@ Template[templateName].events {
 				context._disabledAttr = 'disabled'
 
 				if error
-					Meteor._debug error
 					context._submitMessage = I18nEasy.i18nDefault(if error.error is 409 then 'duplicatedKey' else 'internalServerError')
 					context._statusClass = 'theme-redlight color-redlight'
 				else
