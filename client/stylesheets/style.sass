@@ -31,10 +31,6 @@
 	.hidden
 		opacity: 0
 		visibility: hidden
-		height: 0 !important
-		width: 0 !important
-		padding: 0 !important
-		margin: 0 !important
 
 	.animated
 		+transition(all 0.5s ease-in-out)
@@ -52,8 +48,25 @@
 	.note
 		display: inline-block
 		line-height: 19px
-		padding: 4px
-		border-radius: 2px
+		padding: 5px
+		border-radius: 5px
 		background-color: $grey
-		box-shadow: 0 1px 3px #aaa
 		color: #aaa
+
+	.big-shadow
+		box-shadow: 0 5px 10px #707070
+
+	.engraved
+		text-shadow: 0 1px 1px #ccc
+
+	#submit-result
+		padding: 10px
+		border-radius: 5px
+		z-index: 1
+		width: 85%
+		position: fixed
+		top: 80px
+		left: 7.5%
+		border: 1px solid #333
+		@extend .big-shadow
+		@extend .engraved

@@ -10,11 +10,11 @@
     -->
     <div class="col content">
         <div class="col">
-			<div class="cell note capitalize-first stretch text-center animated {{statusClass}} {{displayClass}}">{{submitMessage}}</div>
+			<strong id="submit-result" class="capitalize-first text-center animated {{statusClass}} {{displayClass}} gradient">{{submitMessage}}</strong>
             <div class="cell">
                 <form>
                     {{#each i18nTranslations}}
-                    <div class="col">
+                    <div id="translation_{{key}}" class="col">
                         <div class="col width-1of4">
                             <div class="cell">
                                 <label class="capitalize-first" for="_{{key}}"><strong class="{{emptyWarningClass singular.default}}">{{label}}</strong> <span class="tiny">{{key}}</span></label>
@@ -24,12 +24,12 @@
                             <div class="col">
                                 <div class="col width-1of2">
                                     <div class="cell">
-                                        <textarea id="_{{key}}" class="stretch collapse-right" placeholder="{{singular.default}}">{{singular.actual}}</textarea>
+                                        <textarea id="_{{key}}" name="singular" class="stretch collapse-right" placeholder="{{singular.default}}" data-initial-value="{{singular.actual}}">{{singular.actual}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col width-1of2">
                                     <div class="cell">
-                                        <textarea id="_{{key}}s" class="stretch collapse-left" placeholder="{{plural.default}}">{{plural.actual}}</textarea>
+                                        <textarea id="_{{key}}s" name="plural" class="stretch collapse-left" placeholder="{{plural.default}}" data-initial-value="{{plural.actual}}">{{plural.actual}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -44,8 +44,8 @@
                             <div class="cell">
                                 <button id="save" class="button icon-button active-button capitalize theme-black color-grey animated" href="javascript:void();"><i class="fa fa-check"></i> <strong>{{i18nDefault 'save'}}</strong></button>
                                 <button id="add" class="button icon-button capitalize animated {{disabledClass}}" {{disabledAttr}} href="javascript:void();"><i class="fa fa-plus"></i> <strong>{{i18nDefault 'add'}}</strong></button>
-                                <input type="text" id="newKey" placeholder="{{i18nDefault 'newKey'}}" class="text animated {{statusClass}}">
-								<span id="submit-result" class="note capitalize-first animated {{statusClass}} {{displayClass}}">{{submitMessage}}</span>
+                                <input type="text" id="newKey" placeholder="{{i18nDefault 'newKey'}}" class="text animated">
+								<span class="note capitalize-first animated {{statusClass}} {{displayClass}}">{{submitMessage}}</span>
                             </div>
                         </div>
                     </div>

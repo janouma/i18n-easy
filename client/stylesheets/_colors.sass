@@ -8,6 +8,7 @@ $pink: #e93889
 $redlight: #ff6000
 $emerald: #228055
 $jade: #88bb00
+$almostblack: #505050
 
 =color($name, $main, $hover: $main, $active: $main)
 	.color-#{$name}
@@ -47,9 +48,11 @@ $jade: #88bb00
 	+color('grey', $darkgrey)
 	+color('redlight', $redlight)
 	+color('emerald', $emerald)
+	+color('black', $almostblack)
 
-	+theme('black', #333, #505050, black)
+	+theme('black', #333, $almostblack, black)
 	+theme('grey', $darkgrey)
-	+theme('redlight', rgba($redlight, 0.1))
-	+theme('jade', rgba($jade, 0.3))
+	+theme('redlight', lighten($redlight, 15%))
+	+theme('emerald', lighten($emerald, 15%))
+	+theme('orange', orange)
 
