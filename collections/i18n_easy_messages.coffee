@@ -18,4 +18,21 @@ Meteor.methods {
 				language: I18nEasy.getDefault()
 				message: ''
 			)
+
+	#==================================
+	i18nEasySave: (translations)->
+		check(
+			translations
+			[
+				language: String
+				key: String
+				message: Match.OneOf(String, [String])
+			]
+		)
+
+		for translation in translations
+			I18nEasyMessages.upsert(
+				{key: translation.key, language: translation.language}
+				{$set: message: translation.message}
+			)
 }

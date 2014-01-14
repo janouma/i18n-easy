@@ -34,7 +34,7 @@ Template[templateName].created =-> do context.init
 
 
 Template[templateName].helpers {
-	emptyWarningClass: (translation)-> 'label theme-redlight color-black' unless translation?.length
+	emptyWarningClass: (translation)-> 'label theme-gold color-black' unless translation?.length
 	displayClass: -> Session.get "#{context.sessionPrefix}_displayClass"
 	submitMessage: -> Session.get "#{context.sessionPrefix}_submitMessage"
 	statusClass: -> Session.get "#{context.sessionPrefix}_statusClass"
@@ -66,25 +66,39 @@ Template[templateName].events {
 
 			if message
 				translations.push {
-					key: $singular.attr 'id'
+					key: $(@).attr 'data-key'
 					language: I18nEasy.getLanguage()
 					message: message
 				}
+
+		context._displayClass = undefined
+		context._disabledClass = 'theme-grey color-white'
+		context._disabledAttr = 'disabled'
+
+		$newKeyInput = $('#newKey')
 
 		if translations.length
 			Meteor.call(
 				'i18nEasySave'
 				translations
-				#callBack
+				(error)->
+					if error
+						context.flash {
+							submitMessage: I18nEasy.i18nDefault 'internalServerError'
+							statusClass: 'theme-redlight color-black'
+						}
+					else
+						$newKeyInput.val ''
+						context.flash {
+							submitMessage: I18nEasy.i18nDefault 'successful'
+							statusClass: 'theme-emerald color-black'
+						}
 			)
 		else
-			$('#newKey').val ''
+			$newKeyInput.val ''
 			context.flash {
-				displayClass: undefined
-				disabledClass: 'theme-grey color-white'
-				disabledAttr: 'disabled'
 				submitMessage: I18nEasy.i18nDefault 'nothingToSave'
-				statusClass: 'theme-emerald color-black'
+				statusClass: 'theme-gold color-black'
 			}
 
 	#==================================
@@ -96,9 +110,7 @@ Template[templateName].events {
 		Meteor.call(
 			'i18nEasyAddKey'
 			$.trim $newKeyInput.val()
-
 			(error)->
-				do context.reset
 				context._displayClass = undefined
 				context._disabledClass = 'theme-grey color-white'
 				context._disabledAttr = 'disabled'

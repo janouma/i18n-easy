@@ -106,17 +106,17 @@ class @I18nBase
 	_singularFor = (key, options)->
 		message = _translationFor(key, options)
 		if message?.constructor.name is 'Array'
-			message[0]
+			message[0] unless not message[0]?.length
 		else
-			message
+			message unless not message?.length
 
 	#==================================
 	_pluralFor = (key, options)->
 		message = _translationFor(key, options)
 		if message?.constructor.name is 'Array'
-			message[1]
+			message[1] unless not message[1]?.length
 		else
-			"#{message}s" unless not message or options?.autoPlural is no
+			"#{message}s" unless not message?.length or options?.autoPlural is no
 
 	#Public
 

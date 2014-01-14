@@ -81,15 +81,15 @@
   .i18n-easy .theme-emerald:active {
     background-color: #32bc7d !important;
     border-color: #2da870 !important; }
-.i18n-easy .theme-orange {
-  background-color: orange !important;
-  border-color: #e69500 !important; }
-  .i18n-easy .theme-orange:hover {
-    background-color: orange !important;
-    border-color: #e69500 !important; }
-  .i18n-easy .theme-orange:active {
-    background-color: orange !important;
-    border-color: #e69500 !important; }
+.i18n-easy .theme-gold {
+  background-color: #ffc800 !important;
+  border-color: #e6b400 !important; }
+  .i18n-easy .theme-gold:hover {
+    background-color: #ffc800 !important;
+    border-color: #e6b400 !important; }
+  .i18n-easy .theme-gold:active {
+    background-color: #ffc800 !important;
+    border-color: #e6b400 !important; }
 
 .i18n-easy input[type=text],
 .i18n-easy textarea {

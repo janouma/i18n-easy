@@ -14,7 +14,7 @@
             <div class="cell">
                 <form>
                     {{#each i18nTranslations}}
-                    <div id="translation_{{key}}" class="col">
+                    <div id="translation_{{key}}" data-key="{{key}}" class="col">
                         <div class="col width-1of4">
                             <div class="cell">
                                 <label class="capitalize-first" for="_{{key}}"><strong class="{{emptyWarningClass singular.default}}">{{label}}</strong> <span class="tiny">{{key}}</span></label>
