@@ -90,6 +90,15 @@
   .i18n-easy .theme-gold:active {
     background-color: #ffc800 !important;
     border-color: #e6b400 !important; }
+.i18n-easy .theme-blue {
+  background-color: #3091ff !important;
+  border-color: #1783ff !important; }
+  .i18n-easy .theme-blue:hover {
+    background-color: #3091ff !important;
+    border-color: #1783ff !important; }
+  .i18n-easy .theme-blue:active {
+    background-color: #3091ff !important;
+    border-color: #1783ff !important; }
 
 .i18n-easy input[type=text],
 .i18n-easy textarea {

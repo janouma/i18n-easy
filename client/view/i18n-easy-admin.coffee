@@ -78,6 +78,10 @@ Template[templateName].events {
 		$newKeyInput = $('#newKey')
 
 		if translations.length
+			context._submitMessage = I18nEasy.i18nDefault 'processing'
+			context._statusClass = 'theme-blue color-black'
+			do context.update
+
 			Meteor.call(
 				'i18nEasySave'
 				translations
@@ -106,6 +110,10 @@ Template[templateName].events {
 		do e.preventDefault
 
 		$newKeyInput = $('#newKey')
+
+		context._submitMessage = I18nEasy.i18nDefault 'processing'
+		context._statusClass = 'theme-blue color-black'
+		do context.update
 
 		Meteor.call(
 			'i18nEasyAddKey'
