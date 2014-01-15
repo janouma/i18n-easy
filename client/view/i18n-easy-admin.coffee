@@ -12,7 +12,9 @@ context =
 
 	init: -> do @reset
 
-	set: (newContext)-> @["_#{property}"] = value for property, value of newContext
+	set: (newContext)->
+		@displayedPath = Router.current().path
+		@["_#{property}"] = value for property, value of newContext
 
 	get: (property)-> @["_#{property}"]
 	varNameFor: (property)-> "#{@sessionPrefix}_#{property}"
@@ -140,7 +142,7 @@ Template[templateName].rendered = ->
 	Meteor.clearTimeout context.toast
 	$messageElts = $('#submit-result, #submit-note')
 
-	Meteor.defer ->
+	showMessage = ->
 		statusClasses =
 			info: 'theme-blue color-black'
 			success: 'theme-emerald color-black'
@@ -149,13 +151,18 @@ Template[templateName].rendered = ->
 
 		if context.get 'status'
 			$messageElts.addClass(statusClasses[context.get 'status'])
-				.removeClass 'hidden'
+			.removeClass 'hidden'
 
 		$('#add').addClass('theme-grey color-white')
-			.removeClass('active-button theme-black color-grey')
-			.attr disabled: yes
+		.removeClass('active-button theme-black color-grey')
+		.attr disabled: yes
 
 		$('#newKey').val('') if context.get('status') is 'success'
+
+	if context.displayedPath is Router.current().path
+		Meteor.defer showMessage
+	else
+		showMessage()
 
 	context.toast = Meteor.setTimeout(
 		->
