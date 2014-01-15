@@ -140,21 +140,22 @@ Template[templateName].rendered = ->
 	Meteor.clearTimeout context.toast
 	$messageElts = $('#submit-result, #submit-note')
 
-	statusClasses =
-		info: 'theme-blue color-black'
-		success: 'theme-emerald color-black'
-		warning: 'theme-gold color-black'
-		error: 'theme-redlight color-black'
+	Meteor.defer ->
+		statusClasses =
+			info: 'theme-blue color-black'
+			success: 'theme-emerald color-black'
+			warning: 'theme-gold color-black'
+			error: 'theme-redlight color-black'
 
-	if context.get 'status'
-		$messageElts.addClass(statusClasses[context.get 'status'])
-			.removeClass 'hidden'
+		if context.get 'status'
+			$messageElts.addClass(statusClasses[context.get 'status'])
+				.removeClass 'hidden'
 
-	$('#add').addClass('theme-grey color-white')
-		.removeClass('active-button theme-black color-grey')
-		.attr disabled: yes
+		$('#add').addClass('theme-grey color-white')
+			.removeClass('active-button theme-black color-grey')
+			.attr disabled: yes
 
-	$('#newKey').val('') if context.get('status') is 'success'
+		$('#newKey').val('') if context.get('status') is 'success'
 
 	context.toast = Meteor.setTimeout(
 		->
