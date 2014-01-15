@@ -2,30 +2,20 @@ context =
 	sessionPrefix: 'i18n-easy-submit-result'
 	sessionPropertyPattern: /^_\w+$/
 
-	update: ->
-		Session.set("#{@sessionPrefix}#{property}", value) for property, value of @ when @sessionPropertyPattern.test property
+	save: -> Session.set("#{@sessionPrefix}#{property}", value) for property, value of @ when @sessionPropertyPattern.test property
 
-	clear: ->
-		@_submitMessage = undefined
-		@_statusClass = undefined
-		@_displayClass = 'hidden'
-		@_disabledClass = 'theme-grey color-white'
-		@_disabledAttr = 'disabled'
+	clear: -> @[property] = undefined for property, value of @ when @sessionPropertyPattern.test property
 
 	reset: ->
 		do @clear
-		do @update
+		do @save
 
-	init: ->
-		do @reset
+	init: -> do @reset
 
-	flash: (newContext)->
-		@["_#{property}"] = value for property, value of newContext
-		do @update
-		Meteor.setTimeout(
-			=> do @reset
-			5000
-		)
+	set: (newContext)-> @["_#{property}"] = value for property, value of newContext
+
+	get: (property)-> @["_#{property}"]
+	varNameFor: (property)-> "#{@sessionPrefix}_#{property}"
 
 
 templateName = 'i18n-easy-admin'
@@ -35,11 +25,7 @@ Template[templateName].created =-> do context.init
 
 Template[templateName].helpers {
 	emptyWarningClass: (translation)-> 'label theme-gold color-black' unless translation?.length
-	displayClass: -> Session.get "#{context.sessionPrefix}_displayClass"
-	submitMessage: -> Session.get "#{context.sessionPrefix}_submitMessage"
-	statusClass: -> Session.get "#{context.sessionPrefix}_statusClass"
-	disabledClass: -> Session.get "#{context.sessionPrefix}_disabledClass"
-	disabledAttr: -> Session.get "#{context.sessionPrefix}_disabledAttr"
+	submitMessage: -> Session.get context.varNameFor('submitMessage')
 }
 
 
@@ -71,39 +57,37 @@ Template[templateName].events {
 					message: message
 				}
 
-		context._displayClass = undefined
-		context._disabledClass = 'theme-grey color-white'
-		context._disabledAttr = 'disabled'
-
-		$newKeyInput = $('#newKey')
-
 		if translations.length
-			context._submitMessage = I18nEasy.i18nDefault 'processing'
-			context._statusClass = 'theme-blue color-black'
-			do context.update
+			context.set {
+				status: 'info'
+				submitMessage: I18nEasy.i18nDefault 'processing'
+			}
+			do context.save
 
 			Meteor.call(
 				'i18nEasySave'
 				translations
 				(error)->
 					if error
-						context.flash {
+						context.set {
+							status: 'error'
 							submitMessage: I18nEasy.i18nDefault 'internalServerError'
-							statusClass: 'theme-redlight color-black'
 						}
 					else
-						$newKeyInput.val ''
-						context.flash {
+						context.set {
+							status: 'success'
 							submitMessage: I18nEasy.i18nDefault 'successful'
-							statusClass: 'theme-emerald color-black'
 						}
+
+					do context.save
 			)
 		else
-			$newKeyInput.val ''
-			context.flash {
+			do context.reset
+			context.set {
+				status: 'warning'
 				submitMessage: I18nEasy.i18nDefault 'nothingToSave'
-				statusClass: 'theme-gold color-black'
 			}
+			do context.save
 
 	#==================================
 	'click #add': (e)->
@@ -111,29 +95,28 @@ Template[templateName].events {
 
 		$newKeyInput = $('#newKey')
 
-		context._submitMessage = I18nEasy.i18nDefault 'processing'
-		context._statusClass = 'theme-blue color-black'
-		do context.update
+		context.set {
+			status: 'info'
+			submitMessage: I18nEasy.i18nDefault 'processing'
+		}
+		do context.save
 
 		Meteor.call(
 			'i18nEasyAddKey'
 			$.trim $newKeyInput.val()
 			(error)->
-				context._displayClass = undefined
-				context._disabledClass = 'theme-grey color-white'
-				context._disabledAttr = 'disabled'
-
 				if error
-					context.flash {
+					context.set {
+						status: 'error'
 						submitMessage: I18nEasy.i18nDefault(if error.error is 409 then 'duplicatedKey' else 'internalServerError')
-						statusClass: 'theme-redlight color-black'
 					}
 				else
-					$newKeyInput.val ''
-					context.flash {
+					context.set {
+						status: 'success'
 						submitMessage: I18nEasy.i18nDefault 'successful'
-						statusClass: 'theme-emerald color-black'
 					}
+
+				do context.save
 		)
 
 	#==================================
@@ -149,3 +132,34 @@ Template[templateName].events {
 				.addClass('theme-grey color-white')
 				.removeClass('active-button theme-black color-grey')
 }
+
+
+Template[templateName].rendered = ->
+	return unless context.get('submitMessage')
+
+	Meteor.clearTimeout context.toast
+	$messageElts = $('#submit-result, #submit-note')
+
+	statusClasses =
+		info: 'theme-blue color-black'
+		success: 'theme-emerald color-black'
+		warning: 'theme-gold color-black'
+		error: 'theme-redlight color-black'
+
+	if context.get 'status'
+		$messageElts.addClass(statusClasses[context.get 'status'])
+			.removeClass 'hidden'
+
+	$('#add').addClass('theme-grey color-white')
+		.removeClass('active-button theme-black color-grey')
+		.attr disabled: yes
+
+	$('#newKey').val('') if context.get('status') is 'success'
+
+	context.toast = Meteor.setTimeout(
+		->
+			do context.clear
+			$messageElts.addClass 'hidden'
+
+		5000
+	)
