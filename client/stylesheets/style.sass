@@ -2,9 +2,13 @@
 @import colors
 
 .i18n-easy
+
+	.tiny
+		@extend .color-magenta
+
 	input[type=text],
 	textarea
-		background-color: rgba($grey, 0.1)
+		background-color: $smoke
 
 	.no-box-shadow
 		box-shadow: none
@@ -48,7 +52,7 @@
 	.note
 		display: inline-block
 		line-height: 19px
-		padding: 5px
+		padding: 5px 15px
 		border-radius: 5px
 		background-color: $grey
 		color: #aaa
@@ -57,7 +61,7 @@
 		box-shadow: 0 5px 10px #707070
 
 	.engraved
-		text-shadow: 0 1px 1px #ccc
+		text-shadow: 0 1px 1px #cfcfcf
 
 	#submit-result
 		padding: 10px

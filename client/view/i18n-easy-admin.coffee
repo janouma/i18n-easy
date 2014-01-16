@@ -128,10 +128,10 @@ Template[templateName].events {
 		if /^\w+$/.test $(e.target).val().trim()
 			$addButton.removeAttr('disabled')
 				.addClass('active-button theme-black color-lightmagenta')
-				.removeClass('theme-grey color-white')
+				.removeClass('theme-grey color-smoke')
 		else
 			$addButton.attr(disabled: yes)
-				.addClass('theme-grey color-white')
+				.addClass('theme-grey color-smoke')
 				.removeClass('active-button theme-black color-lightmagenta')
 }
 
@@ -153,7 +153,7 @@ Template[templateName].rendered = ->
 			$messageElts.addClass(statusClasses[context.get 'status'])
 			.removeClass 'hidden'
 
-		$('#add').addClass('theme-grey color-white')
+		$('#add').addClass('theme-grey color-smoke')
 		.removeClass('active-button theme-black color-lightmagenta')
 		.attr disabled: yes
 

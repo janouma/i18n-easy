@@ -1,21 +1,22 @@
 $almostblack: #505050
 $neardark: #333
 $grey: darken(#F7F7F9, 2%)
-$darkgrey: darken($grey, 7%)
+$darkgrey: darken($grey, 15%)
 $header-color: $neardark
 $magenta: #aa5093
-//$strawberry: #ef006e
+$smoke: #f0f0f0
 $darkpink: #be0158
 $pink: #e93889
 $redlight: #ff6000
 $emerald: #228055
 $jade: #88bb00
+$silver: #dadada
 
 =color($name, $main, $hover: $main, $active: $main)
 	.color-#{$name}
 		&, a
 			color: $main !important
-		input[type=submit]:hover, button:hover, a:hover
+		&.input[type=submit]:hover, &.button:hover, a:hover
 			color: $hover !important
 		.active, &.active
 			&, a
@@ -26,7 +27,7 @@ $jade: #88bb00
 		background-color: $main !important
 		border-color: darken($main, 5%) !important
 
-		input[type=submit]:hover, button:hover, a:hover
+		&.input[type=submit]:hover, &.button:hover, &.a:hover
 			background-color: $hover !important
 			border-color: darken($hover, 5%) !important
 
@@ -41,21 +42,22 @@ $jade: #88bb00
 		background-color: transparent
 
 	.gradient-deepspace
-		+background-image(linear-gradient(darken($header-color, 10%) 10%, rgba($header-color, 0.95) 65%, rgba($header-color, 0.85)))
+		+background-image(linear-gradient(darken($header-color, 7.5%) 10%, rgba($header-color, 0.95) 65%, rgba($header-color, 0.85)))
 
 	+color('magenta', lighten($magenta, 13%), lighten($magenta, 20%), lighten($magenta, 28%))
 	+color('lightmagenta', lighten($magenta, 28%))
 	+color('pink', $pink, $darkpink, $darkpink)
 	+color('white', white)
-	+color('grey', $darkgrey)
+	+color('smoke', $smoke)
 	+color('redlight', $redlight)
 	+color('emerald', $emerald)
-	+color('black', $almostblack)
+	+color('black', $neardark)
 
 	+theme('black', $neardark, $almostblack, black)
 	+theme('grey', $darkgrey)
-	+theme('redlight', lighten($redlight, 15%))
+	+theme('redlight', lighten($redlight, 10%))
 	+theme('emerald', lighten($emerald, 15%))
-	+theme('gold', #ffc800)
+	+theme('gold', #ffca54)
 	+theme('blue', #3091ff)
+	+theme('silver', $silver)
 
