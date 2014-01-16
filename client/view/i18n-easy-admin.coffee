@@ -127,12 +127,12 @@ Template[templateName].events {
 
 		if /^\w+$/.test $(e.target).val().trim()
 			$addButton.removeAttr('disabled')
-				.addClass('active-button theme-black color-grey')
+				.addClass('active-button theme-black color-lightmagenta')
 				.removeClass('theme-grey color-white')
 		else
 			$addButton.attr(disabled: yes)
 				.addClass('theme-grey color-white')
-				.removeClass('active-button theme-black color-grey')
+				.removeClass('active-button theme-black color-lightmagenta')
 }
 
 
@@ -154,7 +154,7 @@ Template[templateName].rendered = ->
 			.removeClass 'hidden'
 
 		$('#add').addClass('theme-grey color-white')
-		.removeClass('active-button theme-black color-grey')
+		.removeClass('active-button theme-black color-lightmagenta')
 		.attr disabled: yes
 
 		$('#newKey').val('') if context.get('status') is 'success'
