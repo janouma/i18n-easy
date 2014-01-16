@@ -133,6 +133,12 @@ Template[templateName].events {
 			$addButton.attr(disabled: yes)
 				.addClass('theme-grey color-smoke')
 				.removeClass('active-button theme-black color-lightmagenta')
+
+	#==================================
+	'focus div[id^=translation_] textarea': (e)-> $(e.target).parents('div[id^=translation_]').find('textarea').addClass 'focus'
+
+	#==================================
+	'blur div[id^=translation_] textarea': (e)-> $(e.target).parents('div[id^=translation_]').find('textarea').removeClass 'focus'
 }
 
 

@@ -4,6 +4,7 @@ $grey: darken(#F7F7F9, 2%)
 $darkgrey: darken($grey, 15%)
 $header-color: $neardark
 $magenta: #aa5093
+$lightmagenta: lighten($magenta, 28%)
 $smoke: #f0f0f0
 $darkpink: #be0158
 $pink: #e93889
@@ -44,8 +45,8 @@ $silver: #dadada
 	.gradient-deepspace
 		+background-image(linear-gradient(darken($header-color, 7.5%) 10%, rgba($header-color, 0.95) 65%, rgba($header-color, 0.85)))
 
-	+color('magenta', lighten($magenta, 13%), lighten($magenta, 20%), lighten($magenta, 28%))
-	+color('lightmagenta', lighten($magenta, 28%))
+	+color('magenta', lighten($magenta, 13%), lighten($magenta, 20%), $lightmagenta)
+	+color('lightmagenta', $lightmagenta)
 	+color('pink', $pink, $darkpink, $darkpink)
 	+color('white', white)
 	+color('smoke', $smoke)

@@ -115,6 +115,11 @@
     background-color: #dadada !important;
     border-color: #cdcdcd !important; }
 
+.i18n-easy .focus, .i18n-easy input[type=text]:focus,
+.i18n-easy textarea:focus {
+  box-shadow: 0 0 8px rgba(170, 80, 147, 0.5);
+  border-color: rgba(170, 80, 147, 0.5);
+  outline: 0; }
 .i18n-easy input[type=text],
 .i18n-easy textarea {
   background-color: #f0f0f0; }

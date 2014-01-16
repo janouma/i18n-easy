@@ -6,9 +6,16 @@
 	.tiny
 		@extend .color-magenta
 
+	.focus
+		box-shadow: 0 0 8px rgba($magenta, 0.5)
+		border-color: rgba($magenta, 0.5)
+		outline: 0
+
 	input[type=text],
 	textarea
 		background-color: $smoke
+		&:focus
+			@extend .focus
 
 	.no-box-shadow
 		box-shadow: none
