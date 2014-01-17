@@ -115,9 +115,89 @@
     background-color: #dadada !important;
     border-color: #cdcdcd !important; }
 
+/* border helpers
+ * br = border
+ * a,t,r,b,l,h,v = all,top,right,bottom,left,horizontal,vertical
+ * s,m,l,n = small(1px),medium(2px),large(5px),none(0px) */
+.brts, .brvs, .bras, .brtm, .brvm, .bram, .brtl, .brvl, .bral, .brrs, .brhs, .brrm, .brhm, .brrl, .brhl, .brbs, .brbm, .brbl, .brls, .brlm, .brll {
+  border-style: solid;
+  border-width: 0; }
+
+.brtn, .brvn, .bran {
+  border-top: none; }
+
+.brts, .brvs, .bras {
+  border-top-width: 1px; }
+
+.brtm, .brvm, .bram {
+  border-top-width: 2px; }
+
+.brtl, .brvl, .bral {
+  border-top-width: 5px; }
+
+.brrn, .brhn, .bran {
+  border-right: none; }
+
+.brrs, .brhs, .bras {
+  border-right-width: 1px; }
+
+.brrm, .brhm, .bram {
+  border-right-width: 2px; }
+
+.brrl, .brhl, .bral {
+  border-right-width: 5px; }
+
+.brbn, .brvn, .bran {
+  border-bottom: none; }
+
+.brbs, .brvs, .bras {
+  border-bottom-width: 1px; }
+
+.brbm, .brvm, .bram {
+  border-bottom-width: 2px; }
+
+.brbl, .brvl, .bral {
+  border-bottom-width: 5px; }
+
+.brln, .brhn, .bran {
+  border-left: none; }
+
+.brls, .brhs, .bras {
+  border-left-width: 1px; }
+
+.brlm, .brhm, .bram {
+  border-left-width: 2px; }
+
+.brll, .brhl, .bral {
+  border-left-width: 5px; }
+
+.bdtn, .bdvn, .bdan {
+  border-top-style: inherit; }
+
+.bdt, .bdv, .bda {
+  border-top-style: dashed; }
+
+.bdrn, .bdhn, .bdan {
+  border-right-style: inherit; }
+
+.bdr, .bdh, .bda {
+  border-right-style: dashed; }
+
+.bdbn, .bdvn, .bdan {
+  border-bottom-style: inherit; }
+
+.bdb, .bdv, .bda {
+  border-bottom-style: dashed; }
+
+.bdln, .bdhn, .bdan {
+  border-left-style: inherit; }
+
+.bdl, .bdh, .bda {
+  border-left-style: dashed; }
+
 .i18n-easy .focus, .i18n-easy input[type=text]:focus,
 .i18n-easy textarea:focus {
-  box-shadow: 0 0 8px rgba(170, 80, 147, 0.5);
+  box-shadow: inset 0 0 4px rgba(170, 80, 147, 0.5);
   border-color: rgba(170, 80, 147, 0.5);
   outline: 0; }
 .i18n-easy input[type=text],
@@ -145,11 +225,11 @@
 .i18n-easy .collapse-left {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border-left-width: 0; }
+  padding-left: 7px; }
 .i18n-easy .collapse-right {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  border-right-width: 0; }
+  padding-right: 7px; }
 .i18n-easy .note {
   display: inline-block;
   line-height: 19px;

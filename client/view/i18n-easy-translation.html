@@ -1,0 +1,23 @@
+<template name="i18n-easy-translation">
+	<div id="translation_{{key}}" data-key="{{key}}" class="col">
+		<div class="col width-1of4">
+			<div class="cell">
+				<label class="capitalize-first" for="_{{key}}"><strong class="{{emptyWarningClass singular.default}}">{{label}}</strong> <span class="tiny">{{key}}</span></label>
+			</div>
+		</div>
+		<div class="col width-fill">
+			<div class="col">
+				<div class="col width-1of2">
+					<div class="cell">
+						<textarea id="_{{key}}" name="singular" class="stretch collapse-right" placeholder="{{singular.default}}" data-initial-value="{{singular.actual}}">{{singular.actual}}</textarea>
+					</div>
+				</div>
+				<div class="col width-1of2">
+					<div class="cell">
+						<textarea id="_{{key}}s" name="plural" class="stretch collapse-left" placeholder="{{plural.default}}" data-initial-value="{{plural.actual}}">{{plural.actual}}</textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
