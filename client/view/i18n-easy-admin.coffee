@@ -26,7 +26,6 @@ Template[templateName].created =-> do context.init
 
 
 Template[templateName].helpers {
-	emptyWarningClass: (translation)-> 'label theme-gold color-black' unless translation?.length
 	submitMessage: -> Session.get context.varNameFor('submitMessage')
 }
 
