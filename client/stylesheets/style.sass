@@ -65,19 +65,57 @@
 		background-color: $grey
 		color: #aaa
 
+	.small-shadow
+		box-shadow: 0 1px 2px $shadow
+
+	.medium-shadow
+		box-shadow: 0 3px 6px $shadow
+
 	.big-shadow
-		box-shadow: 0 5px 10px #707070
+		box-shadow: 0 5px 10px $shadow
+
+	.round
+		border-radius: 50%
 
 	.engraved
 		text-shadow: 0 1px 1px #cfcfcf
 
+	.z1
+		z-index: 1
+	.z2
+		z-index: 2
+
 	#submit-result
 		padding: 10px
 		border-radius: 5px
-		z-index: 1
 		width: 85%
 		position: fixed
 		top: 80px
 		left: 7.5%
 		@extend .big-shadow
 		@extend .engraved
+
+	[id^=translation_]
+
+		.delete
+			position: absolute
+			top: 12px
+			right: -18px
+			width: 20px
+			height: 20px
+
+			.fa-stack-1x
+				top: -3px
+
+		&:hover
+			.delete
+				opacity: 1
+				visibility: visible
+
+
+// Mobile display
+
+@media (max-width: 767px)
+	[id^=translation_]
+		.delete
+			right: -10px !important

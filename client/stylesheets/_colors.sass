@@ -12,6 +12,8 @@ $redlight: #ff6000
 $emerald: #228055
 $jade: #88bb00
 $silver: #dadada
+$shadow: #707070
+$gold: #ffca54
 
 =color($name, $main, $hover: $main, $active: $main)
 	.color-#{$name}
@@ -28,13 +30,15 @@ $silver: #dadada
 		background-color: $main !important
 		border-color: darken($main, 5%) !important
 
-		&.input[type=submit]:hover, &.button:hover, &.a:hover
-			background-color: $hover !important
-			border-color: darken($hover, 5%) !important
-
 		&:active
 			background-color: $active !important
 			border-color: darken($active, 5%) !important
+
+	input[type=submit].theme-#{$name}:hover,
+	a.theme-#{$name}:hover,
+	.button.theme-#{$name}:hover
+		background-color: $hover !important
+		border-color: darken($hover, 5%) !important
 
 
 .i18n-easy
@@ -56,9 +60,9 @@ $silver: #dadada
 
 	+theme('black', $neardark, $almostblack, black)
 	+theme('grey', $darkgrey)
-	+theme('redlight', lighten($redlight, 10%))
+	+theme('redlight', lighten($redlight, 10%), $redlight)
 	+theme('emerald', lighten($emerald, 15%))
-	+theme('gold', #ffca54)
+	+theme('gold', $gold)
 	+theme('blue', #3091ff)
 	+theme('silver', $silver)
 

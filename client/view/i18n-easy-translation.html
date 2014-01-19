@@ -1,5 +1,5 @@
 <template name="i18n-easy-translation">
-	<div id="translation_{{key}}" data-key="{{key}}" class="col">
+	<div id="translation_{{key}}" data-key="{{key}}" class="col cell">
 		<div class="col width-1of4">
 			<div class="cell">
 				<label class="capitalize-first" for="_{{key}}"><strong class="{{emptyWarningClass singular.default}}">{{label}}</strong> <span class="tiny">{{key}}</span></label>
@@ -19,5 +19,8 @@
 				</div>
 			</div>
 		</div>
+		<a href="javascript:void();" class="z1 delete fa-stack theme-redlight gradient round small-shadow bras animated hidden">
+			<i class="fa fa-times fa-stack-1x color-smoke" title="{{i18nDefault 'delete'}}"></i>
+		</a>
 	</div>
 </template>
