@@ -5,7 +5,7 @@ Package.describe({
 Package.on_use(function(api, where){
     api.use(['coffeescript', 'minimongo', 'mongo-livedata', 'templating', 'handlebars', 'deps', 'font-awesome'], 'client');
     api.use(['coffeescript', 'minimongo', 'mongo-livedata'], 'server');
-    api.use(['iron-router', 'fast-render']);
+    api.use('iron-router');
     
     api.add_files(['i18n_easy.coffee','collections/i18n_easy_messages.coffee']);
 

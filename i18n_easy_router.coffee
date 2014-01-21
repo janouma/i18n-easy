@@ -12,5 +12,4 @@ Router.map ->
                 I18nEasy.setLanguage language
 
         waitOn: -> Meteor.subscribe I18nBase.LANGUAGES_PUBLICATION
-        fastRender: true
     )
