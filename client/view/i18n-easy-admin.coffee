@@ -1,38 +1,18 @@
-context =
-	sessionPrefix: 'i18n-easy-submit-result'
-	sessionPropertyPattern: /^_\w+$/
-
-	save: -> Session.set("#{@sessionPrefix}#{property}", value) for property, value of @ when @sessionPropertyPattern.test property
-
-	clear: -> @[property] = undefined for property, value of @ when @sessionPropertyPattern.test property
-
-	reset: ->
-		do @clear
-		do @save
-
-	init: -> do @reset
-
-	set: (newContext)->
-		@displayedPath = Router.current().path
-		@["_#{property}"] = value for property, value of newContext
-
-	get: (property)-> @["_#{property}"]
-	varNameFor: (property)-> "#{@sessionPrefix}_#{property}"
-
-
 templateName = 'i18n-easy-admin'
 
-Template[templateName].created =-> do context.init
+Template[templateName].created =->
+	@_context = new Context
+	do @_context.init
 
 
 Template[templateName].helpers {
-	submitMessage: -> Session.get context.varNameFor('submitMessage')
+	submitMessage: -> Session.get Context.varNameFor('submitMessage')
 }
 
 
 Template[templateName].events {
 
-	'submit form': (e)->
+	'submit form': (e, template)->
 		do e.preventDefault
 
 		translations = []
@@ -59,69 +39,70 @@ Template[templateName].events {
 				}
 
 		if translations.length
-			context.set {
+			template._context.set {
 				status: 'info'
 				submitMessage: I18nEasy.i18nDefault 'processing'
 			}
-			do context.save
+			do template._context.save
 
 			Meteor.call(
 				'i18nEasySave'
 				translations
 				(error)->
 					if error
-						context.set {
+						template._context.set {
 							status: 'error'
 							submitMessage: I18nEasy.i18nDefault 'internalServerError'
 						}
 					else
-						context.set {
+						template._context.set {
 							status: 'success'
 							submitMessage: I18nEasy.i18nDefault 'successful'
 						}
 
-					do context.save
+					do template._context.save
 			)
 		else
-			do context.reset
-			context.set {
+			do template._context.reset
+			template._context.set {
 				status: 'warning'
 				submitMessage: I18nEasy.i18nDefault 'nothingToSave'
 			}
-			do context.save
+			do template._context.save
+
 
 	#==================================
-	'click #add': (e)->
+	'click #add': (e, template)->
 		do e.preventDefault
 
 		$newKeyInput = $('#newKey')
 
-		context.set {
+		template._context.set {
 			status: 'info'
 			submitMessage: I18nEasy.i18nDefault 'processing'
 		}
-		do context.save
+		do template._context.save
 
 		Meteor.call(
 			'i18nEasyAddKey'
 			$.trim $newKeyInput.val()
 			(error)->
 				if error
-					context.set {
+					template._context.set {
 						status: 'error'
 						submitMessage: I18nEasy.i18nDefault(if error.error is 409 then 'duplicatedKey' else 'internalServerError')
 					}
 				else
-					context.set {
+					template._context.set {
 						status: 'success'
 						submitMessage: I18nEasy.i18nDefault 'successful'
 					}
 
-				do context.save
+				do template._context.save
 		)
 
 	#==================================
-	'input #newKey': (e)->
+	'input #newKey': (e, template)->
 		$addButton = $('#add')
 
 		if /^\w+$/.test $(e.target).val().trim()
@@ -136,36 +117,36 @@ Template[templateName].events {
 
 
 Template[templateName].rendered = ->
-	return unless context.get('submitMessage')
+	return unless @_context.get('submitMessage')
 
-	Meteor.clearTimeout context.toast
+	Meteor.clearTimeout @_context.toast
 	$messageElts = $('#submit-result, #submit-note')
 
-	showMessage = ->
+	showMessage = =>
 		statusClasses =
 			info: 'theme-blue color-black'
 			success: 'theme-emerald color-black'
 			warning: 'theme-gold color-black'
 			error: 'theme-redlight color-black'
 
-		if context.get 'status'
-			$messageElts.addClass(statusClasses[context.get 'status'])
+		if @_context.get 'status'
+			$messageElts.addClass(statusClasses[@_context.get 'status'])
 			.removeClass 'hidden'
 
 		$('#add').addClass('theme-grey color-smoke')
 		.removeClass('active-button theme-black color-lightmagenta')
 		.attr disabled: yes
 
-		$('#newKey').val('') if context.get('status') is 'success'
+		$('#newKey').val('') if @_context.get('status') is 'success'
 
-	if context.displayedPath is Router.current().path
+	if @_context.displayedPath is Router.current().path
 		Meteor.defer showMessage
 	else
 		showMessage()
 
-	context.toast = Meteor.setTimeout(
-		->
-			do context.clear
+	@_context.toast = Meteor.setTimeout(
+		=>
+			do @_context.clear
 			$messageElts.addClass 'hidden'
 
 		5000

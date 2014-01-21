@@ -80,10 +80,9 @@
 	.engraved
 		text-shadow: 0 1px 1px #cfcfcf
 
-	.z1
-		z-index: 1
-	.z2
-		z-index: 2
+	@for $z from 1 through 5
+		.z#{$z}
+			z-index: $z
 
 	#submit-result
 		padding: 10px
@@ -96,9 +95,15 @@
 		@extend .engraved
 
 	[id^=translation_]
-
+		.confirm,
 		.delete
 			position: absolute
+
+		.confirm
+			top: 9px
+			right: -24px
+
+		.delete
 			top: 12px
 			right: -18px
 			width: 20px
@@ -117,5 +122,7 @@
 
 @media (max-width: 767px)
 	[id^=translation_]
+		.confirm
+			right: -16px !important
 		.delete
 			right: -10px !important

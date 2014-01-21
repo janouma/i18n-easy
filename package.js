@@ -3,15 +3,16 @@ Package.describe({
 });
 
 Package.on_use(function(api, where){
-    api.use(['coffeescript', 'minimongo', 'mongo-livedata', 'templating', 'handlebars', 'deps', 'iron-router', 'font-awesome'], 'client');
+    api.use(['coffeescript', 'minimongo', 'mongo-livedata', 'templating', 'handlebars', 'deps', 'font-awesome'], 'client');
     api.use(['coffeescript', 'minimongo', 'mongo-livedata'], 'server');
-    api.use('fast-render');
+    api.use(['iron-router', 'fast-render']);
     
     api.add_files(['i18n_easy.coffee','collections/i18n_easy_messages.coffee']);
 
 	var clientFiles = [];
 	clientFiles.push('i18n_easy_client.coffee');
-	clientFiles.push('router.coffee');
+	clientFiles.push('i18n_easy_router.coffee');
+	clientFiles.push('client/helpers/context.coffee');
 	clientFiles.push('client/view/i18n-easy-nav.html');
 	clientFiles.push('client/view/i18n-easy-nav.coffee');
 	clientFiles.push('client/view/i18n-easy-header.html');
@@ -26,7 +27,7 @@ Package.on_use(function(api, where){
 
     api.add_files(clientFiles, 'client');
 
-    api.add_files(['i18n_easy_server.coffee', 'server/publications.coffee'], 'server');
+    api.add_files(['i18n_easy_server.coffee', 'server/publications.coffee', 'i18n_easy_router.coffee'], 'server');
     
     if (api.export) {
         api.export('I18nEasy');
