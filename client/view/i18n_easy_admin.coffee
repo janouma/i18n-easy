@@ -1,4 +1,4 @@
-templateName = 'i18n-easy-admin'
+templateName = 'i18n_easy_admin'
 
 Template[templateName].created =->
 	@_context = new Context

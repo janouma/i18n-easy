@@ -1,9 +1,9 @@
 Router.map ->
     
     @route(
-        'i18n-easy-admin'
+        'i18n_easy_admin'
         path: '/:language?/i18n-easy-admin'
-        layoutTemplate: 'i18n-easy-layout'
+        layoutTemplate: 'i18n_easy_layout'
 
         before: ->
             language = @params.language

@@ -13,21 +13,21 @@ Package.on_use(function(api, where){
 	clientFiles.push('i18n_easy_client.coffee');
 	clientFiles.push('i18n_easy_router.coffee');
 	clientFiles.push('client/helpers/context.coffee');
-	clientFiles.push('client/view/i18n-easy-nav.html');
-	clientFiles.push('client/view/i18n-easy-nav.coffee');
-	clientFiles.push('client/view/i18n-easy-header.html');
-	clientFiles.push('client/view/i18n-easy-footer.html');
-	clientFiles.push('client/view/i18n-easy-layout.html');
-	clientFiles.push('client/view/i18n-easy-translation.html');
-	clientFiles.push('client/view/i18n-easy-translation.coffee');
-	clientFiles.push('client/view/i18n-easy-admin.html');
-	clientFiles.push('client/view/i18n-easy-admin.coffee');
+	clientFiles.push('client/view/i18n_easy_nav.html');
+	clientFiles.push('client/view/i18n_easy_nav.coffee');
+	clientFiles.push('client/view/i18n_easy_header.html');
+	clientFiles.push('client/view/i18n_easy_footer.html');
+	clientFiles.push('client/view/i18n_easy_layout.html');
+	clientFiles.push('client/view/i18n_easy_translation.html');
+	clientFiles.push('client/view/i18n_easy_translation.coffee');
+	clientFiles.push('client/view/i18n_easy_admin.html');
+	clientFiles.push('client/view/i18n_easy_admin.coffee');
 	clientFiles.push('client/stylesheets/style.css');
 	clientFiles.push('client/stylesheets/build-full-no-icons.min.css');
 
     api.add_files(clientFiles, 'client');
 
-    api.add_files(['i18n_easy_server.coffee', 'server/publications.coffee', 'i18n_easy_router.coffee'], 'server');
+    api.add_files(['i18n_easy_server.coffee', 'server/i18n_easy_publications.coffee', 'i18n_easy_router.coffee'], 'server');
     
     if (api.export) {
         api.export('I18nEasy');
