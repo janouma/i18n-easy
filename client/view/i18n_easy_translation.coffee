@@ -27,13 +27,11 @@ Template[templateName].events {
 	#==================================
 	'click .confirm': (e, template)->
 		do e.preventDefault
-		#Meteor.clearTimeout template._toast
 
 		$confirm = $(template.find('.confirm')).addClass 'hidden'
 
 		#DEBUG
-		Meteor._debug "delete '#{$confirm.parents('div[data-key]').attr 'data-key'}'"
-		Alert.warning "DEBUG: Next step, the removal of '#{$confirm.parents('div[data-key]').attr 'data-key'}' !!!"
+		Alert.warning "DEBUG_removal_of_#{$confirm.parents('div[data-key]').attr 'data-key'}"
 		##
 
 		###

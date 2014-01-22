@@ -41,9 +41,9 @@ Template[templateName].events {
 				translations
 				(error)->
 					if error
-						Alert.error I18nEasy.i18nDefault('internalServerError')
+						Alert.error 'internalServerError'
 					else
-						Alert.success I18nEasy.i18nDefault('successful')
+						Alert.success 'successful'
 
 			)
 		else Alert.warning I18nEasy.i18nDefault('nothingToSave')
@@ -54,16 +54,16 @@ Template[templateName].events {
 
 		$newKeyInput = $('#newKey')
 
-		Alert.info I18nEasy.i18nDefault('processing')
+		Alert.info 'processing'
 
 		Meteor.call(
 			'i18nEasyAddKey'
 			$.trim $newKeyInput.val()
 			(error)->
 				if error
-					Alert.error I18nEasy.i18nDefault(if error.error is 409 then 'duplicatedKey' else 'internalServerError')
+					Alert.error(if error.error is 409 then 'duplicatedKey' else 'internalServerError')
 				else
-					Alert.success I18nEasy.i18nDefault('successful')
+					Alert.success 'successful'
 		)
 
 	#==================================
