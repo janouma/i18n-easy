@@ -1,9 +1,5 @@
 templateName = 'i18n_easy_translation'
 
-Template[templateName].created =->
-	@_context = new Context
-	do @_context.init
-
 Template[templateName].helpers {
 	emptyWarningClass: (translation)-> 'label theme-gold color-black' unless translation?.length
 }
@@ -28,17 +24,20 @@ Template[templateName].events {
 			5000
 		)
 
-		###DEBUG
-		Meteor._debug "delete '#{$(e.target).parents('div[data-key]').attr 'data-key'}'"
-		do template._context.reset
-		template._context.set {
-			status: 'warning'
-			submitMessage: "DEBUG: Next step, the removal of '#{$(e.target).parents('div[data-key]').attr 'data-key'}' !!!"
-		}
-		do template._context.save###
+	#==================================
+	'click .confirm': (e, template)->
+		do e.preventDefault
+		#Meteor.clearTimeout template._toast
+
+		$confirm = $(template.find('.confirm')).addClass 'hidden'
+
+		#DEBUG
+		Meteor._debug "delete '#{$confirm.parents('div[data-key]').attr 'data-key'}'"
+		Alert.warning "DEBUG: Next step, the removal of '#{$confirm.parents('div[data-key]').attr 'data-key'}' !!!"
+		##
 
 		###
-		key = $(e.target).parents('div[data-key]').attr 'data-key'
+		key = $confirm.parents('div[data-key]').attr 'data-key'
 		Meteor.call(
 			'i18nEasyRemoveKey'
 			key

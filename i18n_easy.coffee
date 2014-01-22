@@ -1,8 +1,9 @@
 class @I18nBase
 	#Private
 
-	_defaultVarName = 'i18n-defaultLanguage'
-	_varName = 'i18n-language'
+	_prefix = 'i18n-easy-'
+	_defaultVarName = '#{_prefix}defaultLanguage'
+	_varName = '#{_prefix}language'
 
 	if Meteor.isClient
 		_context =
@@ -206,3 +207,6 @@ class @I18nBase
 	#==================================
 	translations: =>
 		_translations()
+
+	#==================================
+	prefix: (name)-> "#{_prefix}#{name}"

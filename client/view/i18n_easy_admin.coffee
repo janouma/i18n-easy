@@ -1,18 +1,13 @@
 templateName = 'i18n_easy_admin'
 
-Template[templateName].created =->
-	@_context = new Context
-	do @_context.init
-
-
 Template[templateName].helpers {
-	submitMessage: -> Session.get Context.varNameFor('submitMessage')
+	submitMessage: -> Alert.message()
 }
 
 
 Template[templateName].events {
 
-	'submit form': (e, template)->
+	'submit form': (e)->
 		do e.preventDefault
 
 		translations = []
@@ -39,70 +34,40 @@ Template[templateName].events {
 				}
 
 		if translations.length
-			template._context.set {
-				status: 'info'
-				submitMessage: I18nEasy.i18nDefault 'processing'
-			}
-			do template._context.save
+			Alert.info I18nEasy.i18nDefault('processing')
 
 			Meteor.call(
 				'i18nEasySave'
 				translations
 				(error)->
 					if error
-						template._context.set {
-							status: 'error'
-							submitMessage: I18nEasy.i18nDefault 'internalServerError'
-						}
+						Alert.error I18nEasy.i18nDefault('internalServerError')
 					else
-						template._context.set {
-							status: 'success'
-							submitMessage: I18nEasy.i18nDefault 'successful'
-						}
+						Alert.success I18nEasy.i18nDefault('successful')
 
-					do template._context.save
 			)
-		else
-			do template._context.reset
-			template._context.set {
-				status: 'warning'
-				submitMessage: I18nEasy.i18nDefault 'nothingToSave'
-			}
-			do template._context.save
-
+		else Alert.warning I18nEasy.i18nDefault('nothingToSave')
 
 	#==================================
-	'click #add': (e, template)->
+	'click #add': (e)->
 		do e.preventDefault
 
 		$newKeyInput = $('#newKey')
 
-		template._context.set {
-			status: 'info'
-			submitMessage: I18nEasy.i18nDefault 'processing'
-		}
-		do template._context.save
+		Alert.info I18nEasy.i18nDefault('processing')
 
 		Meteor.call(
 			'i18nEasyAddKey'
 			$.trim $newKeyInput.val()
 			(error)->
 				if error
-					template._context.set {
-						status: 'error'
-						submitMessage: I18nEasy.i18nDefault(if error.error is 409 then 'duplicatedKey' else 'internalServerError')
-					}
+					Alert.error I18nEasy.i18nDefault(if error.error is 409 then 'duplicatedKey' else 'internalServerError')
 				else
-					template._context.set {
-						status: 'success'
-						submitMessage: I18nEasy.i18nDefault 'successful'
-					}
-
-				do template._context.save
+					Alert.success I18nEasy.i18nDefault('successful')
 		)
 
 	#==================================
-	'input #newKey': (e, template)->
+	'input #newKey': (e)->
 		$addButton = $('#add')
 
 		if /^\w+$/.test $(e.target).val().trim()
@@ -117,9 +82,9 @@ Template[templateName].events {
 
 
 Template[templateName].rendered = ->
-	return unless @_context.get('submitMessage')
+	return unless Alert.changed
 
-	Meteor.clearTimeout @_context.toast
+	Meteor.clearTimeout @_toast
 	$messageElts = $('#submit-result, #submit-note')
 
 	showMessage = =>
@@ -129,25 +94,24 @@ Template[templateName].rendered = ->
 			warning: 'theme-gold color-black'
 			error: 'theme-redlight color-black'
 
-		if @_context.get 'status'
-			$messageElts.addClass(statusClasses[@_context.get 'status'])
-			.removeClass 'hidden'
+		if Alert.status()
+			$messageElts.addClass(statusClasses[Alert.status()])
+				.removeClass 'hidden'
 
 		$('#add').addClass('theme-grey color-smoke')
 		.removeClass('active-button theme-black color-lightmagenta')
 		.attr disabled: yes
 
-		$('#newKey').val('') if @_context.get('status') is 'success'
+		$('#newKey').val('') if Alert.isSuccess()
 
-	if @_context.displayedPath is Router.current().path
+	if Alert.path() is Router.current().path
 		Meteor.defer showMessage
 	else
 		showMessage()
 
-	@_context.toast = Meteor.setTimeout(
+	@_toast = Meteor.setTimeout(
 		=>
-			do @_context.clear
+			do Alert.clear
 			$messageElts.addClass 'hidden'
-
 		5000
 	)

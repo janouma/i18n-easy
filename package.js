@@ -12,7 +12,7 @@ Package.on_use(function(api, where){
 	var clientFiles = [];
 	clientFiles.push('i18n_easy_client.coffee');
 	clientFiles.push('i18n_easy_router.coffee');
-	clientFiles.push('client/helpers/context.coffee');
+	clientFiles.push('client/helpers/alert.coffee');
 	clientFiles.push('client/view/i18n_easy_nav.html');
 	clientFiles.push('client/view/i18n_easy_nav.coffee');
 	clientFiles.push('client/view/i18n_easy_header.html');

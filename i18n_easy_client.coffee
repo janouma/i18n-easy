@@ -22,6 +22,7 @@ class I18nClient extends I18nBase
 			ready
 		)
 
+
 #==================================
 I18nEasy = new I18nClient()
 
