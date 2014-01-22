@@ -1,6 +1,7 @@
 @import bourbon/bourbon
 @import _colors
 @import _borders
+@import _spaces
 
 .i18n-easy
 
@@ -31,7 +32,7 @@
 	.capitalize
 		text-transform: capitalize
 
-	.capitalize-first:first-letter
+	.capitalize-first::first-letter
 		@extend .capitalize
 
 	.text-center

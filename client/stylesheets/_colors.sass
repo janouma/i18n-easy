@@ -52,6 +52,7 @@ $sky: #3091ff
 
 	+color('magenta', lighten($magenta, 13%), lighten($magenta, 20%), $lightmagenta)
 	+color('lightmagenta', $lightmagenta)
+	+color('darkmagenta', $magenta, lighten($magenta, 13%), lighten($magenta, 20%))
 	+color('bloodywhite', lighten($lightmagenta, 5%))
 	+color('pink', $pink, $darkpink, $darkpink)
 	+color('white', white)
@@ -59,8 +60,6 @@ $sky: #3091ff
 	+color('redlight', $redlight)
 	+color('emerald', $emerald)
 	+color('black', $neardark)
-	+color('darkred', darken(red, 10%))
-	+color('darkblue', darken($sky, 25%))
 
 	+theme('black', $neardark, $almostblack, black)
 	+theme('grey', $darkgrey)
@@ -68,6 +67,6 @@ $sky: #3091ff
 	+theme('emerald', lighten($emerald, 15%))
 	+theme('gold', $gold)
 	+theme('sky', $sky)
-	+theme('blue', darken($sky, 10%), darken($sky, 15%))
 	+theme('silver', $silver)
+	+theme('magenta', lighten($magenta, 10%), lighten($magenta, 20%))
 
