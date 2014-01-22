@@ -327,6 +327,8 @@
 .mll, .mhl, .mal {
   margin-left: 20px; }
 
+.i18n-easy .site-body {
+  background-image: url(../../public/img/noise.png); }
 .i18n-easy .focus, .i18n-easy input[type=text]:focus,
 .i18n-easy textarea:focus {
   box-shadow: inset 0 0 4px rgba(170, 80, 147, 0.5);
