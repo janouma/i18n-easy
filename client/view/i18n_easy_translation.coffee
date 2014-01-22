@@ -6,7 +6,7 @@ Template[templateName].helpers {
 
 
 Template[templateName].events {
-	#==================================
+
 	'focus div[id^=translation_] textarea': (e)-> $(e.target).parents('div[id^=translation_]').find('textarea').addClass 'focus'
 
 	#==================================
@@ -15,20 +15,34 @@ Template[templateName].events {
 	#==================================
 	'click .delete': (e, template)->
 		do e.preventDefault
+
 		Meteor.clearTimeout template._toast
 
-		$confirm = $(template.find('.confirm')).removeClass 'hidden'
+		$ask = $(template.find('.ask')).removeClass 'hidden'
+		template._cancel = no
 
-		template._toast = Meteor.setInterval(
-			-> $confirm.addClass 'hidden'
+		template._toast = Meteor.setTimeout(
+			->
+				template._cancel = yes
+				$ask.addClass 'hidden'
 			5000
 		)
 
 	#==================================
-	'click .confirm': (e, template)->
+	'click .cancel': (e, template)->
 		do e.preventDefault
 
-		$confirm = $(template.find('.confirm')).addClass 'hidden'
+		template._cancel = yes
+		Meteor.clearTimeout template._toast
+		$(template.find('.ask')).addClass 'hidden'
+
+
+	#==================================
+	'click .confirm': (e, template)->
+		do e.preventDefault
+		return if template._cancel
+
+		$confirm = $(e.target).addClass 'hidden'
 
 		Meteor.call(
 			'i18nEasyRemoveKey'

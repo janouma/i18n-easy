@@ -89,7 +89,7 @@ Template[templateName].rendered = ->
 
 	showMessage = =>
 		statusClasses =
-			info: 'theme-blue color-black'
+			info: 'theme-sky color-black'
 			success: 'theme-emerald color-black'
 			warning: 'theme-gold color-black'
 			error: 'theme-redlight color-black'

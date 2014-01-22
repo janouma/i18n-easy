@@ -14,6 +14,7 @@ $jade: #88bb00
 $silver: #dadada
 $shadow: #707070
 $gold: #ffca54
+$sky: #3091ff
 
 =color($name, $main, $hover: $main, $active: $main)
 	.color-#{$name}
@@ -51,19 +52,22 @@ $gold: #ffca54
 
 	+color('magenta', lighten($magenta, 13%), lighten($magenta, 20%), $lightmagenta)
 	+color('lightmagenta', $lightmagenta)
-	+color('bloodywhite', lighten($lightmagenta, 7%))
+	+color('bloodywhite', lighten($lightmagenta, 5%))
 	+color('pink', $pink, $darkpink, $darkpink)
 	+color('white', white)
 	+color('smoke', $smoke)
 	+color('redlight', $redlight)
 	+color('emerald', $emerald)
 	+color('black', $neardark)
+	+color('darkred', darken(red, 10%))
+	+color('darkblue', darken($sky, 25%))
 
 	+theme('black', $neardark, $almostblack, black)
 	+theme('grey', $darkgrey)
 	+theme('redlight', lighten($redlight, 10%), $redlight)
 	+theme('emerald', lighten($emerald, 15%))
 	+theme('gold', $gold)
-	+theme('blue', #3091ff)
+	+theme('sky', $sky)
+	+theme('blue', darken($sky, 10%), darken($sky, 15%))
 	+theme('silver', $silver)
 

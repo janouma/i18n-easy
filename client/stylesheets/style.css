@@ -16,11 +16,11 @@
 .i18n-easy .color-lightmagenta .active, .i18n-easy .color-lightmagenta .active a, .i18n-easy .color-lightmagenta.active, .i18n-easy .color-lightmagenta.active a {
   color: #d9afcf !important; }
 .i18n-easy .color-bloodywhite, .i18n-easy .color-bloodywhite a {
-  color: #e5c8dd !important; }
+  color: #e2c1d9 !important; }
 .i18n-easy .color-bloodywhite.input[type=submit]:hover, .i18n-easy .color-bloodywhite.button:hover, .i18n-easy .color-bloodywhite a:hover {
-  color: #e5c8dd !important; }
+  color: #e2c1d9 !important; }
 .i18n-easy .color-bloodywhite .active, .i18n-easy .color-bloodywhite .active a, .i18n-easy .color-bloodywhite.active, .i18n-easy .color-bloodywhite.active a {
-  color: #e5c8dd !important; }
+  color: #e2c1d9 !important; }
 .i18n-easy .color-pink, .i18n-easy .color-pink a {
   color: #e93889 !important; }
 .i18n-easy .color-pink.input[type=submit]:hover, .i18n-easy .color-pink.button:hover, .i18n-easy .color-pink a:hover {
@@ -57,6 +57,18 @@
   color: #333333 !important; }
 .i18n-easy .color-black .active, .i18n-easy .color-black .active a, .i18n-easy .color-black.active, .i18n-easy .color-black.active a {
   color: #333333 !important; }
+.i18n-easy .color-darkred, .i18n-easy .color-darkred a {
+  color: #cc0000 !important; }
+.i18n-easy .color-darkred.input[type=submit]:hover, .i18n-easy .color-darkred.button:hover, .i18n-easy .color-darkred a:hover {
+  color: #cc0000 !important; }
+.i18n-easy .color-darkred .active, .i18n-easy .color-darkred .active a, .i18n-easy .color-darkred.active, .i18n-easy .color-darkred.active a {
+  color: #cc0000 !important; }
+.i18n-easy .color-darkblue, .i18n-easy .color-darkblue a {
+  color: #0052b0 !important; }
+.i18n-easy .color-darkblue.input[type=submit]:hover, .i18n-easy .color-darkblue.button:hover, .i18n-easy .color-darkblue a:hover {
+  color: #0052b0 !important; }
+.i18n-easy .color-darkblue .active, .i18n-easy .color-darkblue .active a, .i18n-easy .color-darkblue.active, .i18n-easy .color-darkblue.active a {
+  color: #0052b0 !important; }
 .i18n-easy .theme-black {
   background-color: #333333 !important;
   border-color: #262626 !important; }
@@ -112,17 +124,28 @@
 .i18n-easy .button.theme-gold:hover {
   background-color: #ffca54 !important;
   border-color: #ffc23b !important; }
-.i18n-easy .theme-blue {
+.i18n-easy .theme-sky {
   background-color: #3091ff !important;
   border-color: #1783ff !important; }
-  .i18n-easy .theme-blue:active {
+  .i18n-easy .theme-sky:active {
     background-color: #3091ff !important;
     border-color: #1783ff !important; }
+.i18n-easy input[type=submit].theme-sky:hover,
+.i18n-easy a.theme-sky:hover,
+.i18n-easy .button.theme-sky:hover {
+  background-color: #3091ff !important;
+  border-color: #1783ff !important; }
+.i18n-easy .theme-blue {
+  background-color: #0076fc !important;
+  border-color: #006ae3 !important; }
+  .i18n-easy .theme-blue:active {
+    background-color: #0076fc !important;
+    border-color: #006ae3 !important; }
 .i18n-easy input[type=submit].theme-blue:hover,
 .i18n-easy a.theme-blue:hover,
 .i18n-easy .button.theme-blue:hover {
-  background-color: #3091ff !important;
-  border-color: #1783ff !important; }
+  background-color: #006ae3 !important;
+  border-color: #005ec9 !important; }
 .i18n-easy .theme-silver {
   background-color: #dadada !important;
   border-color: #cdcdcd !important; }
@@ -285,10 +308,10 @@
   position: fixed;
   top: 80px;
   left: 7.5%; }
-.i18n-easy [id^=translation_] .confirm,
+.i18n-easy [id^=translation_] .ask,
 .i18n-easy [id^=translation_] .delete {
   position: absolute; }
-.i18n-easy [id^=translation_] .confirm {
+.i18n-easy [id^=translation_] .ask {
   top: 9px;
   right: -24px; }
 .i18n-easy [id^=translation_] .delete {
@@ -303,7 +326,7 @@
   visibility: visible; }
 
 @media (max-width: 767px) {
-  [id^=translation_] .confirm {
+  [id^=translation_] .ask {
     right: -16px !important; }
   [id^=translation_] .delete {
     right: -10px !important; } }
