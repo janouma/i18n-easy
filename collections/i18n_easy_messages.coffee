@@ -35,4 +35,9 @@ Meteor.methods {
 				{key: translation.key, language: translation.language}
 				{$set: message: translation.message}
 			)
+
+	#==================================
+	i18nEasyRemoveKey: (key)->
+		check key, String
+		Meteor._debug "#{I18nEasyMessages.remove key: key} translations of '#{key}' has been removed"
 }

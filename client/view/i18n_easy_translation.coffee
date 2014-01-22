@@ -30,16 +30,14 @@ Template[templateName].events {
 
 		$confirm = $(template.find('.confirm')).addClass 'hidden'
 
-		#DEBUG
-		Alert.warning "DEBUG_removal_of_#{$confirm.parents('div[data-key]').attr 'data-key'}"
-		##
-
-		###
-		key = $confirm.parents('div[data-key]').attr 'data-key'
 		Meteor.call(
 			'i18nEasyRemoveKey'
-			key
-			(error)-> # TODO delete key
+			$confirm.parents('div[data-key]').attr('data-key')
+
+			(error)->
+				if error
+					Alert.error 'internalServerError'
+				else
+					Alert.success 'successful'
 		)
-		###
 }
