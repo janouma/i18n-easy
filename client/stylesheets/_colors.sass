@@ -1,4 +1,4 @@
-$almostblack: #505050
+$ash: #505050
 $neardark: #333
 $grey: darken(#F7F7F9, 2%)
 $darkgrey: darken($grey, 15%)
@@ -59,8 +59,9 @@ $sky: #3091ff
 	+color('redlight', $redlight)
 	+color('emerald', $emerald)
 	+color('black', $neardark)
+	+color('silver', $silver)
 
-	+theme('black', $neardark, $almostblack, black)
+	+theme('black', $neardark, $ash, black)
 	+theme('grey', $darkgrey)
 	+theme('redlight', lighten($redlight, 10%), $redlight)
 	+theme('emerald', lighten($emerald, 15%))

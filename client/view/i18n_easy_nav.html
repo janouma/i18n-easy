@@ -10,6 +10,10 @@
                 {{#each languages}}
                 <li class="{{activeLanguageClass this}}"><a class="animated" href="{{pathToLanguage this}}"><i class="fa {{activeFlagClass this}}"></i> {{i18nDefault this}}</a></li>
                 {{/each}}
+				<li class="new-language-wrapper">
+					<input type="text" class="new-language text tiny-text-input spaced-letters lowercase fatty big-radius pls prn animated" maxlength="2">
+					<a class="add-language phn animated"><i class="sign fa fa-plus-circle"></i> <span class="legend mls">{{i18nDefault 'newLanguage'}}</span></a>
+				</li>
             </ul>
             <div class="col width-fill mobile-width-fill">
                 <ul class="nav pull-right">

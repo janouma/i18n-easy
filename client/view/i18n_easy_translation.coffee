@@ -14,8 +14,6 @@ Template[templateName].events {
 
 	#==================================
 	'click .delete': (e, template)->
-		do e.preventDefault
-
 		Meteor.clearTimeout template._toast
 
 		$ask = $(template.find('.ask')).removeClass 'hidden'
@@ -31,7 +29,6 @@ Template[templateName].events {
 	#==================================
 	'click .cancel': (e, template)->
 		do e.preventDefault
-
 		template._cancel = yes
 		Meteor.clearTimeout template._toast
 		$(template.find('.ask')).addClass 'hidden'

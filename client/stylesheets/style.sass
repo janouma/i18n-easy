@@ -8,6 +8,11 @@
 	.tiny
 		@extend .color-magenta
 
+	.tiny-text-input
+		+size(auto 11px)
+		margin-top: 8px
+		margin-bottom: 8px
+
 	.site-body
 		background-image: url(../../public/img/noise.png)
 
@@ -37,6 +42,9 @@
 
 	.capitalize-first::first-letter
 		@extend .capitalize
+
+	.lowercase
+		text-transform: lowercase
 
 	.text-center
 		text-align: center
@@ -81,6 +89,18 @@
 	.round
 		border-radius: 50%
 
+	.small-radius
+		border-radius: 3px
+
+	.medium-radius
+		border-radius: 5px
+
+	.big-radius
+		border-radius: 10px
+
+	.spaced-letters
+		letter-spacing: 2px
+
 	.engraved
 		text-shadow: 0 1px 1px #cfcfcf
 
@@ -105,13 +125,12 @@
 
 		.ask
 			top: 9px
-			right: -24px
+			right: -7px
 
 		.delete
 			top: 12px
-			right: -18px
-			width: 20px
-			height: 20px
+			right: -1px
+			+size(20px)
 
 			.fa-stack-1x
 				top: -3px
@@ -121,12 +140,42 @@
 				opacity: 1
 				visibility: visible
 
+	.add-language
+		position: absolute
+		top: 0
+		left: 24px
+		cursor: default
 
-// Mobile display
+		.sign
+			color: $silver
 
-@media (max-width: 767px)
-	[id^=translation_]
-		.ask
-			right: -16px !important
-		.delete
-			right: -10px !important
+	.active
+		.add-language
+			cursor: pointer
+
+		.sign, .new-language ~ .add-language .legend
+			color: inherit
+
+	.new-language-wrapper:hover
+		input, a
+			opacity: 1
+
+		.legend
+			color: $shadow
+
+	.new-language
+		width: 35px
+		opacity: 0.15
+		font-size: 13px
+
+		& ~ a
+			opacity: 0.3
+
+		&:hover,
+		&:focus,
+		&:hover ~ a,
+		&:focus ~ a
+			opacity: 1
+
+			.legend
+				color: $shadow
