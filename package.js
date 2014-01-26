@@ -7,7 +7,7 @@ Package.on_use(function(api, where){
     api.use(['coffeescript', 'minimongo', 'mongo-livedata'], 'server');
     api.use('iron-router');
     
-    api.add_files(['i18n_easy.coffee','collections/i18n_easy_messages.coffee']);
+    api.add_files(['i18n_easy.coffee', 'i18n_easy_permissions.coffee','collections/i18n_easy_messages.coffee']);
 
 	var clientFiles = [];
 	clientFiles.push('i18n_easy_client.coffee');

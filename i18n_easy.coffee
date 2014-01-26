@@ -2,13 +2,14 @@ class @I18nBase
 	#Private
 
 	_prefix = 'i18n-easy-'
-	_defaultVarName = '#{_prefix}defaultLanguage'
-	_varName = '#{_prefix}language'
+	_defaultVarName = "#{_prefix}defaultLanguage"
+	_varName = "#{_prefix}language"
 
 	if Meteor.isClient
 		_context =
 			set: (varName, value)->
 				Session.set varName, value
+
 			get: (varName)->
 				Session.get varName
 
@@ -16,6 +17,7 @@ class @I18nBase
 		_context =
 			set: (varName, value)->
 				@[varName] = value
+
 			get: (varName)->
 				@[varName]
 
@@ -129,7 +131,7 @@ class @I18nBase
 
 		return if language is _defaultLanguage()
 		_defaultLanguage language
-		_language _defaultLanguage unless _language()
+		_language _defaultLanguage() unless _language()
 
 	#==================================
 	getDefault: ->
@@ -141,7 +143,7 @@ class @I18nBase
 
 		return if language is _language()
 		_language language
-		_defaultLanguage _language unless _defaultLanguage()
+		_defaultLanguage _language() unless _defaultLanguage()
 
 	#==================================
 	getLanguage: ->
@@ -183,7 +185,7 @@ class @I18nBase
 	#==================================
 	i18nDefault: (key)=>
 		@i18n(
-				key
+			key
 			defaultLanguage: yes
 		)
 
@@ -194,7 +196,7 @@ class @I18nBase
 	#==================================
 	translate: (key)=>
 		@i18n(
-				key
+			key
 			fallBack: no
 			autoPlural: no
 			useDefault: no

@@ -18,7 +18,19 @@ Template[templateName].events {
 			$wrapper.removeClass activeClass
 
 	#==================================
-	'click .active .add-language': (e)->
-		Meteor._debug "add language"
+	'click .active .add-language': (e, template)->
+		$newLanguage = $(template.find '.new-language')
+
+		Meteor.call(
+			'i18nEasyAddLanguage'
+			$.trim $newLanguage.val()
+
+			(error)->
+				$newLanguage.val ''
+				if error
+					Alert.error(if error.error is 409 then 'duplicatedLanguage' else 'internalServerError')
+				else
+					Alert.success 'successful'
+		)
 
 }
