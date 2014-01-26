@@ -24,7 +24,9 @@
 	Meteor.call 'clearI18nEasyMessages'
 	do @initData
 
-do @resetData
+Meteor.call 'clearI18nEasyMessages'
+if Meteor.isServer
+	do @initData
+	I18nEasy.publish default: 'en'
 
-I18nEasy.publish default: 'en' if Meteor.isServer
 I18nEasy.subscribe default: 'en' if Meteor.isClient
