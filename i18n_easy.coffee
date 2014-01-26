@@ -83,7 +83,7 @@ class @I18nBase
 					[translation.singular.actual, translation.plural.actual] = if result.message.constructor.name is 'Array'
 						result.message
 					else
-						translation.plural.default = "#{result.message}s"
+						translation.plural.default = "#{result.message}s" if result.message?.length
 						[result.message, undefined]
 
 

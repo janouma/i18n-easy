@@ -49,9 +49,14 @@ Meteor.methods {
 		if I18nEasyMessages.find(language: new RegExp("^#{lowerCaseLanguage}$",'i')).count()
 			throw new Meteor.Error 409, "duplicated language '#{lowerCaseLanguage}'"
 		else
-			I18nEasyMessages.insert(
+			I18nEasyMessages.insert {
+				key: lowerCaseLanguage
+				language: I18nEasy.getDefault()
+				message: ''
+			}
+			I18nEasyMessages.insert {
 				key: lowerCaseLanguage
 				language: lowerCaseLanguage
 				message: ''
-			)
+			}
 }
