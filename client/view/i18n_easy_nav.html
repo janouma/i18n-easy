@@ -4,17 +4,28 @@
             <h2 class="capitalize color-magenta"><i class="fa fa-gears"></i> {{i18nDefault 'translationAdmin'}}</h2>
         </div>
     </div>
-    <div class="col width-fill mobile-width-fill">
+    <div class="main-nav col width-fill mobile-width-fill">
         <div class="cell capitalize color-magenta">
             <ul class="col width-fit mobile-width-fit nav">
                 {{#each languages}}
-                <li class="{{activeLanguageClass this}}"><a class="animated" href="{{pathToLanguage this}}"><i class="fa {{activeFlagClass this}}"></i> {{i18nDefault this}}</a></li>
+                <li class="{{activeLanguageClass this}}">
+					<a class="animated" href="{{pathToLanguage this}}">
+						<i class="language-icon fa {{activeFlagClass this}}"></i> {{i18nDefault this}}
+						<i class="delete fa fa-trash-o animated z1 medium-radius color-red hidden" title="{{i18nDefault 'delete'}}"></i>
+					</a>
+				</li>
                 {{/each}}
-				<li class="new-language-wrapper">
-					<input type="text" class="new-language text tiny-text-input spaced-letters lowercase fatty big-radius pls prn animated" maxlength="2">
+				<li class="new-language-wrapper mll">
+					<input type="text" class="new-language text tiny-input spaced-letters lowercase fatty big-radius pls prn animated" maxlength="2">
 					<a class="add-language phn animated"><i class="sign fa fa-plus-circle"></i> <span class="legend mls">{{i18nDefault 'newLanguage'}}</span></a>
 				</li>
             </ul>
+			<div class="ask animated hidden">
+				<span class="button-group animated bras medium-shadow medium-radius">
+					<button class="confirm button icon-button active-button theme-ash color-lightmagenta capitalize small-shadow gradient animated"><i class="fa fa-check"></i> <strong class="prs">{{i18nDefault 'delete'}}</strong></button>
+					<button class="cancel button icon-button active-button theme-magenta color-bloodywhite capitalize small-shadow gradient animated"><strong class="pls">{{i18nDefault 'cancel'}}</strong> <i class="fa fa-times"></i></button>
+				</span>
+			</div>
             <div class="col width-fill mobile-width-fill">
                 <ul class="nav pull-right">
                     <li><a class="animated" href="#"><i class="fa fa-lock"></i> {{i18nDefault 'signin'}}</a></li>

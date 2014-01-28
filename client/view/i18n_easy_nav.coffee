@@ -33,4 +33,35 @@ Template[templateName].events {
 					Alert.success 'successful'
 		)
 
+	#==================================
+	'click .delete': (e, template)->
+		do e.preventDefault
+
+		Meteor.clearTimeout template._toast
+		$ask = $(template.find '.ask')
+		offset = $ask.offset()
+
+		$ask.offset(
+			top: offset.top
+			left: $(e.target).siblings('.language-icon').offset().left - $ask.width()/2 + 9
+		).removeClass 'hidden'
+
+		template._cancel = no
+
+		template._toast = Meteor.setTimeout(
+			->
+				template._cancel = yes
+				$ask.addClass 'hidden'
+			5000
+		)
+
+
+	#==================================
+	'click .cancel': (e, template)->
+		do e.preventDefault
+		
+		template._cancel = yes
+		Meteor.clearTimeout template._toast
+		$(template.find('.ask')).addClass 'hidden'
+
 }

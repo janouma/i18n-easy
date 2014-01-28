@@ -1,14 +1,14 @@
 @import bourbon/bourbon
 @import _colors
-@import _borders
-@import _spaces
 
 .i18n-easy
+	@import _borders
+	@import _spaces
 
 	.tiny
 		@extend .color-magenta
 
-	.tiny-text-input
+	.tiny-input
 		+size(auto 11px)
 		margin-top: 8px
 		margin-bottom: 8px
@@ -57,7 +57,9 @@
 		visibility: hidden
 
 	.animated
-		+transition(all 0.5s ease-in-out)
+		+transition-duration(0.5s)
+		+transition-timing-function(ease-in-out)
+		+transition-property(color, background-color, opacity, visibility)
 
 	.collapse-left
 		border-top-left-radius: 0
@@ -139,6 +141,34 @@
 			.delete
 				opacity: 1
 				visibility: visible
+
+	.main-nav
+		.delete
+			position: absolute
+			right: 0
+			top: 10px
+
+		a:hover
+			.delete
+				opacity: 1
+				visibility: visible
+
+		.ask
+			$border-color: lighten($magenta, 13%)
+			position: absolute
+			left: 0
+			top: 26px
+
+			& > .button-group
+				border-color: $border-color
+
+			&::before
+				content: ""
+				display: block
+				margin: 0 auto
+				+triangle(18px, $border-color, up)
+				border-top-width: 0
+
 
 	.add-language
 		position: absolute
