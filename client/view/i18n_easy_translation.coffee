@@ -31,7 +31,7 @@ Template[templateName].events {
 		do e.preventDefault
 		template._cancel = yes
 		Meteor.clearTimeout template._toast
-		$(template.find('.ask')).addClass 'hidden'
+		$(template.find '.ask').addClass 'hidden'
 
 
 	#==================================
@@ -39,11 +39,11 @@ Template[templateName].events {
 		do e.preventDefault
 		return if template._cancel
 
-		$confirm = $(e.target).addClass 'hidden'
+		$(template.find '.ask').addClass 'hidden'
 
 		Meteor.call(
 			'i18nEasyRemoveKey'
-			$confirm.parents('div[data-key]').attr('data-key')
+			$(template.find 'div[data-key]').attr('data-key')
 
 			(error)->
 				if error

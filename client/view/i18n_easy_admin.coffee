@@ -34,7 +34,7 @@ Template[templateName].events {
 				}
 
 		if translations.length
-			Alert.info I18nEasy.i18nDefault('processing')
+			Alert.info 'processing'
 
 			Meteor.call(
 				'i18nEasySave'
@@ -46,7 +46,7 @@ Template[templateName].events {
 						Alert.success 'successful'
 
 			)
-		else Alert.warning I18nEasy.i18nDefault('nothingToSave')
+		else Alert.warning 'nothingToSave'
 
 	#==================================
 	'click #add': (e)->

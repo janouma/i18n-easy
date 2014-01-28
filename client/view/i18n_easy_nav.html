@@ -11,7 +11,7 @@
                 <li class="{{activeLanguageClass this}}">
 					<a class="animated" href="{{pathToLanguage this}}">
 						<i class="language-icon fa {{activeFlagClass this}}"></i> {{i18nDefault this}}
-						<i class="delete fa fa-trash-o animated z1 medium-radius color-red hidden" title="{{i18nDefault 'delete'}}"></i>
+						<i class="delete fa fa-trash-o animated z1 medium-radius color-red hidden" title="{{i18nDefault 'delete'}}" data-language="{{this}}"></i>
 					</a>
 				</li>
                 {{/each}}

@@ -59,4 +59,10 @@ Meteor.methods {
 				language: lowerCaseLanguage
 				message: ''
 			}
+
+	#==================================
+	i18nEasyRemoveLanguage: (language)->
+		check language, String
+		Meteor._debug "#{I18nEasyMessages.remove language: language} translations in '#{language}' has been removed"
+
 }
