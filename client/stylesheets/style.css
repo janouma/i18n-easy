@@ -303,6 +303,8 @@
   .i18n-easy input[type=text],
   .i18n-easy textarea {
     background-color: #f0f0f0; }
+  .i18n-easy .disabled {
+    cursor: not-allowed; }
   .i18n-easy .no-box-shadow {
     box-shadow: none; }
   .i18n-easy .no-text-decoration, .i18n-easy .no-text-decoration:hover {
@@ -359,6 +361,8 @@
     border-radius: 5px; }
   .i18n-easy .big-radius {
     border-radius: 10px; }
+  .i18n-easy .huge-radius {
+    border-radius: 15px; }
   .i18n-easy .spaced-letters {
     letter-spacing: 2px; }
   .i18n-easy .engraved, .i18n-easy #submit-result {
@@ -445,3 +449,7 @@
       opacity: 1; }
       .i18n-easy .new-language:hover .legend, .i18n-easy .new-language:focus .legend, .i18n-easy .new-language:hover ~ a .legend, .i18n-easy .new-language:focus ~ a .legend {
         color: #707070; }
+  .i18n-easy #add {
+    display: inline-block;
+    margin-left: -31px;
+    padding-bottom: 1px; }

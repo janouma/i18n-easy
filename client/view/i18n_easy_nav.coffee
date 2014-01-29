@@ -27,9 +27,10 @@ Template[templateName].events {
 			$.trim $newLanguage.val()
 
 			(error)->
-				$newLanguage.val ''
 				if error
 					Alert.error(if error.error is 409 then 'duplicatedLanguage' else 'internalServerError')
+					$newLanguage.val ''
+					$(template.find '.new-language-wrapper').removeClass 'active'
 				else
 					Alert.success 'successful'
 		)

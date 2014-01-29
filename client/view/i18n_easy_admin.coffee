@@ -71,13 +71,9 @@ Template[templateName].events {
 		$addButton = $('#add')
 
 		if /^\w+$/.test $(e.target).val().trim()
-			$addButton.removeAttr('disabled')
-				.addClass('active-button theme-black color-lightmagenta')
-				.removeClass('theme-grey color-smoke')
+			$addButton.addClass('color-magenta').removeClass('disabled color-silver')
 		else
-			$addButton.attr(disabled: yes)
-				.addClass('theme-grey color-smoke')
-				.removeClass('active-button theme-black color-lightmagenta')
+			$addButton.addClass('disabled color-silver').removeClass('color-magenta')
 }
 
 
@@ -98,9 +94,7 @@ Template[templateName].rendered = ->
 			$messageElts.addClass(statusClasses[Alert.status()])
 				.removeClass 'hidden'
 
-		$('#add').addClass('theme-grey color-smoke')
-		.removeClass('active-button theme-black color-lightmagenta')
-		.attr disabled: yes
+		$('#add').addClass('disabled color-silver').removeClass('color-magenta')
 
 		$('#newKey').val('') if Alert.isSuccess()
 
