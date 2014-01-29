@@ -62,7 +62,12 @@ Meteor.methods {
 
 	#==================================
 	i18nEasyRemoveLanguage: (language)->
-		check language, String
+		check(
+			language
+			Match.Where (value)->
+				check value, String
+				value isnt I18nEasy.getDefault()
+		)
 		Meteor._debug "#{I18nEasyMessages.remove language: language} translations in '#{language}' has been removed"
 
 }

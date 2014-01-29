@@ -3,7 +3,7 @@ templateName = 'i18n_easy_nav'
 Template[templateName].helpers(
     activeLanguageClass: (language)-> 'active' if language is I18nEasy.getLanguage()
     activeFlagClass: (language)-> if language is I18nEasy.getLanguage() then 'fa-flag' else 'fa-flag-o'
-    languages: -> do I18nEasy.getLanguages
+    languages: -> {language: language, notDefault: language isnt I18nEasy.getDefault()} for language in I18nEasy.getLanguages()
 )
 
 Template[templateName].events {
