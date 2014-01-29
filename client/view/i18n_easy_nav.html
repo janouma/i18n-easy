@@ -8,11 +8,11 @@
         <div class="cell capitalize color-magenta">
             <ul class="col width-fit mobile-width-fit nav">
                 {{#each languages}}
-                <li class="{{activeLanguageClass language}}">
-					<a class="animated" href="{{pathToLanguage language}}">
-						<i class="language-icon fa {{activeFlagClass language}}"></i> {{i18nDefault language}}
+                <li class="{{activeLanguageClass this}}">
+					<a class="animated" href="{{pathToLanguage this}}">
+						<i class="language-icon fa {{activeFlagClass this}}"></i> {{i18nDefault this}}
 						{{#if notDefault}}
-						<i class="delete fa fa-trash-o animated z1 medium-radius color-red hidden" title="{{i18nDefault 'delete'}}" data-language="{{language}}"></i>
+						<i class="delete fa fa-trash-o animated z1 medium-radius color-red hidden" title="{{i18nDefault 'delete'}}" data-language="{{this}}"></i>
 						{{/if}}
 					</a>
 				</li>
