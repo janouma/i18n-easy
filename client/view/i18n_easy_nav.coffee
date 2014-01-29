@@ -1,10 +1,14 @@
 templateName = 'i18n_easy_nav'
 
-Template[templateName].helpers(
+Template[templateName].helpers {
     activeLanguageClass: (language)-> 'active' if language is I18nEasy.getLanguage()
     activeFlagClass: (language)-> if language is I18nEasy.getLanguage() then 'fa-flag' else 'fa-flag-o'
-    languages: -> {language: language, notDefault: language isnt I18nEasy.getDefault()} for language in I18nEasy.getLanguages()
-)
+
+	languages: ->
+		for language in I18nEasy.getLanguages()
+			language: language
+			notDefault: language isnt I18nEasy.getDefault()
+}
 
 Template[templateName].events {
 
