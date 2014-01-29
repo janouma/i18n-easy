@@ -10,7 +10,7 @@
     -->
     <div class="col content">
         <div class="col">
-			<strong id="submit-result" class="z1 capitalize-first text-center animated gradient hidden">{{submitMessage}}</strong>
+			<strong id="submit-result" class="z-infinite capitalize-first text-center animated gradient hidden">{{submitMessage}}</strong>
             <div class="cell">
                 <form>
                     {{#each i18nTranslations}}
@@ -25,7 +25,7 @@
                                 <button id="save" class="button icon-button active-button capitalize theme-black color-lightmagenta animated"><i class="fa fa-check"></i> <strong>{{i18nDefault 'save'}}</strong></button>
                                 <button id="add" class="button icon-button capitalize animated theme-grey color-smoke" disabled><i class="fa fa-plus"></i> <strong>{{i18nDefault 'add'}}</strong></button>
                                 <input type="text" id="newKey" placeholder="{{i18nDefault 'newKey'}}" class="text">
-								<span id="submit-note" class="note capitalize-first animated hidden">{{submitMessage}}</span>
+								<span id="submit-note" class="note capitalize-first pull-right animated hidden">{{submitMessage}}</span>
                             </div>
                         </div>
                     </div>

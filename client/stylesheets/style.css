@@ -373,6 +373,8 @@
     z-index: 4; }
   .i18n-easy .z5 {
     z-index: 5; }
+  .i18n-easy .z-infinite {
+    z-index: 10000; }
   .i18n-easy #submit-result {
     padding: 10px;
     border-radius: 5px;
@@ -421,9 +423,7 @@
       border-bottom-color: #c17baf;
       border-top-width: 0; }
   .i18n-easy .add-language {
-    position: absolute;
-    top: 0;
-    left: 24px;
+    margin-left: -18px;
     cursor: default; }
     .i18n-easy .add-language .sign {
       color: #dadada; }
