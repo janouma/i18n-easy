@@ -6,6 +6,11 @@ class I18nClient extends I18nBase
 	subscribe: (options)->
 		defaultLanguage = options?.default
 		check defaultLanguage, String
+		@setDefault defaultLanguage
+		do @defaultSubscribe
+
+	defaultSubscribe: (options)->
+		check @getDefault(), String
 
 		OptionalFunction = Match.Optional(
 			Match.Where (val)-> typeof val is 'function'
@@ -14,13 +19,15 @@ class I18nClient extends I18nBase
 		ready = options?.ready
 		check ready, OptionalFunction
 
-		@setDefault defaultLanguage
+		[
+			Meteor.subscribe(
+				I18nBase.TRANSLATION_PUBLICATION
+				[@getDefault(), @getLanguage()]
+				ready
+			)
 
-		Meteor.subscribe(
-			I18nBase.TRANSLATION_PUBLICATION
-			[@getDefault(), @getLanguage()]
-			ready
-		)
+			Meteor.subscribe I18nBase.LANGUAGES_PUBLICATION
+		]
 
 
 #==================================

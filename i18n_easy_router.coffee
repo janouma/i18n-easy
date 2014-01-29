@@ -11,5 +11,5 @@ Router.map ->
             if language and I18nEasy.getLanguage() isnt language
                 I18nEasy.setLanguage language
 
-        waitOn: -> Meteor.subscribe I18nBase.LANGUAGES_PUBLICATION
+        waitOn: -> do I18nEasy.defaultSubscribe
     )
