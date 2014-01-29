@@ -68,6 +68,14 @@ Meteor.methods {
 				check value, String
 				value isnt I18nEasy.getDefault()
 		)
-		Meteor._debug "#{I18nEasyMessages.remove language: language} translations in '#{language}' has been removed"
+
+		documentsRemoved = I18nEasyMessages.remove {
+			$or: [
+				{language: language}
+				{key: language}
+			]
+		}
+
+		Meteor._debug "#{documentsRemoved} translations in '#{language}' has been removed"
 
 }
