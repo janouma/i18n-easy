@@ -13,18 +13,22 @@ class I18nServer extends I18nBase
 		Meteor.publish(
 			I18nBase.TRANSLATION_PUBLICATION
 			(languages)->
-				check languages, [String]
+				check(
+					languages
+					default: String
+					actual: String
+				)
 
 				defaultKeys = []
 
 				I18nEasyMessages.find(
-					{language: languages[0]}
+					{language: languages.default}
 					{fields: key: yes}
 				)
 				.forEach (document)-> defaultKeys.push document.key
 
 				selector = $or: [key: $nin: defaultKeys]
-				selector.$or.push {language: language} for language in languages
+				selector.$or.push {language: language} for language in [languages.default, languages.actual]
 
 				I18nEasyMessages.find selector
 

@@ -22,7 +22,7 @@ class I18nClient extends I18nBase
 		[
 			Meteor.subscribe(
 				I18nBase.TRANSLATION_PUBLICATION
-				[@getDefault(), @getLanguage()]
+				{default: @getDefault(), actual: @getLanguage()}
 				ready
 			)
 
