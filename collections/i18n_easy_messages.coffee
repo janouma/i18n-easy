@@ -51,11 +51,6 @@ Meteor.methods {
 		else
 			I18nEasyMessages.insert {
 				key: lowerCaseLanguage
-				language: I18nEasy.getDefault()
-				message: ''
-			}
-			I18nEasyMessages.insert {
-				key: lowerCaseLanguage
 				language: lowerCaseLanguage
 				message: ''
 			}
