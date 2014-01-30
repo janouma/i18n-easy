@@ -20,15 +20,17 @@ class I18nServer extends I18nBase
 				)
 
 				defaultKeys = []
+				actualKeys = []
 
-				I18nEasyMessages.find(
-					{language: languages.default}
-					{fields: key: yes}
-				)
-				.forEach (document)-> defaultKeys.push document.key
+				I18nEasyMessages.find(language: $in: [languages.default, languages.actual]).forEach (document)->
+					defaultKeys.push(document.key) if document.language is languages.default
+					actualKeys.push(document.key) if document.language is languages.actual
 
-				selector = $or: [key: $nin: defaultKeys]
-				selector.$or.push {language: language} for language in [languages.default, languages.actual]
+				selector = $or: [
+					{language: languages.actual}
+					{language: languages.default, key: $nin: actualKeys}
+					{key: $nin: defaultKeys}
+				]
 
 				I18nEasyMessages.find selector
 
