@@ -1,13 +1,13 @@
 class I18nClient extends I18nBase
 
-	publish: ->
-		Meteor._debug "Calling publish client side has no effect"
+	publish: -> Meteor._debug "Calling publish client side has no effect"
 
 	subscribe: (options)->
 		defaultLanguage = options?.default
 		check defaultLanguage, String
 		@setDefault defaultLanguage
 		do @defaultSubscribe
+
 
 	defaultSubscribe: (options)->
 		check @getDefault(), String
@@ -28,6 +28,18 @@ class I18nClient extends I18nBase
 
 			Meteor.subscribe I18nBase.LANGUAGES_PUBLICATION
 		]
+
+
+	subscribeForTranslation: (options)->
+		subscriptions = @defaultSubscribe options
+		subscriptions.push(
+			Meteor.subscribe(
+				I18nBase.TRANSLATION_PUBLICATION
+				default: @getDefault()
+				actual: @getDefault()
+			)
+		)
+		subscriptions
 
 
 #==================================
