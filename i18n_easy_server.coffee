@@ -14,9 +14,18 @@ class I18nServer extends I18nBase
 			I18nBase.TRANSLATION_PUBLICATION
 			(languages)->
 				check languages, [String]
-				selector =
-					$or: []
+
+				defaultKeys = []
+
+				I18nEasyMessages.find(
+					{language: languages[0]}
+					{fields: key: yes}
+				)
+				.forEach (document)-> defaultKeys.push document.key
+
+				selector = $or: [key: $nin: defaultKeys]
 				selector.$or.push {language: language} for language in languages
+
 				I18nEasyMessages.find selector
 
 		)
