@@ -1,10 +1,21 @@
 templateName = 'i18n_easy_nav'
 
 Template[templateName].helpers {
-    activeLanguageClass: (language)-> 'active' if language is I18nEasy.getLanguage()
-    activeFlagClass: (language)-> if language is I18nEasy.getLanguage() then 'fa-flag' else 'fa-flag-o'
-	languages: -> do I18nEasy.getLanguages
-	notDefault: -> @.toString() isnt I18nEasy.getDefault()
+	languages: ->
+		do I18nEasy.getLanguages
+
+	activeLanguageClass: ->
+		'active' if @toString() is I18nEasy.getLanguage()
+
+	activeFlagClass: ->
+		switch @toString()
+			when I18nEasy.getDefault() then 'fa-flag-checkered'
+			when I18nEasy.getLanguage() then 'fa-flag'
+			else
+				'fa-flag-o'
+
+	default: ->
+		@toString() is I18nEasy.getDefault()
 }
 
 Template[templateName].events {
