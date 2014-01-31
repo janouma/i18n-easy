@@ -22,7 +22,6 @@ Package.on_use(function(api, where){
 	clientFiles.push('client/view/i18n_easy_translation.coffee');
 	clientFiles.push('client/view/i18n_easy_admin.html');
 	clientFiles.push('client/view/i18n_easy_admin.coffee');
-	clientFiles.push('public/img/noise.png');
 	clientFiles.push('client/stylesheets/style.css');
 	clientFiles.push('client/stylesheets/build-full-no-icons.min.css');
 

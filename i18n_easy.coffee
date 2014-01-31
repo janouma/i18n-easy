@@ -75,7 +75,7 @@ class @I18nBase
 						translation.plural.default = result.message[1] unless translation.plural.default
 					else
 						translation.singular.default = result.message
-						translation.plural.default = "#{result.message}s" unless translation.plural.default
+						translation.plural.default = "#{result.message}s" unless translation.plural.default or not result.message.length
 
 					translation.label = translation.singular.default if translation.singular.default
 

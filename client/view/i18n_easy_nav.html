@@ -18,11 +18,11 @@
 				</li>
                 {{/each}}
 				<li class="new-language-wrapper mll">
-					<input type="text" class="new-language text tiny-input spaced-letters lowercase fatty prn animated" maxlength="2">
+					<input type="text" class="new-language text tiny-input spaced-letters lowercase fatty prn pull-left animated" maxlength="2">
 					<a class="add-language phn pull-right animated"><i class="sign fa fa-plus-square"></i> <span class="legend mls">{{i18nDefault 'newLanguage'}}</span></a>
 				</li>
             </ul>
-			<div class="ask animated hidden">
+			<div class="ask up-triangle animated hidden">
 				<span class="button-group animated medium-shadow medium-radius">
 					<button class="confirm button icon-button active-button theme-ash color-lightmagenta capitalize small-shadow gradient animated"><i class="fa fa-check"></i> <strong class="prs">{{i18nDefault 'delete'}}</strong></button>
 					<button class="cancel button icon-button active-button theme-magenta color-bloodywhite capitalize small-shadow gradient animated"><strong class="pls">{{i18nDefault 'cancel'}}</strong> <i class="fa fa-times"></i></button>
@@ -30,9 +30,20 @@
 			</div>
             <div class="col width-fill mobile-width-fill">
                 <ul class="nav pull-right">
+					<li><a class="upload-link animated"><i class="upload-icon fa fa-upload"></i> {{i18nDefault 'import'}}</a></li>
 					<li><a class="animated" href="{{pathFor 'i18n_easy_translations'}}" target="_blank"><i class="fa fa-download"></i> {{i18nDefault 'export'}}</a></li>
                 </ul>
             </div>
+			<div class="upload-form up-triangle animated hidden">
+				<div class="panel gradient medium-shadow bran">
+					<div class="body bran">
+						<div class="cell">
+							<input type="file" id="import" accept="application/json" class="text medium-radius">
+							<button id="upload" class="button icon-button active-button capitalize theme-black color-lightmagenta animated"><i class="fa fa-upload"></i> <strong>{{i18nDefault 'upload'}}</strong></button>
+						</div>
+					</div>
+				</div>
+			</div>
         </div>
     </div>
 </template>

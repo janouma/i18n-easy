@@ -53,11 +53,12 @@ Template[templateName].events {
 		Meteor.clearTimeout template._toast
 		$ask = $(template.find '.ask')
 		$delete = $(e.target)
-		offset = $ask.offset()
+		$icon = $delete.siblings('.language-icon')
+		offset = $icon.offset()
 
 		$ask.offset(
-			top: offset.top
-			left: $delete.siblings('.language-icon').offset().left - $ask.width()/2 + 9
+			top: offset.top + $icon.height()
+			left: offset.left - $ask.width()/2 + 9
 		).removeClass 'hidden'
 
 		template._targetedLanguage = $delete.attr('data-language')
@@ -108,5 +109,16 @@ Template[templateName].events {
 
 						template._targetedLanguage = undefined
 			)
+
+	#==================================
+	'click .upload-link': (e, template)->
+		$uploadForm = $(template.find '.upload-form')
+		$uploadIcon = $(template.find '.upload-icon')
+		offset = $uploadIcon.offset()
+
+		$uploadForm.offset(
+			top: offset.top + $uploadIcon.height()
+			left: offset.left - $uploadForm.width()/2 + 8
+		).removeClass 'hidden'
 
 }
