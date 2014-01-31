@@ -78,7 +78,7 @@ Tinytest.add(
 
 		test.equal(
 			I18nEasy.getLanguages()
-			['fr', 'en']
+			['en','fr']
 		)
 )
 

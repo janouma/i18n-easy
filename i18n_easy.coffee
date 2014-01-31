@@ -164,6 +164,7 @@ class @I18nBase
 		I18nEasyMessages.find(
 			{}
 			fields: language: yes
+			sort: language: 1
 		).forEach (result)-> distinctLanguages.push result.language unless result.language in distinctLanguages
 
 		distinctLanguages
