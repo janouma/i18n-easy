@@ -294,7 +294,8 @@
     margin-top: 8px;
     margin-bottom: 8px; }
   .i18n-easy .site-body {
-    background-image: url(../../public/img/noise.png); }
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0) 66%, rgba(0, 0, 0, 0.2)), url(../../public/img/noise.png);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0) 66%, rgba(0, 0, 0, 0.2)), url(../../public/img/noise.png); }
   .i18n-easy .focus, .i18n-easy input[type=text]:focus,
   .i18n-easy textarea:focus {
     box-shadow: inset 0 0 4px rgba(170, 80, 147, 0.5);

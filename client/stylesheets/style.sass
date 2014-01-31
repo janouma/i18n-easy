@@ -14,7 +14,9 @@
 		margin-bottom: 8px
 
 	.site-body
-		background-image: url(../../public/img/noise.png)
+		$endswatch: rgba(#000, 0.2)
+		$middleswatch: rgba(#000, 0)
+		+background-image(linear-gradient(left, $endswatch, $middleswatch 33%, $middleswatch 66%, $endswatch), url(../../public/img/noise.png))
 
 	.focus
 		box-shadow: inset 0 0 4px rgba($magenta, 0.5)
