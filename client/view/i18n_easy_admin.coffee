@@ -49,7 +49,7 @@ Template[templateName].events {
 		else Alert.warning 'nothingToSave'
 
 	#==================================
-	'click #add': (e)->
+	'click #add:not(.disabled)': (e)->
 		do e.preventDefault
 
 		$newKeyInput = $('#newKey')
