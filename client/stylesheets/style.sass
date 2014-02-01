@@ -187,7 +187,8 @@
 				visibility: visible
 
 	.main-nav
-		.delete
+		.delete,
+		.delete-ghost
 			position: absolute
 			right: 0
 			top: 10px
@@ -197,7 +198,8 @@
 				opacity: 1
 				visibility: visible
 
-		.ask
+		.ask,
+		.ask-ghost
 			$border-color: lighten($magenta, 13%)
 			position: absolute
 			top: 0
@@ -209,12 +211,14 @@
 			&::before
 				border-bottom-color: $border-color
 
-	.upload-form
+	.upload-form,
+	.upload-form-ghost
 		position: absolute
 		top: 0
 		left: 0
 
-	.add-language
+	.add-language,
+	.add-language-ghost
 		margin-left: -18px
 		cursor: default
 
@@ -235,7 +239,8 @@
 		.legend
 			color: $dust
 
-	.new-language
+	.new-language,
+	.new-language-ghost
 		width: 35px
 		opacity: 0.15
 		font-size: 13px

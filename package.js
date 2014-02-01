@@ -17,6 +17,7 @@ Package.on_use(function(api, where){
 	clientFiles.push('client/view/i18n_easy_nav.html');
 	clientFiles.push('client/view/i18n_easy_nav.coffee');
 	clientFiles.push('client/view/i18n_easy_header.html');
+	clientFiles.push('client/view/i18n_easy_header.coffee');
 	clientFiles.push('client/view/i18n_easy_footer.html');
 	clientFiles.push('client/view/i18n_easy_layout.html');
 	clientFiles.push('client/view/i18n_easy_layout.coffee');

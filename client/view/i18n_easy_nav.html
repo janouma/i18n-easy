@@ -10,36 +10,36 @@
                 {{#each languages}}
                 <li class="{{activeLanguageClass}}">
 					<a class="animated" href="{{pathToLanguage this}}">
-						<i class="language-icon fa {{activeFlagClass}}"></i> {{i18nDefault this}}
+						<i class="language-icon{{ghostSuffix}} fa {{activeFlagClass}}"></i> {{i18nDefault this}}
 						{{#unless default}}
-						<i class="delete fa fa-trash-o animated z1 medium-radius color-red hidden" title="{{i18nDefault 'delete'}}" data-language="{{this}}"></i>
+						<i class="delete{{ghostSuffix}} fa fa-trash-o animated z1 medium-radius color-red hidden" title="{{i18nDefault 'delete'}}" data-language="{{this}}"></i>
 						{{/unless}}
 					</a>
 				</li>
                 {{/each}}
-				<li class="new-language-wrapper mll">
-					<input type="text" class="new-language text tiny-input spaced-letters lowercase fatty prn pull-left animated" maxlength="2">
-					<a class="add-language phn pull-right animated"><i class="sign fa fa-plus-square"></i> <span class="legend mls">{{i18nDefault 'newLanguage'}}</span></a>
+				<li class="new-language-wrapper{{ghostSuffix}} mll">
+					<input type="text" class="new-language{{ghostSuffix}} text tiny-input spaced-letters lowercase fatty prn pull-left animated" maxlength="2">
+					<a class="add-language{{ghostSuffix}} phn pull-right animated"><i class="sign fa fa-plus-square"></i> <span class="legend mls">{{i18nDefault 'newLanguage'}}</span></a>
 				</li>
             </ul>
-			<div class="ask up-triangle animated hidden">
+			<div class="ask{{ghostSuffix}} up-triangle animated hidden">
 				<span class="button-group animated medium-shadow medium-radius">
-					<button class="confirm button icon-button active-button theme-ash color-lightmagenta capitalize small-shadow gradient animated"><i class="fa fa-check"></i> <strong class="prs">{{i18nDefault 'delete'}}</strong></button>
-					<button class="cancel button icon-button active-button theme-magenta color-bloodywhite capitalize small-shadow gradient animated"><strong class="pls">{{i18nDefault 'cancel'}}</strong> <i class="fa fa-times"></i></button>
+					<button class="confirm{{ghostSuffix}} button icon-button active-button theme-ash color-lightmagenta capitalize small-shadow gradient animated"><i class="fa fa-check"></i> <strong class="prs">{{i18nDefault 'delete'}}</strong></button>
+					<button class="cancel{{ghostSuffix}} button icon-button active-button theme-magenta color-bloodywhite capitalize small-shadow gradient animated"><strong class="pls">{{i18nDefault 'cancel'}}</strong> <i class="fa fa-times"></i></button>
 				</span>
 			</div>
             <div class="col width-fill mobile-width-fill">
                 <ul class="nav pull-right">
-					<li><a class="upload-link animated"><i class="upload-icon fa fa-upload"></i> {{i18nDefault 'import'}}</a></li>
+					<li><a class="upload-link{{ghostSuffix}} animated"><i class="upload-icon{{ghostSuffix}} fa fa-upload"></i> {{i18nDefault 'import'}}</a></li>
 					<li><a class="animated" href="{{pathFor 'i18n_easy_translations'}}" target="_blank"><i class="fa fa-download"></i> {{i18nDefault 'export'}}</a></li>
                 </ul>
             </div>
-			<div class="upload-form up-triangle animated hidden">
+			<div class="upload-form{{ghostSuffix}} up-triangle animated hidden">
 				<div class="panel gradient medium-shadow bran">
 					<div class="body bran">
 						<div class="cell">
-							<input disabled type="file" accept="application/json" class="upload-input text medium-radius pull-right">
-							<button disabled class="upload-button button icon-button active-button capitalize theme-black color-lightmagenta pull-left animated"><i class="fa fa-upload"></i> <strong>{{i18nDefault 'upload'}}</strong></button>
+							<input disabled type="file" accept="application/json" class="upload-input{{ghostSuffix}} text medium-radius pull-right">
+							<button disabled class="upload-button{{ghostSuffix}} button icon-button active-button capitalize theme-black color-lightmagenta pull-left animated"><i class="fa fa-upload"></i> <strong>{{i18nDefault 'upload'}}</strong></button>
 						</div>
 					</div>
 				</div>

@@ -1,8 +1,9 @@
 <template name="i18n_easy_header">
     <div class="site-header-fixture background-transparent">
-        <div class="site-header-ghost background-transparent no-box-shadow">
-			{{!-- don't know the purpose of ghost header yet, so commented out for now --}}
-			{{!-- {{>i18n_easy_nav}} --}}
+        <div class="site-header-ghost">
+			{{#with ghost}}
+				{{>i18n_easy_nav}}
+			{{/with}}
         </div>
         <div class="site-header background-transparent gradient-deepspace no-box-shadow">
             {{>i18n_easy_nav}}

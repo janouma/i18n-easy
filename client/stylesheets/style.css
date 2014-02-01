@@ -433,29 +433,36 @@
   .i18n-easy [id^=translation_]:hover .delete {
     opacity: 1;
     visibility: visible; }
-  .i18n-easy .main-nav .delete {
+  .i18n-easy .main-nav .delete,
+  .i18n-easy .main-nav .delete-ghost {
     position: absolute;
     right: 0;
     top: 10px; }
   .i18n-easy .main-nav a:hover .delete {
     opacity: 1;
     visibility: visible; }
-  .i18n-easy .main-nav .ask {
+  .i18n-easy .main-nav .ask,
+  .i18n-easy .main-nav .ask-ghost {
     position: absolute;
     top: 0;
     left: 0; }
-    .i18n-easy .main-nav .ask > .button-group {
+    .i18n-easy .main-nav .ask > .button-group,
+    .i18n-easy .main-nav .ask-ghost > .button-group {
       border-color: #c17baf; }
-    .i18n-easy .main-nav .ask::before {
+    .i18n-easy .main-nav .ask::before,
+    .i18n-easy .main-nav .ask-ghost::before {
       border-bottom-color: #c17baf; }
-  .i18n-easy .upload-form {
+  .i18n-easy .upload-form,
+  .i18n-easy .upload-form-ghost {
     position: absolute;
     top: 0;
     left: 0; }
-  .i18n-easy .add-language {
+  .i18n-easy .add-language,
+  .i18n-easy .add-language-ghost {
     margin-left: -18px;
     cursor: default; }
-    .i18n-easy .add-language .sign {
+    .i18n-easy .add-language .sign,
+    .i18n-easy .add-language-ghost .sign {
       color: #dadada; }
   .i18n-easy .active .add-language {
     cursor: pointer; }
@@ -465,15 +472,25 @@
     opacity: 1; }
   .i18n-easy .new-language-wrapper:hover .legend {
     color: #707070; }
-  .i18n-easy .new-language {
+  .i18n-easy .new-language,
+  .i18n-easy .new-language-ghost {
     width: 35px;
     opacity: 0.15;
     font-size: 13px; }
-    .i18n-easy .new-language ~ a {
+    .i18n-easy .new-language ~ a,
+    .i18n-easy .new-language-ghost ~ a {
       opacity: 0.3; }
-    .i18n-easy .new-language:hover, .i18n-easy .new-language:focus, .i18n-easy .new-language:hover ~ a, .i18n-easy .new-language:focus ~ a {
+    .i18n-easy .new-language:hover, .i18n-easy .new-language:focus, .i18n-easy .new-language:hover ~ a, .i18n-easy .new-language:focus ~ a,
+    .i18n-easy .new-language-ghost:hover,
+    .i18n-easy .new-language-ghost:focus,
+    .i18n-easy .new-language-ghost:hover ~ a,
+    .i18n-easy .new-language-ghost:focus ~ a {
       opacity: 1; }
-      .i18n-easy .new-language:hover .legend, .i18n-easy .new-language:focus .legend, .i18n-easy .new-language:hover ~ a .legend, .i18n-easy .new-language:focus ~ a .legend {
+      .i18n-easy .new-language:hover .legend, .i18n-easy .new-language:focus .legend, .i18n-easy .new-language:hover ~ a .legend, .i18n-easy .new-language:focus ~ a .legend,
+      .i18n-easy .new-language-ghost:hover .legend,
+      .i18n-easy .new-language-ghost:focus .legend,
+      .i18n-easy .new-language-ghost:hover ~ a .legend,
+      .i18n-easy .new-language-ghost:focus ~ a .legend {
         color: #707070; }
   .i18n-easy #add {
     display: inline-block;
