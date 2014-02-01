@@ -50,7 +50,8 @@ Template[templateName].events {
 	'click .delete': (e, template)->
 		do e.preventDefault
 
-		Meteor.clearTimeout template._toast
+		template._toast ?= {}
+		Meteor.clearTimeout template._toast.delete
 		$ask = $(template.find '.ask')
 		$delete = $(e.target)
 		$icon = $delete.siblings('.language-icon')
@@ -64,7 +65,7 @@ Template[templateName].events {
 		template._targetedLanguage = $delete.attr('data-language')
 		template._cancel = no
 
-		template._toast = Meteor.setTimeout(
+		template._toast.delete = Meteor.setTimeout(
 			->
 				template._targetedLanguage = undefined
 				template._cancel = yes
@@ -79,7 +80,7 @@ Template[templateName].events {
 
 		template._targetedLanguage = undefined
 		template._cancel = yes
-		Meteor.clearTimeout template._toast
+		Meteor.clearTimeout template._toast?.delete
 		$(template.find('.ask')).addClass 'hidden'
 
 
@@ -112,6 +113,10 @@ Template[templateName].events {
 
 	#==================================
 	'click .upload-link': (e, template)->
+		do e.stopPropagation
+
+		template._toast ?= {}
+		Meteor.clearTimeout template._toast.upload
 		$uploadForm = $(template.find '.upload-form')
 		$uploadIcon = $(template.find '.upload-icon')
 		offset = $uploadIcon.offset()
@@ -120,5 +125,29 @@ Template[templateName].events {
 			top: offset.top + $uploadIcon.height()
 			left: offset.left - $uploadForm.width()/2 + 8
 		).removeClass 'hidden'
+
+		$(template.find '.upload-input').removeAttr 'disabled'
+		$(template.find '.upload-button').removeAttr 'disabled'
+
+		template._toast.upload = Meteor.setTimeout(
+			-> fadeUploadForm $uploadForm, template
+			5000
+		)
+
+	#==================================
+	'mouseleave .upload-form': (e, template)->
+		template._toast ?= {}
+		Meteor.clearTimeout template._toast.upload
+
+		template._toast.upload = Meteor.setTimeout(
+			-> fadeUploadForm $(e.target), template
+			5000
+		)
+
+	#==================================
+	'mouseenter .upload-form': (e, template)-> Meteor.clearTimeout template._toast?.upload
+
+	#==================================
+	'click .upload-form': (e)-> do e.stopPropagation
 
 }
