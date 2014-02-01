@@ -1,7 +1,5 @@
 class I18nClient extends I18nBase
 
-	publish: -> Meteor._debug "Calling publish client side has no effect"
-
 	subscribe: (options)->
 		defaultLanguage = options?.default
 		check defaultLanguage, String

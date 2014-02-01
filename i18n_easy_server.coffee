@@ -1,6 +1,5 @@
 class I18nServer extends I18nBase
 
-	#==================================
 	_mapAll = (translations)->
 		_addTranslation(language, messages) for language, messages of translations
 
@@ -97,16 +96,6 @@ class I18nServer extends I18nBase
 				@onStop -> do liveQuery.stop
 				@ready()
 		)
-
-	#==================================
-	subscribe: -> Meteor._debug "Calling subscribe server side has no effect"
-
-	#==================================
-	defaultSubscribe: -> Meteor._debug "Calling defaultSubscribe server side has no effect"
-
-	#==================================
-	subscribeForTranslation: -> Meteor._debug "Calling subscribeForTranslation server side has no effect"
-
 
 #==================================
 I18nEasy = new I18nServer()
