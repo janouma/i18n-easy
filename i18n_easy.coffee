@@ -36,22 +36,6 @@ class @I18nBase
 			_context.get _varName
 
 	#==================================
-	_mapAll = (translations)->
-		_addTranslation(language, messages) for language, messages of translations
-
-	#==================================
-	_addTranslation = (language, messages)->
-		for key, message of messages
-			I18nEasyMessages.upsert(
-					{
-						language: language
-						key: key
-					}
-				$set:
-					message: message
-			)
-
-	#==================================
 	_translations = ->
 		translations = {}
 		defaultLanguage = _defaultLanguage()
@@ -148,14 +132,6 @@ class @I18nBase
 	#==================================
 	getLanguage: ->
 		_language()
-
-	#==================================
-	map: (language, messages)->
-		_addTranslation language, messages
-
-	#==================================
-	mapAll: (translations)->
-		_mapAll translations
 
 	#==================================
 	getLanguages: ->

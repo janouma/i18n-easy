@@ -1,11 +1,5 @@
 @I18nEasyMessages = new Meteor.Collection 'i18n_easy_messages'
 
-permissions =
-    insert: -> validDocument
-    update: -> yes # TODO use permission function
-
-@I18nEasyMessages.allow permissions
-
 Meteor.methods {
 	i18nEasyAddKey: (newKey)->
 		check newKey, String

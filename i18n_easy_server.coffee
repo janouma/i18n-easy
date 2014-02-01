@@ -1,5 +1,30 @@
 class I18nServer extends I18nBase
 
+	#==================================
+	_mapAll = (translations)->
+		_addTranslation(language, messages) for language, messages of translations
+
+	#==================================
+	_addTranslation = (language, messages)->
+		for key, message of messages
+			I18nEasyMessages.upsert(
+				{
+					language: language
+					key: key
+				}
+				$set:
+					message: message
+			)
+
+	#==================================
+	map: (language, messages)->
+		_addTranslation language, messages
+
+	#==================================
+	mapAll: (translations)->
+		_mapAll translations
+
+	#==================================
 	publish: (options)->
 		initialTranslations = options?.translations
 		defaultLanguage = options?.default
@@ -73,11 +98,13 @@ class I18nServer extends I18nBase
 				@ready()
 		)
 
-
+	#==================================
 	subscribe: -> Meteor._debug "Calling subscribe server side has no effect"
 
+	#==================================
 	defaultSubscribe: -> Meteor._debug "Calling defaultSubscribe server side has no effect"
 
+	#==================================
 	subscribeForTranslation: -> Meteor._debug "Calling subscribeForTranslation server side has no effect"
 
 

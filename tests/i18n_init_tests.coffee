@@ -1,3 +1,8 @@
+I18nEasyMessages.allow {
+	insert: -> yes
+	update: -> yes
+}
+
 @fr = test_key: "test de clé"
 
 @en =
