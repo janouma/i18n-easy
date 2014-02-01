@@ -4,6 +4,7 @@ class @I18nBase
 	_prefix = 'i18n-easy-'
 	_defaultVarName = "#{_prefix}defaultLanguage"
 	_varName = "#{_prefix}language"
+	_writePermission = -> no
 
 	if Meteor.isClient
 		_context =
@@ -20,6 +21,9 @@ class @I18nBase
 
 			get: (varName)->
 				@[varName]
+
+	#==================================
+	_writeIsAllowed = (instance)-> _writePermission.call(instance)
 
 	#==================================
 	_defaultLanguage = (language)->
@@ -189,3 +193,21 @@ class @I18nBase
 
 	#==================================
 	prefix: (name)-> "#{_prefix}#{name}"
+
+	#==================================
+	checkWritePermissions: (details)->
+		unless _writeIsAllowed(@)
+			throw new Meteor.Error(
+				403
+				"write forbidden (set permissions properly through 'allowWrite' operation)"
+				details
+			)
+
+	#==================================
+	allowWrite: (writePermission)->
+		check(
+			writePermission
+			Match.Where (val)-> typeof val is 'function'
+		)
+
+		_writePermission = writePermission

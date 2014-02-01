@@ -97,5 +97,6 @@ class I18nServer extends I18nBase
 				@ready()
 		)
 
+
 #==================================
 I18nEasy = new I18nServer()

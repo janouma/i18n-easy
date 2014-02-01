@@ -2,6 +2,7 @@
 
 Meteor.methods {
 	i18nEasyAddKey: (newKey)->
+		do I18nEasy.checkWritePermissions
 		check newKey, String
 
 		if I18nEasyMessages.find(key: new RegExp("^#{newKey}$",'i')).count()
@@ -15,6 +16,7 @@ Meteor.methods {
 
 	#==================================
 	i18nEasySave: (translations)->
+		do I18nEasy.checkWritePermissions
 		check(
 			translations
 			[
@@ -32,11 +34,13 @@ Meteor.methods {
 
 	#==================================
 	i18nEasyRemoveKey: (key)->
+		do I18nEasy.checkWritePermissions
 		check key, String
 		Meteor._debug "#{I18nEasyMessages.remove key: key} translations of '#{key}' has been removed"
 
 	#==================================
 	i18nEasyAddLanguage: (newLanguage)->
+		do I18nEasy.checkWritePermissions
 		check newLanguage, String
 		lowerCaseLanguage  = newLanguage.toLowerCase()
 
@@ -51,6 +55,7 @@ Meteor.methods {
 
 	#==================================
 	i18nEasyRemoveLanguage: (language)->
+		do I18nEasy.checkWritePermissions
 		check(
 			language
 			Match.Where (value)->
