@@ -7,13 +7,15 @@ Package.on_use(function(api, where){
     api.use(['coffeescript', 'minimongo', 'mongo-livedata'], 'server');
     api.use('iron-router');
     
-    api.add_files(['i18n_easy.coffee', 'i18n_easy_permissions.coffee','collections/i18n_easy_messages.coffee']);
+    api.add_files(['i18n_easy.coffee', 'collections/i18n_easy_messages.coffee']);
 
 	var clientFiles = [];
 	clientFiles.push('i18n_easy_client.coffee');
 	clientFiles.push('i18n_easy_router.coffee');
 	clientFiles.push('client/helpers/alert.coffee');
 	clientFiles.push('client/helpers/upload.coffee');
+	clientFiles.push('client/view/i18n_easy_side_nav.html');
+	clientFiles.push('client/view/i18n_easy_side_nav.coffee');
 	clientFiles.push('client/view/i18n_easy_nav.html');
 	clientFiles.push('client/view/i18n_easy_nav.coffee');
 	clientFiles.push('client/view/i18n_easy_header.html');

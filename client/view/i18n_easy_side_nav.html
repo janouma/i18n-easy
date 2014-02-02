@@ -1,0 +1,18 @@
+<template name="i18n_easy_side_nav">
+	<div class="col width-fill mobile-width-fill">
+		<ul class="nav pull-right">
+			<li><a class="upload-link{{ghostSuffix}} animated"><i class="upload-icon{{ghostSuffix}} fa fa-upload"></i> {{i18nDefault 'import'}}</a></li>
+			<li><a class="animated" href="{{pathFor 'i18n_easy_translations'}}" target="_blank"><i class="fa fa-download"></i> {{i18nDefault 'export'}}</a></li>
+		</ul>
+	</div>
+	<div class="upload-form{{ghostSuffix}} up-triangle animated hidden">
+		<div class="panel gradient medium-shadow bran">
+			<div class="body bran">
+				<div class="cell">
+					<input disabled type="file" accept="application/json" class="upload-input{{ghostSuffix}} text medium-radius pull-right">
+					<button disabled class="upload-button{{ghostSuffix}} button icon-button active-button capitalize theme-black color-lightmagenta pull-left animated"><i class="fa fa-upload"></i> <strong>{{i18nDefault 'upload'}}</strong></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

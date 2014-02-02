@@ -19,7 +19,7 @@
                 {{/each}}
 				<li class="new-language-wrapper{{ghostSuffix}} mll">
 					<input type="text" class="new-language{{ghostSuffix}} text tiny-input spaced-letters lowercase fatty prn pull-left animated" maxlength="2">
-					<a class="add-language{{ghostSuffix}} phn pull-right animated"><i class="sign fa fa-plus-square"></i> <span class="legend mls">{{i18nDefault 'newLanguage'}}</span></a>
+					<a class="add-language{{ghostSuffix}} phn pull-right animated"><i class="sign fa fa-plus-circle"></i> <span class="legend mls">{{i18nDefault 'newLanguage'}}</span></a>
 				</li>
             </ul>
 			<div class="ask{{ghostSuffix}} up-triangle animated hidden">
@@ -28,22 +28,7 @@
 					<button class="cancel{{ghostSuffix}} button icon-button active-button theme-magenta color-bloodywhite capitalize small-shadow gradient animated"><strong class="pls">{{i18nDefault 'cancel'}}</strong> <i class="fa fa-times"></i></button>
 				</span>
 			</div>
-            <div class="col width-fill mobile-width-fill">
-                <ul class="nav pull-right">
-					<li><a class="upload-link{{ghostSuffix}} animated"><i class="upload-icon{{ghostSuffix}} fa fa-upload"></i> {{i18nDefault 'import'}}</a></li>
-					<li><a class="animated" href="{{pathFor 'i18n_easy_translations'}}" target="_blank"><i class="fa fa-download"></i> {{i18nDefault 'export'}}</a></li>
-                </ul>
-            </div>
-			<div class="upload-form{{ghostSuffix}} up-triangle animated hidden">
-				<div class="panel gradient medium-shadow bran">
-					<div class="body bran">
-						<div class="cell">
-							<input disabled type="file" accept="application/json" class="upload-input{{ghostSuffix}} text medium-radius pull-right">
-							<button disabled class="upload-button{{ghostSuffix}} button icon-button active-button capitalize theme-black color-lightmagenta pull-left animated"><i class="fa fa-upload"></i> <strong>{{i18nDefault 'upload'}}</strong></button>
-						</div>
-					</div>
-				</div>
-			</div>
+            {{>i18n_easy_side_nav}}
         </div>
     </div>
 </template>
