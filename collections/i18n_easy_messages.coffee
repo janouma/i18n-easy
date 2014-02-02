@@ -72,4 +72,11 @@ Meteor.methods {
 
 		Meteor._debug "#{documentsRemoved} translations in '#{language}' has been removed"
 
+	#==================================
+	I18nEasyImport: (translations)->
+		do I18nEasy.checkWritePermissions
+		check translations, String
+		imports = JSON.parse(translations)
+		I18nEasy.mapAll imports, overwrite: yes
+
 }

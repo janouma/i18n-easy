@@ -40,6 +40,9 @@ class I18nClient extends I18nBase
 		subscriptions
 
 
+	mapAll: -> Meteor._debug 'mapAll client simulation (no effect – usefull to remote method call)'
+
+
 #==================================
 I18nEasy = new I18nClient()
 

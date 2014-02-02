@@ -1,11 +1,20 @@
 class I18nServer extends I18nBase
 
-	_mapAll = (translations)->
-		_addTranslation(language, messages) for language, messages of translations
+	_mapAll = (translations, options)->
+		if options?.overwrite
+			imports = translations
+		else
+			imports = EJSON.clone translations
+			I18nEasyMessages.find().forEach (document)-> delete imports[document.language]?[document.key]
+
+		_addTranslation(language, messages) for language, messages of imports
+
 
 	#==================================
 	_addTranslation = (language, messages)->
+		missTranslatedPlurals = []
 		for key, message of messages
+			missTranslatedPlurals.push "#{key}s"
 			I18nEasyMessages.upsert(
 				{
 					language: language
@@ -15,13 +24,19 @@ class I18nServer extends I18nBase
 					message: message
 			)
 
+		I18nEasyMessages.remove {
+			key: $in: missTranslatedPlurals
+		}
+
 	#==================================
 	map: (language, messages)->
 		_addTranslation language, messages
 
 	#==================================
-	mapAll: (translations)->
-		_mapAll translations
+	mapAll: (translations, options)->
+		check translations, Object
+		check options, Match.Optional(Object)
+		_mapAll translations, options
 
 	#==================================
 	publish: (options)->
@@ -30,9 +45,7 @@ class I18nServer extends I18nBase
 		check defaultLanguage, String
 
 		@setDefault defaultLanguage
-
-		if initialTranslations and not I18nEasyMessages.find().count()
-			@mapAll initialTranslations
+		@mapAll initialTranslations
 
 		Meteor.publish(
 			I18nBase.TRANSLATION_PUBLICATION

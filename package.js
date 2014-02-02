@@ -13,7 +13,6 @@ Package.on_use(function(api, where){
 	clientFiles.push('i18n_easy_client.coffee');
 	clientFiles.push('i18n_easy_router.coffee');
 	clientFiles.push('client/helpers/alert.coffee');
-	clientFiles.push('client/helpers/upload.coffee');
 	clientFiles.push('client/view/i18n_easy_side_nav.html');
 	clientFiles.push('client/view/i18n_easy_side_nav.coffee');
 	clientFiles.push('client/view/i18n_easy_nav.html');
@@ -32,7 +31,7 @@ Package.on_use(function(api, where){
 
     api.add_files(clientFiles, 'client');
 
-    api.add_files(['i18n_easy_server.coffee', 'i18n_easy_router.coffee'], 'server');
+    api.add_files(['i18n_easy_server.coffee', 'server/i18n_easy_init.coffee', 'i18n_easy_router.coffee'], 'server');
     
     if (api.export) {
         api.export('I18nEasy');
