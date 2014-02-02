@@ -12,9 +12,9 @@ class I18nServer extends I18nBase
 
 	#==================================
 	_addTranslation = (language, messages)->
-		missTranslatedPlurals = []
+		mistranslatedPlurals = []
 		for key, message of messages
-			missTranslatedPlurals.push "#{key}s"
+			mistranslatedPlurals.push "#{key}s"
 			I18nEasyMessages.upsert(
 				{
 					language: language
@@ -25,7 +25,7 @@ class I18nServer extends I18nBase
 			)
 
 		I18nEasyMessages.remove {
-			key: $in: missTranslatedPlurals
+			key: $in: mistranslatedPlurals
 		}
 
 	#==================================

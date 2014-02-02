@@ -5,7 +5,9 @@ Meteor.methods {
 		do I18nEasy.checkWritePermissions
 		check newKey, String
 
-		if I18nEasyMessages.find(key: new RegExp("^#{newKey}$",'i')).count()
+		singularKey = newKey.replace(/s$/gi, '')
+
+		if I18nEasyMessages.find(key: new RegExp("^#{singularKey}s?$",'i')).count()
 			throw new Meteor.Error 409, "duplicated key '#{newKey}'"
 		else
 			I18nEasyMessages.insert(
