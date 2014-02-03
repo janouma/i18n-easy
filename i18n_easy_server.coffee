@@ -40,12 +40,10 @@ class I18nServer extends I18nBase
 
 	#==================================
 	publish: (options)->
-		initialTranslations = options?.translations
 		defaultLanguage = options?.default
 		check defaultLanguage, String
 
 		@setDefault defaultLanguage
-		@mapAll initialTranslations
 
 		Meteor.publish(
 			I18nBase.TRANSLATION_PUBLICATION
