@@ -32,6 +32,8 @@ Meteor.startup ->
 
 			upload: "upload"
 			wrongFileType: "wrong file type"
+			resourceForbidden: "access forbidden"
+			resourceForbiddenBody: "you are not allowed to access this resource"
 
 		fr:
 			add: "ajouter"
@@ -68,4 +70,6 @@ Meteor.startup ->
 
 			upload: "envoyer"
 			wrongFileType: "le fichier n'est pas du type attendu"
+			resourceForbidden: "accès non-autorisé"
+			resourceForbiddenBody: "vous n'êtes pas autorisé à accéder à cette ressource"
 	}

@@ -5,6 +5,7 @@
     "version": "0.1.0",
     "git": "https://github.com/janouma/i18n-easy.git",
     "packages": {
-		"font-awesome": "4.0.3"
+		"font-awesome": "4.0.3",
+		"iron-router-progress": {}
     }
 }

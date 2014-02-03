@@ -68,3 +68,5 @@ Handlebars.registerHelper(
             """
             "/#{language}"
 )
+
+Handlebars.registerHelper('ghost', -> ghostSuffix: '-ghost')

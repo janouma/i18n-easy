@@ -4,6 +4,7 @@
             <h2 class="capitalize color-magenta"><i class="fa fa-gears"></i> {{i18nDefault 'translationAdmin'}}</h2>
         </div>
     </div>
+	{{#if writeIsAllowed}}
     <div class="main-nav col width-fill mobile-width-fill">
         <div class="cell capitalize color-magenta">
             <ul class="col width-fit mobile-width-fit nav">
@@ -31,4 +32,5 @@
             {{>i18n_easy_side_nav}}
         </div>
     </div>
+	{{/if}}
 </template>

@@ -11,6 +11,11 @@ Router.map ->
 			if language and I18nEasy.getLanguage() isnt language
 				I18nEasy.setLanguage language
 
+			unless I18nEasy.writeIsAllowed()
+				do @stop
+				@render 'i18n_easy_forbidden'
+
+
 		waitOn: -> do I18nEasy.subscribeForTranslation
 	)
 

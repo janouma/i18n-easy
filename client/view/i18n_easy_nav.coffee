@@ -16,6 +16,8 @@ Template[templateName].helpers {
 
 	default: ->
 		@toString() is I18nEasy.getDefault()
+
+	writeIsAllowed: -> I18nEasy.writeIsAllowed()
 }
 
 Template[templateName].events {

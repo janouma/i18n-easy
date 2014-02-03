@@ -204,6 +204,9 @@ class @I18nBase
 			)
 
 	#==================================
+	writeIsAllowed: -> _writeIsAllowed(@)
+
+	#==================================
 	allowWrite: (writePermission)->
 		check(
 			writePermission

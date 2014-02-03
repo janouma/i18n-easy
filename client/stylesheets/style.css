@@ -294,6 +294,8 @@
     margin-left: 10px !important; }
   .i18n-easy .mll, .i18n-easy .mhl, .i18n-easy .mal {
     margin-left: 20px !important; }
+  .i18n-easy .fa.fa-10x {
+    font-size: 10em; }
   .i18n-easy .tiny-input {
     width: auto;
     height: 11px;
