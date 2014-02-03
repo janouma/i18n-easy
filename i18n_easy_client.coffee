@@ -52,21 +52,25 @@ Handlebars.registerHelper('translate', I18nEasy.translate)
 Handlebars.registerHelper('translatePlural', I18nEasy.translatePlural)
 Handlebars.registerHelper('i18nTranslations', I18nEasy.translations)
 Handlebars.registerHelper('i18nDefault', I18nEasy.i18nDefault)
-
-Handlebars.registerHelper(
-    'pathToLanguage'
-    (language)->
-        try
-            Router.current().route.path(language: language)
-        catch error
-            Meteor._debug """
-            Warning: #{error.message}
-             |_route: #{Router.current().route.name}
-             |_path: #{Router.current().path}
-             |_template: #{Router.current().template}
-             |_language: #{language}
-            """
-            "/#{language}"
-)
-
 Handlebars.registerHelper('ghost', -> ghostSuffix: '-ghost')
+
+ironRouterPackage = 'iron-router'
+
+if Package[ironRouterPackage]
+	Handlebars.registerHelper(
+		'pathToLanguage'
+		(language)->
+			try
+				Package[ironRouterPackage].Router.current().route.path(language: language)
+			catch error
+				Meteor._debug """
+				Warning: #{error.message}
+				 |_route: #{Package[ironRouterPackage].Router.current().route.name}
+				 |_path: #{Package[ironRouterPackage].Router.current().path}
+				 |_template: #{Package[ironRouterPackage].Router.current().template}
+				 |_language: #{language}
+				"""
+				"/#{language}"
+	)
+else
+	Meteor._debug 'To benefit from the "pathToLanguage" helper you need to install "iron-router" smart package (https://atmosphere.meteor.com/package/iron-router)'
