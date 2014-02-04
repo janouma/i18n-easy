@@ -2,8 +2,8 @@ class I18nClient extends I18nBase
 
 	subscribe: (options)->
 		defaultLanguage = options?.default
-		check defaultLanguage, String
-		@setDefault defaultLanguage
+		check defaultLanguage, Match.Optional(String)
+		@setDefault defaultLanguage if defaultLanguage?.length
 		do @defaultSubscribe
 
 
