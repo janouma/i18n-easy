@@ -16,7 +16,10 @@ class I18nServer extends I18nBase
 
 		for key, message of messages
 			if message?.constructor.name is 'Object'
-				_addTranslation language, message, key
+				if not section
+					_addTranslation language, message, key
+				else
+					Meteor._debug "sub sections are not allowed. #{section}/#{key} has been skipped"
 			else
 				mistranslatedPlurals.push "#{key}s"
 
