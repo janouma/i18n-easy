@@ -11,22 +11,30 @@ class I18nServer extends I18nBase
 
 
 	#==================================
-	_addTranslation = (language, messages)->
+	_addTranslation = (language, messages, section)->
 		mistranslatedPlurals = []
+
 		for key, message of messages
-			mistranslatedPlurals.push "#{key}s"
-			I18nEasyMessages.upsert(
-				{
+			if message?.constructor.name is 'Object'
+				_addTranslation language, message, key
+			else
+				mistranslatedPlurals.push "#{key}s"
+
+				selector = {
 					language: language
 					key: key
 				}
-				$set:
-					message: message
-			)
+				selector.section = section if section?.length
 
-		I18nEasyMessages.remove {
-			key: $in: mistranslatedPlurals
-		}
+				I18nEasyMessages.upsert(
+					selector
+					$set: message: message
+				)
+
+		if mistranslatedPlurals.length
+			I18nEasyMessages.remove {
+				key: $in: mistranslatedPlurals
+			}
 
 	#==================================
 	map: (language, messages)->
