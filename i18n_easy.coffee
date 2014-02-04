@@ -83,12 +83,20 @@ class @I18nBase
 			translation = I18nEasyMessages.findOne {
 				language: _language()
 				key: key
+				$or: [
+					{section: options?.section}
+					{section: $exists: no}
+				]
 			}
 
 		if options?.defaultLanguage or not translation and options?.useDefault isnt no
 			translation = I18nEasyMessages.findOne {
 				language: _defaultLanguage()
 				key: key
+				$or: [
+					{section: options?.section}
+					{section: $exists: no}
+				]
 			}
 
 		translation?.message
@@ -153,21 +161,30 @@ class @I18nBase
 	i18n: (key, options)=>
 		check key, String
 
-		message = _singularFor(key, options)
+		enhancedOptions = if typeof options is 'string' then section: options else options
+
+		message = _singularFor(key, enhancedOptions)
 		unless message
-			fallBack = "#{key}..." unless options?.fallBack is no
+			fallBack = "#{key}..." unless enhancedOptions?.fallBack is no
 			if /s$/i.test key
-				_pluralFor(key[0...key.length - 1], options) or fallBack
+				_pluralFor(key[0...key.length - 1], enhancedOptions) or fallBack
 			else
 				fallBack
 		else
 			message
 
 	#==================================
-	i18nDefault: (key)=>
+	i18nDefault: (key, options)=>
+		enhancedOptions = switch typeof options
+			when 'object' then EJSON.clone options
+			when 'string' then section: options
+			else {}
+
+		enhancedOptions.defaultLanguage = yes
+
 		@i18n(
 			key
-			defaultLanguage: yes
+			enhancedOptions
 		)
 
 	#==================================

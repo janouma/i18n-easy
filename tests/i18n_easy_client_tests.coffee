@@ -48,6 +48,98 @@ Tinytest.add(
 )
 
 Tinytest.add(
+	'section keys take precedence over global ones'
+		(test)->
+			do resetData
+
+			defaultLanguage = 'fr'
+			language = 'en'
+
+			I18nEasy.setDefault defaultLanguage
+			I18nEasy.setLanguage language
+			do Deps.flush
+
+			testKey = 'section_test_key'
+			globalDefaultValue = 'global test default value'
+			globalValue = 'global test value'
+			localDefaultValue = 'local test default value'
+			localValue = 'local test value'
+			section = 'test'
+
+			I18nEasyMessages.insert {
+				key: testKey
+				language: defaultLanguage
+				message: localDefaultValue
+				section: section
+			}
+
+			I18nEasyMessages.insert {
+				key: testKey
+				language: defaultLanguage
+				message: globalDefaultValue
+			}
+
+			I18nEasyMessages.insert {
+				key: testKey
+				language: language
+				message: localValue
+				section: section
+			}
+
+			I18nEasyMessages.insert {
+				key: testKey
+				language: language
+				message: globalValue
+			}
+
+
+			# actual
+
+			test.equal(
+				I18nEasy.i18n testKey
+				globalValue
+			)
+
+			test.equal(
+				I18nEasy.i18n testKey, section: 'unknown'
+				globalValue
+			)
+
+			test.equal(
+				I18nEasy.i18n testKey, section: section
+				localValue
+			)
+
+			test.equal(
+				I18nEasy.i18n testKey, section
+				localValue
+			)
+
+
+			# default
+
+			test.equal(
+				I18nEasy.i18nDefault testKey
+				globalDefaultValue
+			)
+
+			test.equal(
+				I18nEasy.i18nDefault testKey, section: 'unknown'
+				globalDefaultValue
+			)
+
+			test.equal(
+				I18nEasy.i18nDefault testKey, section: section
+				localDefaultValue
+			)
+
+			test.equal(
+				I18nEasy.i18nDefault testKey, section
+				localDefaultValue
+			)
+)
+
+Tinytest.add(
 	'pluralize works'
 	(test)->
 		do resetData
