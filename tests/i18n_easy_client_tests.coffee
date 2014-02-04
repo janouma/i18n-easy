@@ -140,6 +140,70 @@ Tinytest.add(
 )
 
 Tinytest.add(
+	'i18n uses current route name as "section" parameter'
+	(test)->
+		do resetData
+
+		defaultLanguage = 'fr'
+		language = 'en'
+
+		I18nEasy.setDefault defaultLanguage
+		I18nEasy.setLanguage language
+		do Deps.flush
+
+		testKey = 'route_test_key'
+		localDefaultValue = 'route test default value'
+		localValue = 'route test value'
+		route = 'route'
+
+		I18nEasyMessages.insert {
+			key: testKey
+			language: language
+			message: localValue
+			section: route
+		}
+
+		I18nEasyMessages.insert {
+			key: testKey
+			language: defaultLanguage
+			message: localDefaultValue
+			section: route
+		}
+
+		ironRouterPackage = 'iron-router'
+
+		if Package[ironRouterPackage]
+			OldRouter = Package[ironRouterPackage].Router
+		else
+			Package[ironRouterPackage] = {}
+
+		Package[ironRouterPackage].Router = current: ->
+			Meteor._debug "Calling mocked 'iron-router'"
+			route: name: route
+
+
+		# actual
+
+		test.equal(
+			I18nEasy.i18n testKey
+			localValue
+		)
+
+
+		# default
+
+		test.equal(
+			I18nEasy.i18nDefault testKey
+			localDefaultValue
+		)
+
+		if OldRouter
+			Package[ironRouterPackage].Router = OldRouter
+		else
+			delete Package[ironRouterPackage]
+)
+
+Tinytest.add(
 	'pluralize works'
 	(test)->
 		do resetData
