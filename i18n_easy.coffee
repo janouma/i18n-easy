@@ -40,13 +40,13 @@ class @I18nBase
 			_context.get _varName
 
 	#==================================
-	_translations = ->
+	_translations = (section)->
 		translations = {}
 		defaultLanguage = _defaultLanguage()
 		language = _language()
 
 		I18nEasyMessages.find(
-			{}
+			if section?.length then section: section else section: $exists: no
 			sort: key: 1
 		).forEach (result)->
 			if result.key
@@ -227,8 +227,7 @@ class @I18nBase
 		@translate "#{key}s"
 
 	#==================================
-	translations: =>
-		_translations()
+	translations: (section)=> _translations section
 
 	#==================================
 	prefix: (name)-> "#{_prefix}#{name}"
