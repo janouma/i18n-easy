@@ -121,6 +121,7 @@ class @I18nBase
 
 	@TRANSLATION_PUBLICATION: 'i18n-easy-translations'
 	@LANGUAGES_PUBLICATION: 'i18n-easy-languages'
+	@SECTIONS_PUBLICATION: 'i18n-easy-sections'
 
 	setDefault: (language)->
 		check language, String
@@ -156,6 +157,18 @@ class @I18nBase
 		).forEach (result)-> distinctLanguages.push result.language unless result.language in distinctLanguages
 
 		distinctLanguages
+
+	#==================================
+	getSections: ->
+		distinctSections = []
+
+		I18nEasyMessages.find(
+			{section: $exists: yes}
+			fields: section: yes
+			sort: section: 1
+		).forEach (result)-> distinctSections.push result.section unless result.section in distinctSections
+
+		distinctSections
 
 	#==================================
 	i18n: (key, options)=>

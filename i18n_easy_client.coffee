@@ -1,5 +1,14 @@
 class I18nClient extends I18nBase
 
+	_checkCallbacks = (options = {})->
+		OptionalFunction = Match.Optional(
+			Match.Where (val)-> typeof val is 'function'
+		)
+		check options.translationsReady, OptionalFunction
+		check options.languagesReady, OptionalFunction
+		check options.sectionsReady, OptionalFunction
+
+
 	subscribe: (options)->
 		defaultLanguage = options?.default
 		check defaultLanguage, Match.Optional(String)
@@ -9,33 +18,36 @@ class I18nClient extends I18nBase
 
 	defaultSubscribe: (options)->
 		check @getDefault(), String
-
-		OptionalFunction = Match.Optional(
-			Match.Where (val)-> typeof val is 'function'
-		)
-
-		ready = options?.ready
-		check ready, OptionalFunction
+		_checkCallbacks options
 
 		[
 			Meteor.subscribe(
 				I18nBase.TRANSLATION_PUBLICATION
 				{default: @getDefault(), actual: @getLanguage()}
-				ready
+				options?.translationsReady
 			)
 
-			Meteor.subscribe I18nBase.LANGUAGES_PUBLICATION
+			Meteor.subscribe(
+				I18nBase.LANGUAGES_PUBLICATION
+				options?.languagesReady
+			)
 		]
 
 
 	subscribeForTranslation: (options)->
+		_checkCallbacks options
+
 		subscriptions = @defaultSubscribe options
 		subscriptions.push(
 			Meteor.subscribe(
 				I18nBase.TRANSLATION_PUBLICATION
-				default: @getDefault()
-				actual: @getDefault()
+				{default: @getDefault(), actual: @getDefault()}
+				options?.translationsReady
 			)
+		)
+		subscriptions.push(
+			Meteor.subscribe I18nBase.SECTIONS_PUBLICATION
+			options?.sectionsReady
 		)
 		subscriptions
 

@@ -119,5 +119,43 @@ class I18nServer extends I18nBase
 		)
 
 
+		Meteor.publish(
+			I18nBase.SECTIONS_PUBLICATION
+			->
+				distinctSections = {}
+
+				liveQuery = I18nEasyMessages.find(
+					{section: $exists: yes}
+					{fields: section: yes}
+				).observe {
+					added: (section)=>
+						if distinctSections[section.section]
+							distinctSections[section.section].count++
+						else
+							@added(
+								I18nEasyMessages._name
+								section._id
+								section
+							)
+							distinctSections[section.section] =
+								count: 1
+								document: section
+
+					removed: (section)=>
+						distinctSections[section.section].count--
+
+						unless distinctSections[section.section].count
+							@removed(
+								I18nEasyMessages._name
+								distinctSections[section.section].document._id
+							)
+							delete distinctSections[section.section]
+				}
+
+				@onStop -> do liveQuery.stop
+				@ready()
+		)
+
+
 #==================================
 I18nEasy = new I18nServer()
