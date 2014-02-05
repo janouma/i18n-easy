@@ -86,32 +86,29 @@ class I18nServer extends I18nBase
 			->
 				distinctLanguages = {}
 
-				liveQuery = I18nEasyMessages.find(
-					{}
-					{fields: language: yes}
-				).observe {
-					added: (language)=>
-						if distinctLanguages[language.language]
-							distinctLanguages[language.language].count++
+				liveQuery = I18nEasyMessages.find().observe {
+					added: (document)=>
+						if distinctLanguages[document.language]
+							distinctLanguages[document.language].count++
 						else
 							@added(
 								I18nEasyMessages._name
-								language._id
-								language
+								document._id
+								document
 							)
-							distinctLanguages[language.language] =
+							distinctLanguages[document.language] =
 								count: 1
-								document: language
+								document: document
 
-					removed: (language)=>
-						distinctLanguages[language.language].count--
+					removed: (document)=>
+						distinctLanguages[document.language].count--
 
-						unless distinctLanguages[language.language].count
+						unless distinctLanguages[document.language].count
 							@removed(
 								I18nEasyMessages._name
-								distinctLanguages[language.language].document._id
+								distinctLanguages[document.language].document._id
 							)
-							delete distinctLanguages[language.language]
+							delete distinctLanguages[document.language]
 				}
 
 				@onStop -> do liveQuery.stop
@@ -126,30 +123,29 @@ class I18nServer extends I18nBase
 
 				liveQuery = I18nEasyMessages.find(
 					{section: $exists: yes}
-					{fields: section: yes}
 				).observe {
-					added: (section)=>
-						if distinctSections[section.section]
-							distinctSections[section.section].count++
+					added: (document)=>
+						if distinctSections[document.section]
+							distinctSections[document.section].count++
 						else
 							@added(
 								I18nEasyMessages._name
-								section._id
-								section
+								document._id
+								document
 							)
-							distinctSections[section.section] =
+							distinctSections[document.section] =
 								count: 1
-								document: section
+								document: document
 
-					removed: (section)=>
-						distinctSections[section.section].count--
+					removed: (document)=>
+						distinctSections[document.section].count--
 
-						unless distinctSections[section.section].count
+						unless distinctSections[document.section].count
 							@removed(
 								I18nEasyMessages._name
-								distinctSections[section.section].document._id
+								distinctSections[document.section].document._id
 							)
-							delete distinctSections[section.section]
+							delete distinctSections[document.section]
 				}
 
 				@onStop -> do liveQuery.stop
