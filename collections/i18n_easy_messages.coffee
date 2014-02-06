@@ -25,13 +25,26 @@ Meteor.methods {
 				language: String
 				key: String
 				message: Match.OneOf(String, [String])
+				section: Match.Optional(String)
 			]
 		)
 
 		for translation in translations
+			selector = {key: translation.key, language: translation.language}
+
+			newTranslation =
+				key: translation.key
+				message: translation.message
+				language: translation.language
+
+			if translation.section?.length
+				newTranslation.section = selector.section = translation.section
+			else
+				selector.section = $exists: no
+
 			I18nEasyMessages.upsert(
-				{key: translation.key, language: translation.language}
-				{$set: message: translation.message}
+				selector
+				newTranslation
 			)
 
 	#==================================
