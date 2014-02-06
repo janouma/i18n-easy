@@ -27,11 +27,20 @@ class I18nServer extends I18nBase
 					language: language
 					key: key
 				}
-				selector.section = section if section?.length
+
+				translation =
+					key: key
+					message: message
+					language: language
+
+				if section?.length
+					translation.section = selector.section = section
+				else
+					selector.section = $exists: no
 
 				I18nEasyMessages.upsert(
 					selector
-					$set: message: message
+					translation
 				)
 
 		if mistranslatedPlurals.length
@@ -62,23 +71,37 @@ class I18nServer extends I18nBase
 					languages
 					default: String
 					actual: String
+					sections: Match.Optional([String])
 				)
 
 				defaultKeys = []
 				actualKeys = []
 
-				I18nEasyMessages.find(language: $in: [languages.default, languages.actual]).forEach (document)->
+				sectionsCriteria = []
+				sectionsCriteria.push(section: $in: languages.sections) if languages.sections
+				sectionsCriteria.push(section: $exists: no)
+
+				I18nEasyMessages.find({
+					language: $in: [languages.default, languages.actual]
+					$or: sectionsCriteria
+				}).forEach (document)->
 					defaultKeys.push(document.key) if document.language is languages.default
 					actualKeys.push(document.key) if document.language is languages.actual
 
 				selector = $or: [
-					{language: languages.actual}
-					{language: languages.default, key: $nin: actualKeys}
-					{key: $nin: defaultKeys}
+					{language: languages.actual, $or: sectionsCriteria}
+					{
+						language: languages.default
+						key: $nin: actualKeys
+						$or: sectionsCriteria
+					}
+					{
+						key: $nin: defaultKeys
+						$or: sectionsCriteria
+					}
 				]
 
 				I18nEasyMessages.find selector
-
 		)
 
 		Meteor.publish(
@@ -114,7 +137,6 @@ class I18nServer extends I18nBase
 				@onStop -> do liveQuery.stop
 				@ready()
 		)
-
 
 		Meteor.publish(
 			I18nBase.SECTIONS_PUBLICATION

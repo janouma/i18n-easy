@@ -8,6 +8,13 @@ class I18nClient extends I18nBase
 		check options.languagesReady, OptionalFunction
 		check options.sectionsReady, OptionalFunction
 
+	_checkSections = (options = {})->
+		if options.sections
+			check options.sections, [String]
+			options.sections
+		else
+			[Package[ironRouterPackage].Router.current().route.name] if Package[ironRouterPackage]
+
 
 	subscribe: (options)->
 		defaultLanguage = options?.default
@@ -19,11 +26,12 @@ class I18nClient extends I18nBase
 	defaultSubscribe: (options)->
 		check @getDefault(), String
 		_checkCallbacks options
+		sections = _checkSections options
 
 		[
 			Meteor.subscribe(
 				I18nBase.TRANSLATION_PUBLICATION
-				{default: @getDefault(), actual: @getLanguage()}
+				{default: @getDefault(), actual: @getLanguage(), sections: sections}
 				options?.translationsReady
 			)
 
@@ -36,12 +44,13 @@ class I18nClient extends I18nBase
 
 	subscribeForTranslation: (options)->
 		_checkCallbacks options
+		sections = _checkSections options
 
 		subscriptions = @defaultSubscribe options
 		subscriptions.push(
 			Meteor.subscribe(
 				I18nBase.TRANSLATION_PUBLICATION
-				{default: @getDefault(), actual: @getDefault()}
+				{default: @getDefault(), actual: @getDefault(), sections: sections}
 				options?.translationsReady
 			)
 		)
