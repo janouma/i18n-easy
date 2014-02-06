@@ -1,3 +1,5 @@
+ironRouterPackage = 'iron-router'
+
 class I18nClient extends I18nBase
 
 	_checkCallbacks = (options = {})->
@@ -73,8 +75,6 @@ Handlebars.registerHelper('translate', I18nEasy.translate)
 Handlebars.registerHelper('translatePlural', I18nEasy.translatePlural)
 Handlebars.registerHelper('i18nDefault', I18nEasy.i18nDefault)
 Handlebars.registerHelper('ghost', -> ghostSuffix: '-ghost')
-
-ironRouterPackage = 'iron-router'
 
 if Package[ironRouterPackage]
 	Handlebars.registerHelper(
