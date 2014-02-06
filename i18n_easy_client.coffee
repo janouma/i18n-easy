@@ -63,7 +63,7 @@ class I18nClient extends I18nBase
 		subscriptions
 
 
-	mapAll: -> Meteor._debug 'mapAll client simulation (no effect – usefull to remote method call)'
+	mapAll: -> Meteor._debug 'mapAll client simulation (no effect – usefull for remote method call)'
 
 
 #==================================
@@ -81,7 +81,12 @@ if Package[ironRouterPackage]
 		'pathToLanguage'
 		(language)->
 			try
-				Package[ironRouterPackage].Router.current().route.path(language: language)
+				parameters = language: language
+
+				if Package[ironRouterPackage].Router.current().params.section
+					parameters.section = Package[ironRouterPackage].Router.current().params.section
+
+				Package[ironRouterPackage].Router.current().route.path(parameters)
 			catch error
 				Meteor._debug """
 				Warning: #{error.message}
