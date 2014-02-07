@@ -60,10 +60,15 @@ Meteor.methods {
 			)
 
 	#==================================
-	i18nEasyRemoveKey: (key)->
+	i18nEasyRemoveKey: (key, section)->
 		do I18nEasy.checkWritePermissions
 		check key, String
-		Meteor._debug "#{I18nEasyMessages.remove key: key} translations of '#{key}' has been removed"
+		check section, Match.Optional(String)
+
+		selector = key: key
+		selector.section = section if section
+
+		Meteor._debug "#{I18nEasyMessages.remove selector} translations of #{if section then "#{section}/" else ''}'#{key}' has been removed"
 
 	#==================================
 	i18nEasyAddLanguage: (newLanguage)->
