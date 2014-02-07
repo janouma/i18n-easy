@@ -18,6 +18,12 @@ Meteor.methods {
 
 	#==================================
 	i18nEasySave: (translations)->
+
+		###DEBUG
+		Meteor._debug 'Calling "i18nEasySave" with:'
+		Meteor._debug translations
+		###
+
 		do I18nEasy.checkWritePermissions
 		check(
 			translations

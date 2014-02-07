@@ -45,17 +45,18 @@ class @I18nBase
 		defaultLanguage = _defaultLanguage()
 		language = _language()
 
-		I18nEasyMessages.find(
-			if section?.length then section: section else section: $exists: no
-			sort: key: 1
-		).forEach (result)->
+		addTranslation = (result)->
+
+			###DEBUG
+			Meteor._debug "fetching translation (#{result.language})(#{result.section}) '#{result.key}': '#{result.message}'"
+			###
+
 			if result.key
-				translation =
-					translations[result.key] ?=
-						key: result.key
-						label: "{{#{result.key}}}"
-						singular: {}
-						plural: {}
+				translation = translations[result.key] ?=
+					key: result.key
+					label: "{{#{result.key}}}"
+					singular: {}
+					plural: {}
 
 				if result.language is defaultLanguage
 					if result.message.constructor.name is 'Array'
@@ -74,6 +75,27 @@ class @I18nBase
 						translation.plural.default = "#{result.message}s" if result.message?.length
 						[result.message, undefined]
 
+
+		cursor = I18nEasyMessages.find(
+			if section?.length then section: section else section: $exists: no
+			sort: key: 1
+		)
+
+		###DEBUG
+		cursor.observeChanges {
+			added: (id, fields) ->
+				fieldsDebug = ("\t#{prop}: #{val}" for prop, val of fields).join('\n')
+				Meteor._debug "added (#{id}) {\n#{fieldsDebug}\n}"
+
+			changed: (id, fields) ->
+				fieldsDebug = ("\t#{prop}: #{val}" for prop, val of fields).join('\n')
+				Meteor._debug "changed (#{id}) {\n{#{fieldsDebug}\n}"
+
+			removed: (id) -> Meteor._debug "removed (#{id})"
+		}
+		###
+
+		cursor.forEach addTranslation
 
 		translation for key, translation of translations
 
