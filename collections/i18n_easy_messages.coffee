@@ -1,20 +1,26 @@
 @I18nEasyMessages = new Meteor.Collection 'i18n_easy_messages'
 
 Meteor.methods {
-	i18nEasyAddKey: (newKey)->
+	i18nEasyAddKey: (newKey, section)->
 		do I18nEasy.checkWritePermissions
 		check newKey, String
+		check section, Match.Optional(String)
 
 		singularKey = newKey.replace(/s$/gi, '')
 
-		if I18nEasyMessages.find(key: new RegExp("^#{singularKey}s?$",'i')).count()
+		selector = key: new RegExp("^#{singularKey}s?$",'i')
+
+		translation =
+			key: newKey
+			language: I18nEasy.getDefault()
+			message: ''
+
+		translation.section = selector.section = section if section
+
+		if I18nEasyMessages.findOne selector
 			throw new Meteor.Error 409, "duplicated key '#{newKey}'"
 		else
-			I18nEasyMessages.insert(
-				key: newKey
-				language: I18nEasy.getDefault()
-				message: ''
-			)
+			I18nEasyMessages.insert translation
 
 	#==================================
 	i18nEasySave: (translations)->
