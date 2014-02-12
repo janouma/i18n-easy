@@ -111,4 +111,17 @@ Meteor.methods {
 		imports = JSON.parse(translations)
 		I18nEasy.mapAll imports, overwrite: yes
 
+	#==================================
+	i18nEasyRemoveSection: (section)->
+		do I18nEasy.checkWritePermissions
+		check(
+			section
+			Match.Where (value)->
+				check value, String
+				value isnt 'i18n_easy_admin'
+		)
+
+		documentsRemoved = I18nEasyMessages.remove section: section
+		Meteor._debug "#{documentsRemoved} translations in '#{section}' has been removed"
+
 }
