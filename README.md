@@ -206,19 +206,19 @@ Request translation in the default language.
 
 **parameter**: key **[String]**
 
-##### <a name="translate"></a> *translate*
+#### <a name="translate"></a> *translate*
 
 Request a translation in the current language. The difference with *i18n*, is that *translate* doesn't have any default behavior: indeed when no translation is found, undefined is returned.
 
 **parameter**: key **[String]**
 
-##### <a name="translatePlural"></a> *translatePlural*
+#### <a name="translatePlural"></a> *translatePlural*
 
 Same as *translate* for the plural version.
 
 **parameter**: key **[String]**
 
-##### *pathToLanguage – only when "iron-router" package is installed*
+#### *pathToLanguage – only when "iron-router" package is installed*
 
 Gives you the path to the current route translated to the given language.
 
