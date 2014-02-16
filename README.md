@@ -245,21 +245,21 @@ Gives you the path to the current route translated to the given language.
 - **i18ns ( key [String], options [Object] )** *– See [helpers](#i18ns)*
 - **translate ( key [String] )** *– See [helpers](#translate)*
 - **translatePlural ( key [String] )** *– See [helpers](#translatePlural)*
-- **translations ( section [String] )** *– Return all available translations in both default and actual language (usefull for **[I18n easy admin][admin]**). When section parameter is provided, returned translations are restricted to the given section*
+- **translations ( section [String] )** *– Return all available translations in both default and actual language (usefull for [I18n easy admin][admin]). When section parameter is provided, returned translations are restricted to the given section*
 - **allowWrite ( writePermission [Function] )** *– Set write permission for translations (see [Setup / Secutity](#allowWrite))*
-- **writeIsAllowed ( ) ** *– Check if translation update is authorized according to the `writePermission` set via the [`allowWrite`](#allowWrite) API*
+- **writeIsAllowed ( )** *– Check if translation update is authorized according to the `writePermission` set via the [`allowWrite`](#allowWrite) API*
 
 #### Client
 
-- <a name="subscribe"></a>**subscribe ( options [Object] ) ** *– Subscribe to translations*
+- <a name="subscribe"></a>**subscribe ( options [Object] )** *– Subscribe to translations*
 	- **options**
 		- **default [String]** *– Subscribe to the given language after setting it as the default one*
 		- **actual [String]** *– Subscribe to the given language as the actually selected one*
 		- **sections [String array]** *– Subscribe only to translations pertaining the the given sections and the global ones (meaning those not attached to any section)*
 
-- **defaultSubscribe ( options [Object] ) ** *– Subscribe to both languages set as default and actual language. See subscribe for options, remember though that "default" and "actual" options will be ignored*
+- **defaultSubscribe ( options [Object] )** *– Subscribe to both languages set as default and actual language. See subscribe for options, remember though that "default" and "actual" options will be ignored*
 
-- **subscribeForTranslation ( options [Object] ) ** *– Same as `subscribe ( options [Object] )` + subscribe to ALL translations both in default and actual languages (see [Setting publications and subscriptions / notes](#publications_notes). Usefull for [I18n easy admin][admin])*
+- **subscribeForTranslation ( options [Object] )** *– Same as `subscribe ( options [Object] )` + subscribe to ALL translations both in default and actual languages (see [Setting publications and subscriptions / notes](#publications_notes). Usefull for [I18n easy admin][admin])*
 
 #### Server
 
@@ -282,7 +282,7 @@ Gives you the path to the current route translated to the given language.
 
 - **i18nEasyAddKey ( key [String], section [String] *(optional)* )** *– Add the key with a blank translation (an empty string) to the current language. If section parameter is present, the key is added solely in this section.*
 
-- **i18nEasySave ( translations [Object array] ) ** *– Add / update the given translations*
+- **i18nEasySave ( translations [Object array] )** *– Add / update the given translations*
 	- **translation item**
 	
 		`{language: [String], key: [String], message: [String]|[String array], section: [String] (optional)}`
