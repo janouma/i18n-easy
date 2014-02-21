@@ -113,7 +113,7 @@ class @I18nBase
 				]
 			}).forEach (document)->
 				translation = {message: document.message} if document.section is options?.section and document.message?.length
-				translation = {message: document.message} unless translation and document.message?.length is 0
+				translation = {message: document.message} unless translation or document.message?.length is 0
 
 		if options?.defaultLanguage or not translation and options?.useDefault isnt no
 			translation = I18nEasyMessages.findOne {
