@@ -101,15 +101,19 @@ class @I18nBase
 
 	#==================================
 	_translationFor = (key, options)->
+		translation = undefined
+
 		if options?.defaultLanguage isnt yes
-			translation = I18nEasyMessages.findOne {
+			I18nEasyMessages.find({
 				language: _language()
 				key: key
 				$or: [
 					{section: options?.section}
 					{section: $exists: no}
 				]
-			}
+			}).forEach (document)->
+				translation = {message: document.message} if document.section is options?.section and document.message?.length
+				translation = {message: document.message} unless translation and document.message?.length is 0
 
 		if options?.defaultLanguage or not translation and options?.useDefault isnt no
 			translation = I18nEasyMessages.findOne {
@@ -199,7 +203,7 @@ class @I18nBase
 		enhancedOptions = if typeof options is 'string' then section: options else options
 
 		ironRouterPackage = 'iron-router'
-		unless not Package[ironRouterPackage] or enhancedOptions?.section
+		unless not (Package[ironRouterPackage] and Package[ironRouterPackage].Router.current()) or enhancedOptions?.section
 			if enhancedOptions and enhancedOptions is options
 				enhancedOptions = EJSON.clone options
 			else

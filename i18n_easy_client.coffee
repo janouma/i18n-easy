@@ -15,7 +15,7 @@ class I18nClient extends I18nBase
 			check options.sections, [String]
 			options.sections
 		else
-			[Package[ironRouterPackage].Router.current().route.name] if Package[ironRouterPackage]
+			[Package[ironRouterPackage].Router.current().route.name] if Package[ironRouterPackage] and Package[ironRouterPackage].Router.current()
 
 
 	subscribe: (options)->
@@ -76,10 +76,10 @@ Handlebars.registerHelper('translatePlural', I18nEasy.translatePlural)
 Handlebars.registerHelper('i18nDefault', I18nEasy.i18nDefault)
 Handlebars.registerHelper('ghost', -> ghostSuffix: '-ghost')
 
-if Package[ironRouterPackage]
-	Handlebars.registerHelper(
-		'pathToLanguage'
-		(language)->
+Handlebars.registerHelper(
+	'pathToLanguage'
+	(language)->
+		if Package[ironRouterPackage]
 			try
 				parameters = language: language
 
@@ -96,6 +96,6 @@ if Package[ironRouterPackage]
 				 |_language: #{language}
 				"""
 				"/#{language}"
-	)
-else
-	Meteor._debug 'To benefit from the "pathToLanguage" helper you need to install "iron-router" smart package (https://atmosphere.meteor.com/package/iron-router)'
+		else
+			Meteor._debug 'To benefit from the "pathToLanguage" helper you need to install "iron-router" smart package (https://atmosphere.meteor.com/package/iron-router)'
+)
