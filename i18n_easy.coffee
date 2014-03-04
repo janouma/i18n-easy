@@ -203,7 +203,7 @@ class @I18nBase
 		enhancedOptions = if typeof options is 'string' then section: options else options
 
 		ironRouterPackage = 'iron-router'
-		unless not (Package[ironRouterPackage] and Package[ironRouterPackage].Router.current()) or enhancedOptions?.section
+		unless Meteor.isServer or not (Package[ironRouterPackage] and Package[ironRouterPackage].Router.current()) or enhancedOptions?.section
 			if enhancedOptions and enhancedOptions is options
 				enhancedOptions = EJSON.clone options
 			else
