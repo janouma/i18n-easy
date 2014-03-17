@@ -15,7 +15,10 @@ Meteor.methods {
 			language: I18nEasy.getDefault()
 			message: ''
 
-		translation.section = selector.section = section if section
+		if section
+			translation.section = selector.section = section
+		else
+			selector.section = $exists: no
 
 		if I18nEasyMessages.findOne selector
 			throw new Meteor.Error 409, "duplicated key '#{newKey}'"
@@ -66,7 +69,11 @@ Meteor.methods {
 		check section, Match.Optional(String)
 
 		selector = key: key
-		selector.section = section if section
+
+		if section
+			selector.section = section
+		else
+			selector.section = $exists: no
 
 		Meteor._debug "#{I18nEasyMessages.remove selector} translations of #{if section then "#{section}/" else ''}'#{key}' has been removed"
 

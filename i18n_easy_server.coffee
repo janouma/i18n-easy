@@ -5,7 +5,11 @@ class I18nServer extends I18nBase
 			imports = translations
 		else
 			imports = EJSON.clone translations
-			I18nEasyMessages.find().forEach (document)-> delete imports[document.language]?[document.key]
+			I18nEasyMessages.find().forEach (document)->
+				if document.section
+					delete imports[document.language]?[document.section]?[document.key]
+				else
+					delete imports[document.language]?[document.key]
 
 		_addTranslation(language, messages) for language, messages of imports
 

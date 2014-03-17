@@ -2,7 +2,7 @@
 
 [admin]: https://github.com/janouma/i18n-easy-admin
 
-*version: 0.1.2*
+*version: 0.1.3*
 
 **I18n easy** provide a simple way to add i18n feature to your meteor app.
 
