@@ -69,30 +69,29 @@ class I18nClient extends I18nBase
 #==================================
 I18nEasy = new I18nClient()
 
-Handlebars.registerHelper('i18n', I18nEasy.i18n)
-Handlebars.registerHelper('i18ns', I18nEasy.i18ns)
-Handlebars.registerHelper('translate', I18nEasy.translate)
-Handlebars.registerHelper('translatePlural', I18nEasy.translatePlural)
-Handlebars.registerHelper('i18nDefault', I18nEasy.i18nDefault)
-Handlebars.registerHelper('ghost', -> ghostSuffix: '-ghost')
+UI.registerHelper('i18n', I18nEasy.i18n)
+UI.registerHelper('i18ns', I18nEasy.i18ns)
+UI.registerHelper('translate', I18nEasy.translate)
+UI.registerHelper('translatePlural', I18nEasy.translatePlural)
+UI.registerHelper('i18nDefault', I18nEasy.i18nDefault)
+UI.registerHelper('ghost', -> ghostSuffix: '-ghost')
 
-Handlebars.registerHelper(
+UI.registerHelper(
 	'pathToLanguage'
 	(language)->
 		if Package[ironRouterPackage]
 			try
 				parameters = language: language
 
-				if Package[ironRouterPackage].Router.current().params.section
+				if Package[ironRouterPackage].Router.current()?.params.section
 					parameters.section = Package[ironRouterPackage].Router.current().params.section
 
-				Package[ironRouterPackage].Router.current().route.path(parameters)
+				Package[ironRouterPackage].Router.current()?.route.path(parameters)
 			catch error
 				Meteor._debug """
 				Warning: #{error.message}
-				 |_route: #{Package[ironRouterPackage].Router.current().route.name}
-				 |_path: #{Package[ironRouterPackage].Router.current().path}
-				 |_template: #{Package[ironRouterPackage].Router.current().template}
+				 |_route: #{Package[ironRouterPackage].Router.current()?.route.name}
+				 |_path: #{Package[ironRouterPackage].Router.current()?.path}
 				 |_language: #{language}
 				"""
 				"/#{language}"

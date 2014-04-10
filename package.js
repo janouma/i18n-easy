@@ -4,7 +4,8 @@ Package.describe({
 
 Package.on_use(function(api, where){
 	api.use(['coffeescript', 'minimongo', 'mongo-livedata']);
-    api.use(['handlebars', 'deps'], 'client');
+    //api.use(['handlebars', 'deps'], 'client');
+	api.use(['ui', 'deps'], 'client');
 
     api.add_files(['i18n_easy.coffee', 'collections/i18n_easy_messages.coffee']);
 	api.add_files('i18n_easy_client.coffee', 'client');
