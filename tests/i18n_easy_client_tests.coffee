@@ -280,3 +280,46 @@ Tinytest.add(
 			]
 		)
 )
+
+Tinytest.add(
+	'i18n replace placeholders'
+	(test)->
+		do resetData
+
+		defaultLanguage = 'fr'
+		language = 'en'
+
+		I18nEasy.setDefault defaultLanguage
+		I18nEasy.setLanguage language
+		do Deps.flush
+
+		testKey = 'key_with_placeholder'
+		srcMessage = [
+			'Hello there {{name}}, from {{company}}'
+			'Hi there everyone of {{company}}, {{name}} too'
+		]
+
+		name = 'Sebastian'
+		company = 'The Company'
+
+		expectedMessage = [
+			srcMessage[0].replace(/\{\{name\}\}/, name).replace(/\{\{company\}\}/, company)
+			srcMessage[1].replace(/\{\{name\}\}/, name).replace(/\{\{company\}\}/, company)
+		]
+
+		I18nEasyMessages.insert {
+			key: testKey
+			language: language
+			message: srcMessage
+		}
+
+		test.equal(
+			I18nEasy.i18n testKey, name: name, company: company
+			expectedMessage[0]
+		)
+
+		test.equal(
+			I18nEasy.i18ns testKey, name: name, company: company
+			expectedMessage[1]
+		)
+)

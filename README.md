@@ -2,7 +2,7 @@
 
 [admin]: https://github.com/janouma/i18n-easy-admin
 
-*version: 0.1.4*
+*version: 0.1.5*
 
 **I18n easy** provide a simple way to add i18n feature to your meteor app.
 
@@ -26,6 +26,7 @@ Then add translations server side:
 		en: {
 			home: "home",
 			setting: "setting",
+			greetings: "grettings {{name}}!",
 			
 			// singular and plural
 			summary: ["summary","summaries"],
@@ -41,6 +42,7 @@ Then add translations server side:
 			home: "acceuil",
 			setting: "préférences",
 			summary: "sommaire",
+			greetings: "salutations {{name}}!",
 			
 			// Client section
 			clients: {
@@ -49,6 +51,8 @@ Then add translations server side:
 			}
 		}
 	});
+
+***note:*** *`{{placeholders}}` cannot have the following names: `fallBack`, `autoPlural`, `useDefault` or `section`*
 
 ### <a name="publications"></a> Setting publications and subscriptions
 
@@ -95,7 +99,8 @@ To prevent unauthorized updates of translations, you should setup permissions *�
 
 Use the *i18n* helper to access translations within templates
 
-	{{i18n 'summary'}}
+	{{i18n 'summary'}} // -> display "summary" according to previously added translations
+	{{i18n 'greetings' name='Sebastian'}} // -> display "grettings Sebastian!" according to previously added translations
 
 To request plural translation, just add an *"s"* to the key or the helper
 

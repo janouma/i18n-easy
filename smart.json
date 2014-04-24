@@ -3,7 +3,7 @@
     "description": "Simple way to handle i18n, including ability to add plurals within translations",
     "homepage": "https://github.com/janouma/i18n-easy",
 	"author": "Judicaël Anouma <judicael.anouma@gmail.com>",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "git": "https://github.com/janouma/i18n-easy.git",
     "packages": {}
 }

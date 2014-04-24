@@ -69,11 +69,11 @@ class I18nClient extends I18nBase
 #==================================
 I18nEasy = new I18nClient()
 
-UI.registerHelper('i18n', I18nEasy.i18n)
-UI.registerHelper('i18ns', I18nEasy.i18ns)
+UI.registerHelper('i18n', (key, options)-> I18nEasy.i18n key, options.hash)
+UI.registerHelper('i18ns', (key, options)-> I18nEasy.i18ns key, options.hash)
 UI.registerHelper('translate', I18nEasy.translate)
 UI.registerHelper('translatePlural', I18nEasy.translatePlural)
-UI.registerHelper('i18nDefault', I18nEasy.i18nDefault)
+UI.registerHelper('i18nDefault', (key, options)-> I18nEasy.i18nDefault key, options.hash)
 UI.registerHelper('ghost', -> ghostSuffix: '-ghost')
 
 UI.registerHelper(

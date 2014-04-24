@@ -5,6 +5,7 @@ class @I18nBase
 	_defaultVarName = "#{_prefix}defaultLanguage"
 	_varName = "#{_prefix}language"
 	_writePermission = -> no
+	_placeHolderPattern = /\{\{(\w+)\}\}/g
 
 	if Meteor.isClient
 		_context =
@@ -128,20 +129,31 @@ class @I18nBase
 		translation?.message
 
 	#==================================
+	_replacer = (replacements, placeholder, key)-> replacements[key]
+
+	#==================================
+	_replacePlaceholders = (message, replacements)->
+		return message unless replacements
+		message.replace(
+			_placeHolderPattern
+			_replacer.bind undefined, replacements
+		)
+
+	#==================================
 	_singularFor = (key, options)->
 		message = _translationFor(key, options)
 		if message?.constructor.name is 'Array'
-			message[0] unless not message[0]?.length
+			_replacePlaceholders(message[0], options) unless not message[0]?.length
 		else
-			message unless not message?.length
+			_replacePlaceholders(message, options) unless not message?.length
 
 	#==================================
 	_pluralFor = (key, options)->
 		message = _translationFor(key, options)
 		if message?.constructor.name is 'Array'
-			message[1] unless not message[1]?.length
+			_replacePlaceholders(message[1], options) unless not message[1]?.length
 		else
-			"#{message}s" unless not message?.length or options?.autoPlural is no
+			_replacePlaceholders("#{message}s", options) unless not message?.length or options?.autoPlural is no
 
 	#Public
 
