@@ -136,7 +136,7 @@ class @I18nBase
 		return message unless replacements
 		message.replace(
 			_placeHolderPattern
-			_replacer.bind undefined, replacements
+			_replacer.bind Object.create(null), replacements
 		)
 
 	#==================================
