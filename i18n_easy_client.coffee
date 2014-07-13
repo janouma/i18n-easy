@@ -55,10 +55,11 @@ class I18nClient extends I18nBase
 				{default: @getDefault(), actual: @getDefault(), sections: sections}
 				options?.translationsReady
 			)
-		)
-		subscriptions.push(
-			Meteor.subscribe I18nBase.SECTIONS_PUBLICATION
-			options?.sectionsReady
+
+			Meteor.subscribe(
+				I18nBase.SECTIONS_PUBLICATION
+				options?.sectionsReady
+			)
 		)
 		subscriptions
 
