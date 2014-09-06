@@ -170,7 +170,7 @@ Tinytest.add(
 			section: route
 		}
 
-		ironRouterPackage = 'iron-router'
+		ironRouterPackage = 'iron:router'
 
 		if Package[ironRouterPackage]
 			OldRouter = Package[ironRouterPackage].Router

@@ -1,4 +1,4 @@
-ironRouterPackage = 'iron-router'
+ironRouterPackage = 'iron:router'
 
 class I18nClient extends I18nBase
 
@@ -97,5 +97,5 @@ UI.registerHelper(
 				"""
 				"/#{language}"
 		else
-			Meteor._debug 'To benefit from the "pathToLanguage" helper you need to install "iron-router" smart package (https://atmosphere.meteor.com/package/iron-router)'
+			Meteor._debug 'To benefit from the "pathToLanguage" helper you need to install "iron:router" package (http://atmospherejs.com/iron/router)'
 )
