@@ -8,6 +8,7 @@ Package.describe({
 });
 
 Package.onUse(function(api, where){
+	api.versionsFrom("METEOR@0.9.1");
 	api.use(['coffeescript', 'minimongo', 'mongo-livedata']);
 	api.use(['ui', 'deps'], 'client');
 
