@@ -221,7 +221,7 @@ class @I18nBase
 			else
 				enhancedOptions ?= {}
 
-			enhancedOptions.section = Package[ironRouterPackage].Router.current().route.name
+			enhancedOptions.section = Package[ironRouterPackage].Router.current().route.getName()
 
 		message = _singularFor(key, enhancedOptions)
 		unless message

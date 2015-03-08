@@ -15,7 +15,7 @@ class I18nClient extends I18nBase
 			check options.sections, [String]
 			options.sections
 		else
-			[Package[ironRouterPackage].Router.current().route.name] if Package[ironRouterPackage] and Package[ironRouterPackage].Router.current()
+			[Package[ironRouterPackage].Router.current().route.getName()] if Package[ironRouterPackage] and Package[ironRouterPackage].Router.current()
 
 
 	subscribe: (options)->
@@ -91,7 +91,7 @@ UI.registerHelper(
 			catch error
 				Meteor._debug """
 				Warning: #{error.message}
-				 |_route: #{Package[ironRouterPackage].Router.current()?.route.name}
+				 |_route: #{Package[ironRouterPackage].Router.current()?.route.getName()}
 				 |_path: #{Package[ironRouterPackage].Router.current()?.path}
 				 |_language: #{language}
 				"""

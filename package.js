@@ -2,7 +2,7 @@ Package.describe({
     summary: "Simple way to handle i18n, including ability to add plurals within translations",
 	homepage: "https://github.com/janouma/i18n-easy",
 	author: "Judicaël Anouma <judicael.anouma@gmail.com>",
-	version: "0.1.6",
+	version: "0.1.7",
 	name: "janouma:i18n-easy",
 	git: "https://github.com/janouma/i18n-easy.git"
 });
@@ -15,7 +15,7 @@ Package.onUse(function(api, where){
     api.addFiles(['i18n_easy.coffee', 'collections/i18n_easy_messages.coffee']);
 	api.addFiles('i18n_easy_client.coffee', 'client');
 	api.addFiles('i18n_easy_server.coffee', 'server');
-    
+
     if (api.export) {
         api.export('I18nEasy');
     }
